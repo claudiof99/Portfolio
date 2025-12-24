@@ -1,0 +1,5 @@
+Romana:Eterna,Imperial,Marmore
+Grega:Atenas,Esparta,Corinto
+Asteca:Tenochitlan,Texcoco,Tlacopan
+Persa:Persepolis,Susa,Ecbatana
+Egipcia:Heliopolis,Menfis,Tebas

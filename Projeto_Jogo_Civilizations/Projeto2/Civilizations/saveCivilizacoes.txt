@@ -1,0 +1,164 @@
+Civilizacao
+Civilizacao;Romana;77630;1.0
+Cidade;Eterna;15;7
+Defesa: 200
+Populacao Total: 2004
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
+Cidade;Imperial;2;9
+Defesa: 200
+Populacao Total: 2617
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
+Cidade;Marmore;18;9
+Defesa: 200
+Populacao Total: 3127
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
+Civilizacao
+Civilizacao;Grega;83521;1.0
+Cidade;Atenas;8;0
+Defesa: 200
+Populacao Total: 3015
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
+Cidade;Esparta;4;6
+Defesa: 200
+Populacao Total: 2454
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
+Cidade;Corinto;6;3
+Defesa: 200
+Populacao Total: 4584
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
+Civilizacao
+Civilizacao;Asteca;67570;1.0
+Cidade;Tenochitlan;7;11
+Defesa: 200
+Populacao Total: 2789
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
+Cidade;Texcoco;24;2
+Defesa: 200
+Populacao Total: 2600
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
+Cidade;Tlacopan;4;14
+Defesa: 200
+Populacao Total: 4267
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
+Civilizacao
+Civilizacao;Egipcia;54580;1.0
+Cidade;Heliopolis;2;3
+Defesa: 200
+Populacao Total: 2171
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
+Cidade;Menfis;24;8
+Defesa: 200
+Populacao Total: 4071
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
+Cidade;Tebas;12;5
+Defesa: 200
+Populacao Total: 4717
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade

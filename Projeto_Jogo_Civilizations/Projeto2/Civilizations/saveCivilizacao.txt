@@ -1,0 +1,48 @@
+Civilizacao
+Civilizacao;Persa;17408;1.0
+Cidade;Persepolis;21;5
+Defesa: 200
+Populacao Total: 812
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
+Cidade;Susa;29;14
+Defesa: 200
+Populacao Total: 714
+Trabalhadores: 350
+Reserva de comida: 0
+Recursos:
+Producao: 13850
+Ouro: 7000
+Alimento: 14000
+Terrenos:
+Terrenos Trabalhados:
+ -, 26, 11, 350
+Unidades:
+Tipo de Unidade: COLONO
+ -, 29, 14, Estado: false, Defesa: 1
+Tipo de Unidade: CONSTRUTOR
+ -, 29, 14, Estado: false, Defesa: 1
+Tipo de Unidade: MILITAR
+ -, 29, 14, Estado: true, Defesa: 400
+Cidade
+Cidade;Ecbatana;14;14
+Defesa: 200
+Populacao Total: 682
+Trabalhadores: 0
+Reserva de comida: 0
+Recursos:
+Terrenos:
+Terrenos Trabalhados:
+Unidades:
+Tipo de Unidade: COLONO
+Tipo de Unidade: CONSTRUTOR
+Tipo de Unidade: MILITAR
+Cidade
