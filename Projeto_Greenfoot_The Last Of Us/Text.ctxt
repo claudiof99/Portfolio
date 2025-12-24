@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Text
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Text\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=text\ fontSize
+comment1.target=Text(java.lang.String,\ int)
+comment2.params=text\ x\ y\ fontSize\ bold\ italic
+comment2.target=void\ writeText(java.lang.String,\ int,\ int,\ int,\ boolean,\ boolean)
+comment2.text=\r\n\ Used\ to\ write\ Text\ making\ use\ of\ the\ setTextFont\ function\ and\ defining\ it\ by\ the\ parameters\ passed\r\n\ @param\ String\ text\ -\ text\ that\ will\ be\ displayed\r\n\ @param\ int\ x\ -\ x\ coordinate\ of\ text\r\n\ @param\ int\ y\ -\ y\ coordinate\ of\ text\r\n\ @param\ int\ fontSize\ -\ the\ text's\ font\ size\r\n\ @param\ boolean\ bold\ -\ true\ if\ text\ is\ bold,\ false\ otherwise\r\n\ @param\ boolean\ italic\ -\ true\ if\ text\ is\ italic,\ false\ otherwise\r\n\ \r\n\ Function\ probably\ could\ have\ been\ better,\ my\ fault(Afonso)\r\n
+comment3.params=text\ bold\ italic\ fontSize
+comment3.target=void\ setTextFont(greenfoot.GreenfootImage,\ boolean,\ boolean,\ int)
+comment3.text=\r\n\ Used\ to\ set\ the\ text's\ font\ based\ on\ the\ parameters\ passed\r\n\ @param\ GreenfootImage\ text\ -\ text\ that\ will\ have\ it's\ font\ set\r\n\ @param\ boolean\ bold\ -\ true\ if\ text\ is\ bold,\ false\ otherwise\r\n\ @param\ boolean\ italic\ -\ true\ if\ text\ is\ italic,\ false\ otherwise\r\n\ @param\ int\ fontSize\ -\ the\ text's\ new\ fontSize\r\n
+numComments=4

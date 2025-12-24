@@ -1,0 +1,51 @@
+[
+  {
+    "id": 101,
+    "name": "CNC Milling Machine X1",
+    "description": "Primary milling unit for Sector A production line.",
+    "type": "Equipment",
+    "status": "Active"
+  },
+  {
+    "id": 102,
+    "name": "Hydraulic Press 50T",
+    "description": "Heavy duty press for metal stamping.",
+    "type": "Equipment",
+    "status": "Maintenance"
+  },
+  {
+    "id": 103,
+    "name": "Digital Caliper #04",
+    "description": "Precision measurement tool (Calibration due: 2026).",
+    "type": "Monitoring Device",
+    "status": "Active"
+  },
+  {
+    "id": 104,
+    "name": "Forklift B (Electric)",
+    "description": "Warehouse transport vehicle.",
+    "type": "Transport",
+    "status": "Active"
+  },
+  {
+    "id": 105,
+    "name": "Server Rack Main",
+    "description": "Hosting ERP and ISO Database.",
+    "type": "IT Infrastructure",
+    "status": "Active"
+  },
+  {
+    "id": 106,
+    "name": "Laser Cutter L-200",
+    "description": "Precision cutting for acrylic and wood components.",
+    "type": "Equipment",
+    "status": "Repairs Needed"
+  },
+  {
+    "id": 107,
+    "name": "Safety Goggles Stock",
+    "description": "PPE Inventory for visitors and staff.",
+    "type": "Safety Gear",
+    "status": "Active"
+  }
+]

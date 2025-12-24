@@ -1,0 +1,55 @@
+
+<h2>Complaints & Non-Conformities</h2>
+<a class="btn btn-success mb-3" href="/complaints/new">Report Non-Conformity</a>
+
+<table class="table align-middle">
+  <thead class="table-light">
+    <tr>
+      <th>ID</th>
+      <th>Source / Customer</th>
+      <th>Severity</th>
+      <th>Status</th>
+      <th>Corrective Actions</th> <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% complaints.forEach(c => { %>
+      <tr>
+        <td>#<%= c.id %></td>
+        <td><%= c.customerName %></td>
+        
+        <td>
+          <% if(c.severity === 'high') { %>
+            <span class="badge bg-danger">High</span>
+          <% } else if(c.severity === 'medium') { %>
+            <span class="badge bg-warning text-dark">Medium</span>
+          <% } else { %>
+            <span class="badge bg-success">Low</span>
+          <% } %>
+        </td>
+
+        <td><%= c.status %></td>
+
+        <td>
+          <% if(c.correctiveActionAssignedTo) { %>
+            <small>Assigned to: <strong><%= c.correctiveActionAssignedTo %></strong></small>
+            <br>
+            <a href="/complaints/<%= c.id %>/actions" class="text-decoration-none" style="font-size:0.85rem;">View Progress</a>
+          <% } else { %>
+            <a href="/complaints/<%= c.id %>/assign" class="btn btn-sm btn-outline-dark">
+              + Assign User
+            </a>
+          <% } %>
+        </td>
+
+        <td>
+          <a class="btn btn-sm btn-outline-primary" href="/complaints/<%= c.id %>">View Details</a>
+        </td>
+      </tr>
+    <% }) %>
+
+    <% if(complaints.length === 0) { %>
+      <tr><td colspan="6" class="text-center">No complaints or non-conformities found.</td></tr>
+    <% } %>
+  </tbody>
+</table>

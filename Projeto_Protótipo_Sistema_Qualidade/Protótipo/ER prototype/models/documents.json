@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1702291003,
+    "name": "Daily Safety Inspection Checklist",
+    "type": "Form",
+    "owner": "Staff",
+    "path": "/uploads/safety_checklist.xlsx",
+    "uploadedBy": "staff_member",
+    "date": "2024-05-20T08:15:00.000Z"
+  },
+  {
+    "id": 1702291004,
+    "name": "CNC Machine Operation Guide",
+    "type": "Work Instruction",
+    "owner": "Admin",
+    "path": "/uploads/cnc_guide.pdf",
+    "uploadedBy": "production_lead",
+    "date": "2024-03-01T11:45:00.000Z"
+  },
+  {
+    "id": 1702291005,
+    "name": "ISO 9001:2015 Standard Requirements",
+    "type": "External",
+    "owner": "Quality Manager",
+    "path": "/uploads/iso_9001_standard.pdf",
+    "uploadedBy": "admin",
+    "date": "2023-11-05T16:00:00.000Z"
+  },
+  {
+    "id": 1702291006,
+    "name": "Internal Audit Report Template",
+    "type": "Form",
+    "owner": "Quality Manager",
+    "path": "/uploads/audit_template.docx",
+    "uploadedBy": "admin",
+    "date": "2024-06-10T10:00:00.000Z"
+  }
+]

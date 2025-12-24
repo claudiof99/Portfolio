@@ -1,0 +1,29 @@
+Command line:
+   valores_esquema_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  64011
+
+Sat Dec 23 14:03:16 2023
+
+
+ Elaboration Time: 0.046875 sec
+
+ Current Memory Usage: 5149.93 Meg
+
+ Total Signals          : 67
+ Total Nets             : 203
+ Total Signal Drivers   : 30
+ Total Blocks           : 11
+ Total Primitive Blocks : 9
+ Total Processes        : 43
+ Total Traceable Variables  : 47
+ Total Scalar Nets and Variables : 557
+Total Line Count : 145
+
+ Total Simulation Time: 0.3125 sec
+
+ Current Memory Usage: 4678.07 Meg
+
+Sat Dec 23 17:34:07 2023
+

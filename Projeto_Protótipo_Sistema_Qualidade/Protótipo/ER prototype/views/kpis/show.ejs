@@ -1,0 +1,282 @@
+<%- include('../partials/header') %>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    .btn-hover-effect {
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px; /* Space between icon and text */
+        font-weight: 500;
+    }
+    .btn-hover-effect:hover {
+        transform: translateY(-2px); /* Slight lift effect */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Shadow effect */
+    }
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1><%= kpi.name %></h1>
+        <div class="d-flex gap-2 align-items-center">
+            <span class="badge bg-secondary">Target: <%= kpi.target %> <%= kpi.unit %></span>
+            <span class="badge bg-info text-dark"><%= kpi.frequency %></span>
+        </div>
+    </div>
+    
+    <div class="d-flex gap-2">
+        <a href="/kpis" class="btn btn-outline-secondary">Back to List</a>
+        
+        <% if (currentUser.role === 'quality_manager' || currentUser.role === 'admin') { %>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#editSettings" aria-expanded="false">
+                <i class="fas fa-cog"></i> Edit Definition
+            </button>
+        <% } %>
+    </div>
+</div>
+
+<% if (currentUser.role === 'quality_manager' || currentUser.role === 'admin') { %>
+<div class="collapse mb-4" id="editSettings">
+    <div class="card card-body bg-light border-primary">
+        <h5 class="card-title">Edit KPI Definition</h5>
+        <form action="/kpis/update/<%= kpi.id %>" method="POST">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Name</label>
+                    <input type="text" name="name" class="form-control" value="<%= kpi.name %>" required>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Target</label>
+                    <input type="number" step="0.01" name="target" class="form-control" value="<%= kpi.target %>" required>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Unit</label>
+                    <input type="text" name="unit" class="form-control" value="<%= kpi.unit %>" required>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Frequency</label>
+                    <select name="frequency" class="form-select">
+                        <option <%= kpi.frequency === 'Monthly' ? 'selected' : '' %>>Monthly</option>
+                        <option <%= kpi.frequency === 'Quarterly' ? 'selected' : '' %>>Quarterly</option>
+                        <option <%= kpi.frequency === 'Yearly' ? 'selected' : '' %>>Yearly</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button class="btn btn-success w-100">Save Changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<% } %>
+
+<div class="row">
+    <div class="col-lg-8 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-header fw-bold">Performance Trend</div>
+            <div class="card-body">
+                <canvas 
+                    id="kpiChart" 
+                    data-target="<%= kpi.target %>"
+                    data-points="<%= JSON.stringify((kpi.dataPoints || []).filter(p => p.active !== false).sort((a,b)=>new Date(a.date)-new Date(b.date))) %>"
+                ></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+        <div class="card shadow-sm border-success h-100">
+            <div class="card-header bg-success text-white">
+                <i class="fas fa-plus-circle"></i> Log New Entry
+            </div>
+            <div class="card-body">
+                <% if (currentUser.role === 'quality_manager' || currentUser.role === 'staff' || currentUser.role === 'admin') { %>
+                    <form action="/kpis/data/<%= kpi.id %>" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label">Date</label>
+                            <input type="date" name="date" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Measured Value (<%= kpi.unit %>)</label>
+                            <input type="number" step="0.01" name="value" class="form-control" placeholder="e.g. 95" required>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Record Data</button>
+                    </form>
+                <% } else { %>
+                    <div class="alert alert-warning">Read-only access.</div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <i class="fas fa-history"></i> History Log (Traceability)
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-striped mb-0 align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Date</th>
+                    <th>Value</th>
+                    <th>Recorded By</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (kpi.dataPoints && kpi.dataPoints.length > 0) { %>
+                    <% kpi.dataPoints.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(d => { %>
+                        <tr id="row-<%= d.date %>" class="<%= d.active === false ? 'text-muted' : '' %>">
+                            
+                            <td id="date-<%= d.date %>"><%= d.date %></td>
+
+                            <td id="value-<%= d.date %>"><strong><%= d.value %></strong></td>
+                            
+                            <td>
+                                <i class="fas fa-user-circle text-secondary me-1"></i>
+                                <%= d.recordedBy || 'System (Legacy)' %>
+                                
+                                <% if(d.lastEditedBy) { %> 
+                                    <div class="text-primary small mt-1" style="font-size: 0.8rem;">
+                                        <i class="fas fa-pen me-1"></i> 
+                                        Edited by <strong><%= d.lastEditedBy %></strong>
+                                    </div>
+                                <% } %>
+                            </td>
+                            
+                            <td>
+                                <% if (d.active === false) { %>
+                                    <span class="badge bg-secondary">Archived</span>
+                                <% } else { %>
+                                    <span class="badge bg-success">Active</span>
+                                <% } %>
+                            </td>
+                            
+                            <td class="action-buttons">
+                                
+                                <% if (d.active !== false) { %>
+                                    <% if (currentUser.role === 'quality_manager' || currentUser.role === 'admin') { %>
+                                        
+                                        <button type="button" 
+                                            class="btn btn-outline-primary btn-sm btn-hover-effect me-1" 
+                                            onclick="enableEdit('<%= d.date %>')"
+                                            title="Edit this value">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+
+                                        <form action="/kpis/data/<%= kpi.id %>/remove/<%= d.date %>" method="POST" style="display:inline;">
+                                            <button class="btn btn-outline-warning btn-sm btn-hover-effect me-1" title="Archive (Soft Delete)">
+                                                <i class="fas fa-archive"></i> Archive
+                                            </button>
+                                        </form>
+                                    <% } %>
+
+                                <% } else { %>
+                                    <% if (currentUser.role === 'quality_manager' || currentUser.role === 'admin') { %>
+                                        <form action="/kpis/data/<%= kpi.id %>/restore/<%= d.date %>" method="POST" style="display:inline;">
+                                            <button class="btn btn-outline-success btn-sm btn-hover-effect me-1" title="Restore this entry">
+                                                <i class="fas fa-undo"></i> Unarchive
+                                            </button>
+                                        </form>
+                                    <% } else { %>
+                                        <span class="text-muted small fst-italic me-2">Archived</span>
+                                    <% } %>
+                                <% } %>
+
+                                <% if (currentUser.role === 'admin') { %>
+                                    <form action="/kpis/data/<%= kpi.id %>/delete/<%= d.date %>" method="POST" style="display:inline;" onsubmit="return confirm('WARNING: This will permanently delete this record. Are you sure?');">
+                                        <button class="btn btn-outline-danger btn-sm btn-hover-effect" title="Permanently Delete">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                <% } %>
+
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr><td colspan="5" class="text-center p-3">No data recorded yet.</td></tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+function enableEdit(dateId) {
+    const dateCell = document.getElementById("date-" + dateId);
+    const valueCell = document.getElementById("value-" + dateId);
+    const oldDate = dateCell.innerText.trim();
+    const oldValue = valueCell.innerText.trim();
+
+    // Inputs
+    dateCell.innerHTML = `<input type="date" class="form-control form-control-sm" id="editDate-${dateId}" value="${oldDate}">`;
+    valueCell.innerHTML = `<input type="number" step="0.01" class="form-control form-control-sm" id="editValue-${dateId}" value="${oldValue}">`;
+
+    // Switch Actions to Save/Cancel buttons
+    const row = document.getElementById("row-" + dateId);
+    const actionCell = row.querySelector(".action-buttons");
+    actionCell.innerHTML = `
+        <div class="btn-group btn-group-sm">
+            <button class="btn btn-success btn-hover-effect" onclick="saveEdit('${dateId}')"><i class="fas fa-check"></i> Save</button>
+            <button class="btn btn-secondary btn-hover-effect" onclick="location.reload()"><i class="fas fa-times"></i> Cancel</button>
+        </div>
+    `;
+}
+
+function saveEdit(dateId) {
+    const newDate = document.getElementById("editDate-" + dateId).value;
+    const newValue = document.getElementById("editValue-" + dateId).value;
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = `/kpis/data/<%= kpi.id %>/edit/${dateId}`;
+    form.innerHTML = `
+        <input type="hidden" name="newDate" value="${newDate}">
+        <input type="hidden" name="newValue" value="${newValue}">
+    `;
+    document.body.appendChild(form);
+    form.submit();
+}
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const canvas = document.getElementById('kpiChart');
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        const target = parseFloat(canvas.dataset.target);
+        const points = JSON.parse(canvas.dataset.points);
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: points.map(p => p.date),
+                datasets: [{
+                    label: 'Actual Value',
+                    data: points.map(p => p.value),
+                    borderColor: '#0d6efd',
+                    backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                    tension: 0.1,
+                    fill: true
+                }, {
+                    label: 'Target (' + target + ')',
+                    data: points.map(() => target),
+                    borderColor: '#dc3545',
+                    borderDash: [5, 5],
+                    pointRadius: 0
+                }]
+            },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+    });
+</script>
+
+<%- include('../partials/footer') %>

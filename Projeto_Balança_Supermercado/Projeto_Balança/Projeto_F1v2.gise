@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<generated_project xmlns="http://www.xilinx.com/XMLSchema" xmlns:xil_pn="http://www.xilinx.com/XMLSchema">
+
+  <!--                                                          -->
+
+  <!--             For tool use only. Do not edit.              -->
+
+  <!--                                                          -->
+
+  <!-- ProjectNavigator created generated project file.         -->
+
+  <!-- For use in tracking generated file and other information -->
+
+  <!-- allowing preservation of process status.                 -->
+
+  <!--                                                          -->
+
+  <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved. -->
+
+  <version xmlns="http://www.xilinx.com/XMLSchema">11.1</version>
+
+  <sourceproject xmlns="http://www.xilinx.com/XMLSchema" xil_pn:fileType="FILE_XISE" xil_pn:name="Projeto_F1v2.xise"/>
+
+  <files xmlns="http://www.xilinx.com/XMLSchema">
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="CameraModule_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="balanca_2kg.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="balanca_2kg.spl"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="balanca_2kg.stx"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="balanca_2kg.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="balanca_2kg.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="balanca_2kg_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="bin2bcd_11_16.spl"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="bin2bcd_11_16.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="bin2bcd_11_16_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="ent_peso.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="ent_peso.spl"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="ent_peso.stx"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="ent_peso.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="ent_peso.xst"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="ent_peso_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="ent_peso_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="ent_preco.spl"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="ent_preco.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="ent_preco_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="esquema.sym" xil_pn:origination="imported"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_VERILOG" xil_pn:name="esquema.vf"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="esquema_esquema_sch_tb_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="esquema_esquema_sch_tb_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="filtragem_peso.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="filtragem_peso.spl"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="filtragem_peso.stx"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="filtragem_peso.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="filtragem_peso.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="filtragem_peso_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="filtragem_preco.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="filtragem_preco.spl"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="filtragem_preco.stx"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="filtragem_preco.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="filtragem_preco.xst"/>
+    <file xil_pn:fileType="FILE_LOG" xil_pn:name="fuse.log"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="isim"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_CMD" xil_pn:name="isim.cmd"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_LOG" xil_pn:name="isim.log"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="limite_2kg.spl"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="limite_2kg.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="modulo_camara_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="multiplicador.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="multiplicador.spl"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="multiplicador.stx"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="multiplicador.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="multiplicador.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="multiplicador_11_9_bin_11.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="multiplicador_11_9_bin_11.spl"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="multiplicador_11_9_bin_11.stx"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="multiplicador_11_9_bin_11.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="multiplicador_11_9_bin_11.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="multiplicador_11_9_bin_11_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="multiplicador_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="saida_peso.spl"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="saida_peso.sym" xil_pn:origination="imported"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="saida_peso_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="saida_peso_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="saida_preco_BCD.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="saida_preco_BCD.spl"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="saida_preco_BCD.stx"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="saida_preco_BCD.xst"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="saida_preco_BCD_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="saida_preco_BCD_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="separador_BCD_4_12.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="separador_BCD_4_12.spl"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="separador_BCD_4_12.stx"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="separador_BCD_4_12.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="separador_BCD_4_12.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="separador_BCD_8_8.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="separador_BCD_8_8.spl"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="separador_BCD_8_8.stx"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="separador_BCD_8_8.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="separador_BCD_8_8.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="separador_BCDg.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="separador_BCDg.spl"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="separador_BCDg.stx"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="separador_BCDg.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="separador_BCDg.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="somador.prj"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="somador.stx"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="somador.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="somador_preco.prj"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="somador_preco.spl"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="somador_preco.stx"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="somador_preco.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="somador_preco.xst"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="somador_preco_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_SPL" xil_pn:name="somador_preco_peso.spl"/>
+    <file xil_pn:fileType="FILE_SYMBOL" xil_pn:name="somador_preco_peso.sym" xil_pn:origination="imported"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="somador_preco_peso_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="somador_preco_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="tara_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="testa_modulo_camara_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="testa_modulo_camara_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="testa_modulo_camara_isim_beh.wdb"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="testa_modulo_camara_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="testando_filtragempeso_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="testando_filtragempeso_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="testando_filtragempeso_isim_beh.wdb"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="testando_filtragempeso_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="teste_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="teste_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="teste_isim_beh.wdb"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="teste_modulo_camara_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="teste_moidulo_camara_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="teste_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="valores_ent_peso_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="valores_ent_peso_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="valores_ent_peso_isim_beh.wdb"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="valores_ent_peso_stx_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="valores_ent_preco_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="valores_ent_preco_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="valores_esquema_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="valores_esquema_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="valores_esquema_isim_beh.wdb"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="valores_esquema_stx_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="valores_multiplicador_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="valores_multiplicador_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="valores_saida_peso_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="valores_saida_peso_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="valores_saida_peso_isim_beh.wdb"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="valores_saida_peso_stx_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="valores_saida_preco_BCD_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="valores_saida_preco_BCD_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="valores_separador_BCDg_stx_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="valores_somador_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="valores_somador_stx_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="valores_tara_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="valores_tara_stx_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_INI" xil_pn:name="xilinxsim.ini"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xst"/>
+  </files>
+
+  <transforms xmlns="http://www.xilinx.com/XMLSchema">
+    <transform xil_pn:end_ts="1703208206" xil_pn:name="TRAN_copyInitialToAbstractSimulation" xil_pn:start_ts="1703208206">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1703340120" xil_pn:in_ck="3986318806580590900" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1703340120">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
+    </transform>
+    <transform xil_pn:end_ts="1703338746" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="-9043149932345103549" xil_pn:start_ts="1703338746">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1703338799" xil_pn:in_ck="160190843570462237" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="-6666233537815875103" xil_pn:start_ts="1703338797">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="esquema.vf"/>
+    </transform>
+    <transform xil_pn:end_ts="1703208208" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="-8060069033678106290" xil_pn:start_ts="1703208208">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1703340120" xil_pn:in_ck="2226849639565763247" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1703340120">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
+    </transform>
+    <transform xil_pn:end_ts="1703340123" xil_pn:in_ck="2226849639565763247" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-5415997606080513451" xil_pn:start_ts="1703340120">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForProperties"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputChanged"/>
+      <status xil_pn:value="OutputRemoved"/>
+    </transform>
+    <transform xil_pn:end_ts="1703340194" xil_pn:in_ck="2772730265059934577" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="6884087448443469048" xil_pn:start_ts="1703340194">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForProperties"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputChanged"/>
+      <status xil_pn:value="OutputRemoved"/>
+    </transform>
+  </transforms>
+
+</generated_project>

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 4,
+    "code": "4",
+    "title": "Context of the Organization",
+    "definition": "Identify internal and external issues relevant to the organization's purpose and strategic definition."
+  },
+  {
+    "id": 5,
+    "code": "5",
+    "title": "Leadership",
+    "definition": "Top management commitment, defined quality policy and roles to ensure QMS effectiveness."
+  },
+  {
+    "id": 6,
+    "code": "6",
+    "title": "Planning",
+    "definition": "Actions to address risks and opportunities, quality objectives and planning to achieve them."
+  },
+  {
+    "id": 7,
+    "code": "7",
+    "title": "Support",
+    "definition": "Resources, competence, awareness, communication and documented information needed for QMS."
+  }
+]

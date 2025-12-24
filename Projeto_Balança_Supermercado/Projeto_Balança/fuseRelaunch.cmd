@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/valores_esquema_isim_beh.exe" -prj "C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/valores_esquema_beh.prj" "work.valores_esquema" "work.glbl" 

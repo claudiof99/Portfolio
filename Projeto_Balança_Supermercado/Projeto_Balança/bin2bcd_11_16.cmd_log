@@ -1,0 +1,8 @@
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/saida_peso.v -lang verilog -prj Projeto_F1v2 -o bin2bcd_11_16.spl -module bin2bcd_11_16 -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 bin2bcd_11_16.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/bin2bcd_11_16.sym 
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/bin2bcd_11_16.v -lang verilog -prj Projeto_F1v2 -o bin2bcd_11_16.spl -module bin2bcd_11_16 -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 bin2bcd_11_16.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/bin2bcd_11_16.sym 
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/bin2bcd_11_16.v -lang verilog -prj Projeto_F1v2 -o bin2bcd_11_16.spl -module bin2bcd_11_16 -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 bin2bcd_11_16.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/bin2bcd_11_16.sym 
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/bin2bcd_11_16.v -lang verilog -prj Projeto_F1v2 -o bin2bcd_11_16.spl -module bin2bcd_11_16 -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 bin2bcd_11_16.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/bin2bcd_11_16.sym 

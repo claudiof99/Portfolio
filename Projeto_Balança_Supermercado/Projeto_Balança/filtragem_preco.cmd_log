@@ -1,0 +1,4 @@
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/ent_preco.v -lang verilog -prj Projeto_F1v2 -o filtragem_preco.spl -module filtragem_preco -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 filtragem_preco.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/filtragem_preco.sym 
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/filtragem_preco.v -lang verilog -prj Projeto_F1v2 -o filtragem_preco.spl -module filtragem_preco -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 filtragem_preco.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/filtragem_preco.sym 

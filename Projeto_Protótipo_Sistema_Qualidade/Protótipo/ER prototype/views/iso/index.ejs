@@ -1,0 +1,59 @@
+<%- include('../partials/header') %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>ISO 9001 Hub</h1>
+    <a href="/dashboard" class="btn btn-outline-secondary">Back to Dashboard</a>
+</div>
+
+<div class="row mt-4">
+    <% clauses.forEach(clause => { %>
+        <% 
+            let targetLink = '#';
+            if (clause.code == '4') targetLink = '/iso/context';
+            if (clause.code == '5') targetLink = '/iso/leadership';
+            if (clause.code == '6') targetLink = '/iso/planning';
+            if (clause.code == '7') targetLink = '/iso/support';
+        %>
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm border-start border-4 border-<%= clause.code == '4' ? 'primary' : clause.code == '5' ? 'warning' : clause.code == '6' ? 'danger' : 'success' %>">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="card-title fw-bold">
+                            <%= clause.code %>. <%= clause.title %>
+                        </h5>
+                        
+                        <% if (currentUser && currentUser.role === 'quality_manager') { %>
+                            <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#edit<%= clause.id %>">
+                                <i class="fas fa-pencil-alt"></i> Edit
+                            </button>
+                        <% } %>
+                    </div>
+
+                    <p class="card-text text-muted mb-3">
+                        <%= clause.definition %>
+                    </p>
+                    
+                    <div class="collapse mb-3" id="edit<%= clause.id %>">
+                        <div class="card card-body bg-light p-2">
+                            <form action="/iso/update-clause" method="POST">
+                                <input type="hidden" name="id" value="<%= clause.id %>">
+                                <div class="mb-2">
+                                    <label class="form-label small text-muted">Update Definition </label>
+                                    <textarea name="definition" class="form-control form-control-sm" rows="2" required><%= clause.definition %></textarea>
+                                </div>
+                                <button class="btn btn-sm btn-dark w-100">Save Definition</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <a href="<%= targetLink %>" class="btn btn-outline-dark btn-sm stretched-link" style="position: relative; z-index: 1;">
+                        Open Section
+                    </a>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+<%- include('../partials/footer') %>

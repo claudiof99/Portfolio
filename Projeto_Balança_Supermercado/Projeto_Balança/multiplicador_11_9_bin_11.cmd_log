@@ -1,0 +1,2 @@
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/saida_preco_calculado.v -lang verilog -prj Projeto_F1v2 -o multiplicador_11_9_bin_11.spl -module multiplicador_11_9_bin_11 -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 multiplicador_11_9_bin_11.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/multiplicador_11_9_bin_11.sym 

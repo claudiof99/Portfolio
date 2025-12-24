@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-check-double text-warning me-2"></i>Pending Approvals</h1>
+    <a href="/dashboard" class="btn btn-outline-secondary">Back to Dashboard</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <% if (pending.length === 0) { %>
+            <div class="text-center py-5 text-muted">
+                <i class="fas fa-clipboard-check fa-3x mb-3"></i>
+                <h5>All Caught Up!</h5>
+                <p>There is no data waiting for validation.</p>
+            </div>
+        <% } else { %>
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Data Type</th>
+                            <th>Entry Details</th>
+                            <th>Submitted By</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% pending.forEach(item => { %>
+                            <tr>
+                                <td><span class="badge bg-info">KPI Data</span></td>
+                                <td>
+                                    <strong><%= item.name %></strong><br>
+                                    Value: <%= item.value %> (Target: <%= item.target %>)
+                                </td>
+                                <td><%= item.createdBy || 'Staff' %></td>
+                                <td>
+                                    <form action="/kpis/approvals/approve/<%= item.id %>" method="POST">
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fas fa-check me-1"></i> Approve
+                                        </button>
+                                        </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

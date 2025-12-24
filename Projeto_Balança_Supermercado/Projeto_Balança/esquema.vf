@@ -1,0 +1,103 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : esquema.vf
+// /___/   /\     Timestamp : 12/23/2023 13:39:58
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: sch2hdl -intstyle ise -family artix7 -verilog C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/esquema.vf -w C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/esquema.sch
+//Design Name: esquema
+//Device: artix7
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale 1ns / 1ps
+
+module esquema(clk, 
+               fim_compra, 
+               funcao_tara, 
+               peso_banana, 
+               peso_maracuja, 
+               peso_tangerina, 
+               preco_banana, 
+               preco_maracuja, 
+               preco_tangerina, 
+               produto, 
+               rst, 
+               taxa, 
+               BCDeuros_decimal, 
+               BCDeuros_fracionario, 
+               BCDkg_decimal, 
+               BCDkg_fracionario, 
+               emissao_talao, 
+               valor_taxa);
+
+    input clk;
+    input fim_compra;
+    input funcao_tara;
+    input [10:0] peso_banana;
+    input [10:0] peso_maracuja;
+    input [10:0] peso_tangerina;
+    input [8:0] preco_banana;
+    input [8:0] preco_maracuja;
+    input [8:0] preco_tangerina;
+    input [1:0] produto;
+    input rst;
+    input taxa;
+   output [7:0] BCDeuros_decimal;
+   output [7:0] BCDeuros_fracionario;
+   output [3:0] BCDkg_decimal;
+   output [11:0] BCDkg_fracionario;
+   output emissao_talao;
+   output [4:0] valor_taxa;
+   
+   wire [15:0] calculo_euros;
+   wire [15:0] peso_kg;
+   wire [8:0] XLXN_20;
+   wire [10:0] XLXN_61;
+   wire [10:0] XLXN_76;
+   wire [10:0] XLXN_79;
+   wire [10:0] XLXN_84;
+   
+   separador_BCD_4_12  XLXI_13 (.BCD_total(peso_kg[15:0]), 
+                               .BCD_fracionario(BCDkg_fracionario[11:0]), 
+                               .BCD_inteiro(BCDkg_decimal[3:0]));
+   separador_BCD_8_8  XLXI_14 (.BCD_total(calculo_euros[15:0]), 
+                              .BCD_fracionario(BCDeuros_fracionario[7:0]), 
+                              .BCD_inteiro(BCDeuros_decimal[7:0]));
+   bin2bcd_11_16  XLXI_15 (.bin(XLXN_79[10:0]), 
+                          .bcd(peso_kg[15:0]));
+   bin2bcd_11_16  XLXI_16 (.bin(XLXN_76[10:0]), 
+                          .bcd(calculo_euros[15:0]));
+   multiplicador_11_9_bin_11  XLXI_17 (.entrada_9b(XLXN_20[8:0]), 
+                                      .entrada_11b(XLXN_84[10:0]), 
+                                      .saida_11b(XLXN_61[10:0]));
+   somador_preco_peso  XLXI_25 (.clk(clk), 
+                               .fim_compra(fim_compra), 
+                               .peso_produto(XLXN_84[10:0]), 
+                               .preco_produto(XLXN_61[10:0]), 
+                               .rst(rst), 
+                               .taxa(taxa), 
+                               .emissao_talao(emissao_talao), 
+                               .soma_final(XLXN_76[10:0]), 
+                               .soma_peso(XLXN_79[10:0]), 
+                               .valor_taxa(valor_taxa[4:0]));
+   filtragem_peso  XLXI_26 (.peso_banana(peso_banana[10:0]), 
+                           .peso_maracuja(peso_maracuja[10:0]), 
+                           .peso_tangerina(peso_tangerina[10:0]), 
+                           .produto(produto[1:0]), 
+                           .tara(funcao_tara), 
+                           .peso_liq(XLXN_84[10:0]));
+   filtragem_preco  XLXI_27 (.preco_banana(preco_banana[8:0]), 
+                            .preco_maracuja(preco_maracuja[8:0]), 
+                            .preco_tangerina(preco_tangerina[8:0]), 
+                            .produto(produto[1:0]), 
+                            .preco_fil(XLXN_20[8:0]));
+endmodule

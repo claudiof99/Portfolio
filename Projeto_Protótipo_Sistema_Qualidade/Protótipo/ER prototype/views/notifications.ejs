@@ -1,0 +1,19 @@
+<% layout('layout') -%>
+<h2>Notifications</h2>
+<table class="table">
+  <thead><tr><th>Message</th><th>When</th><th>Read</th><th>Action</th></tr></thead>
+  <tbody>
+    <% notifications.forEach(n => { %>
+      <tr>
+        <td><a href="<%= n.link %>"><%= n.message %></a></td>
+        <td><%= new Date(n.createdAt).toLocaleString() %></td>
+        <td><%= n.read ? 'Yes' : 'No' %></td>
+        <td>
+          <% if(!n.read) { %>
+            <form method="POST" action="/notifications/<%= n.id %>/read"><button class="btn btn-sm btn-primary">Mark read</button></form>
+          <% } %>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

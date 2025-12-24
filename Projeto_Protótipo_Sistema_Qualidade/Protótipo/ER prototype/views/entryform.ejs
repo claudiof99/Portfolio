@@ -1,0 +1,36 @@
+<% layout('layout') -%>
+<h3><%= entry ? 'Edit Entry' : 'Add Entry' %> — Clause <%= clause.code %></h3>
+<% if(errors && errors.length) { %>
+  <div class="alert alert-danger">
+    <ul><% errors.forEach(e => { %><li><%= e %></li><% }) %></ul>
+  </div>
+<% } %>
+
+<form method="POST" action="<%= entry ? ('/clauses/entries/' + entry.id + '?_method=PUT') : ('/clauses/' + clause.id + '/entries') %>">
+  <div class="mb-3">
+    <label>Title</label>
+    <input name="title" class="form-control" value="<%= entry ? entry.title : '' %>" />
+  </div>
+  <div class="mb-3">
+    <label>Description</label>
+    <textarea name="description" class="form-control"><%= entry ? entry.description : '' %></textarea>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label>Value</label>
+      <input name="value" class="form-control" value="<%= entry && entry.value !== null ? entry.value : '' %>"/>
+    </div>
+    <div class="col">
+      <label>Unit</label>
+      <input name="unit" class="form-control" value="<%= entry ? entry.unit : '' %>"/>
+    </div>
+    <div class="col">
+      <label>Target</label>
+      <input name="target" class="form-control" value="<%= entry && entry.target !== null ? entry.target : '' %>"/>
+    </div>
+  </div>
+  <div class="mt-3">
+    <button class="btn btn-primary"><%= entry ? 'Save' : 'Create' %></button>
+    <a class="btn btn-secondary" href="/clauses/<%= clause.id %>">Cancel</a>
+  </div>
+</form>

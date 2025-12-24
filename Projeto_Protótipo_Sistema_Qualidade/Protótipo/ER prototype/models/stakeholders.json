@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Customers",
+    "type": "External",
+    "needs": "High Quality",
+    "expectations": "Fast Delivery",
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": "Employees",
+    "type": "Internal",
+    "needs": "Safety",
+    "expectations": "Good Salary",
+    "active": true
+  }
+]

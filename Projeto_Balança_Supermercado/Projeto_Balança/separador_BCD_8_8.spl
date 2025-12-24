@@ -1,0 +1,9 @@
+[Inputs]
+=BCD_total[15:0]=
+[Outputs]
+=BCD_inteiro[7:0]=
+=BCD_fracionario[7:0]=
+[BiDir]
+[ATTRIBUTES]
+VeriModel separador_BCD_8_8
+

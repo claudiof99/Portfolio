@@ -1,0 +1,3 @@
+verilog isim_temp "filtragem_peso.v"
+verilog isim_temp "testando_filtragempeso.v"
+verilog isim_temp "C:/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"

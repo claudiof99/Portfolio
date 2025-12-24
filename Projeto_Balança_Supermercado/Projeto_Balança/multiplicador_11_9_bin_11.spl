@@ -1,0 +1,9 @@
+[Inputs]
+=entrada_11b[10:0]=
+=entrada_9b[8:0]=
+[Outputs]
+=saida_11b[10:0]=
+[BiDir]
+[ATTRIBUTES]
+VeriModel multiplicador_11_9_bin_11
+

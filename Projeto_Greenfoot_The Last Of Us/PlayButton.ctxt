@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=PlayButton
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Play\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=PlayButton()
+comment1.text=\r\n\ Should've\ been\ a\ function\ yet\ again\r\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\r\n\ Checks\ if\ mouse\ clicks\ it\ and\ instantiates\ level\ one\ if\ clicked\ on\r\n
+comment3.params=
+comment3.target=boolean\ getIsClicked()
+comment4.params=isClicked
+comment4.target=boolean\ setIsClicked(boolean)
+comment5.params=
+comment5.target=void\ checkMouseClick()
+comment6.params=
+comment6.target=void\ startGameMusic()
+numComments=7

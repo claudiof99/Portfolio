@@ -1,0 +1,6 @@
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/somador.v -lang verilog -prj Projeto_F1v2 -o somador_preco.spl -module somador_preco -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 somador_preco.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/somador_preco.sym 
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/somador.v -lang verilog -prj Projeto_F1v2 -o somador_preco.spl -module somador_preco -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 somador_preco.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/somador_preco.sym 
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/somador.v -lang verilog -prj Projeto_F1v2 -o somador_preco.spl -module somador_preco -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 somador_preco.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/somador_preco.sym 

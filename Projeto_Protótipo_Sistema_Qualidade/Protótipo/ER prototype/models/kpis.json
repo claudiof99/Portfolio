@@ -1,0 +1,742 @@
+[
+  {
+    "id": 1702291001,
+    "name": "Customer Satisfaction Score",
+    "process": "Sales & Marketing",
+    "target": 90,
+    "unit": "%",
+    "frequency": "Monthly",
+    "status": "Active",
+    "createdBy": "admin",
+    "dataPoints": [
+      {
+        "date": "2024-01-15",
+        "value": 85,
+        "recordedBy": "quality_manager",
+        "active": true
+      },
+      {
+        "date": "2024-02-15",
+        "value": 87.5,
+        "recordedBy": "quality_manager",
+        "active": true
+      },
+      {
+        "date": "2024-03-15",
+        "value": 88,
+        "recordedBy": "quality_manager",
+        "active": true
+      },
+      {
+        "date": "2024-04-15",
+        "value": 89.5,
+        "recordedBy": "quality_manager",
+        "active": true
+      },
+      {
+        "date": "2024-05-15",
+        "value": 92,
+        "recordedBy": "quality_manager",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291005,
+    "name": "Lead Conversion Rate",
+    "process": "Sales & Marketing",
+    "target": 20,
+    "unit": "%",
+    "frequency": "Monthly",
+    "status": "Active",
+    "createdBy": "admin",
+    "dataPoints": [
+      {
+        "date": "2024-01-15",
+        "value": 15,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-02-15",
+        "value": 16.2,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-03-15",
+        "value": 18,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-04-15",
+        "value": 19.5,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-05-15",
+        "value": 18.5,
+        "recordedBy": "quality_manager",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291006,
+    "name": "Customer Complaint Resolution Time",
+    "process": "Sales & Marketing",
+    "target": 24,
+    "unit": "Hours",
+    "frequency": "Monthly",
+    "status": "Active",
+    "createdBy": "admin",
+    "dataPoints": [
+      {
+        "date": "2024-01-01",
+        "value": 32,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-02-01",
+        "value": 28,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-03-01",
+        "value": 25,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-04-01",
+        "value": 20,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-05-01",
+        "value": 12,
+        "recordedBy": "staff",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291002,
+    "name": "Product Defect Rate",
+    "process": "Manufacturing",
+    "target": 2.5,
+    "unit": "%",
+    "frequency": "Monthly",
+    "status": "Active",
+    "createdBy": "quality_manager",
+    "dataPoints": [
+      {
+        "date": "2024-01-01",
+        "value": 3.1,
+        "recordedBy": "quality_manager",
+        "active": true
+      },
+      {
+        "date": "2024-02-01",
+        "value": 2.8,
+        "recordedBy": "quality_manager",
+        "active": true
+      },
+      {
+        "date": "2024-03-01",
+        "value": 2.5,
+        "recordedBy": "quality_manager",
+        "active": true
+      },
+      {
+        "date": "2024-04-01",
+        "value": 2.1,
+        "recordedBy": "quality_manager",
+        "active": true
+      },
+      {
+        "date": "2024-05-01",
+        "value": 1.9,
+        "recordedBy": "staff",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1765548951948,
+    "name": "Production Waste (Sector B)",
+    "process": "Manufacturing",
+    "target": 5,
+    "unit": "%",
+    "frequency": "Monthly",
+    "status": "Active",
+    "createdBy": "staff",
+    "dataPoints": [
+      {
+        "date": "2024-01-10",
+        "value": 7,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-02-10",
+        "value": 6.5,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-03-10",
+        "value": 6,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-04-10",
+        "value": 5.2,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-05-10",
+        "value": 4.8,
+        "recordedBy": "staff",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291007,
+    "name": "Cycle Time per Unit",
+    "process": "Manufacturing",
+    "target": 15,
+    "unit": "Minutes",
+    "frequency": "Monthly",
+    "status": "Active",
+    "createdBy": "quality_manager",
+    "dataPoints": [
+      {
+        "date": "2024-01-12",
+        "value": 18,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-02-12",
+        "value": 17.5,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-03-12",
+        "value": 16,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-04-12",
+        "value": 15.2,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-05-12",
+        "value": 14.5,
+        "recordedBy": "staff",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291003,
+    "name": "Supplier On-Time Delivery",
+    "process": "Supply Chain",
+    "target": 95,
+    "unit": "%",
+    "frequency": "Quarterly",
+    "status": "Active",
+    "createdBy": "admin",
+    "dataPoints": [
+      {
+        "date": "2023-06-30",
+        "value": 90,
+        "recordedBy": "admin",
+        "active": true
+      },
+      {
+        "date": "2023-09-30",
+        "value": 92,
+        "recordedBy": "admin",
+        "active": true
+      },
+      {
+        "date": "2023-12-30",
+        "value": 94.5,
+        "recordedBy": "admin",
+        "active": true
+      },
+      {
+        "date": "2024-03-30",
+        "value": 96,
+        "recordedBy": "quality_manager",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291008,
+    "name": "Inventory Turnover Ratio",
+    "process": "Supply Chain",
+    "target": 6,
+    "unit": "Ratio",
+    "frequency": "Quarterly",
+    "status": "Active",
+    "createdBy": "quality_manager",
+    "dataPoints": [
+      {
+        "date": "2023-06-30",
+        "value": 4.5,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2023-09-30",
+        "value": 5,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2023-12-30",
+        "value": 5.5,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-03-30",
+        "value": 5.8,
+        "recordedBy": "staff",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291009,
+    "name": "Supplier Defect Rate",
+    "process": "Supply Chain",
+    "target": 1,
+    "unit": "%",
+    "frequency": "Monthly",
+    "status": "Active",
+    "createdBy": "quality_manager",
+    "dataPoints": [
+      {
+        "date": "2024-01-05",
+        "value": 1.5,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-02-05",
+        "value": 1.2,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-03-05",
+        "value": 0.9,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-04-05",
+        "value": 0.8,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-05-05",
+        "value": 0.5,
+        "recordedBy": "staff",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291004,
+    "name": "Internal Audit Non-Conformities",
+    "process": "Quality Assurance",
+    "target": 0,
+    "unit": "Count",
+    "frequency": "Yearly",
+    "status": "Active",
+    "createdBy": "admin",
+    "dataPoints": [
+      {
+        "date": "2021-11-20",
+        "value": 8,
+        "recordedBy": "auditor_external",
+        "active": true
+      },
+      {
+        "date": "2022-11-20",
+        "value": 7,
+        "recordedBy": "auditor_external",
+        "active": true
+      },
+      {
+        "date": "2023-11-20",
+        "value": 4,
+        "recordedBy": "auditor_external",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291010,
+    "name": "Corrective Actions Closure Time",
+    "process": "Quality Assurance",
+    "target": 30,
+    "unit": "Days",
+    "frequency": "Monthly",
+    "status": "Active",
+    "createdBy": "quality_manager",
+    "dataPoints": [
+      {
+        "date": "2024-01-20",
+        "value": 45,
+        "recordedBy": "quality_manager",
+        "active": true
+      },
+      {
+        "date": "2024-02-20",
+        "value": 40,
+        "recordedBy": "quality_manager",
+        "active": true
+      },
+      {
+        "date": "2024-03-20",
+        "value": 35,
+        "recordedBy": "quality_manager",
+        "active": true
+      },
+      {
+        "date": "2024-04-20",
+        "value": 25,
+        "recordedBy": "quality_manager",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291011,
+    "name": "Document Control Compliance",
+    "process": "Quality Assurance",
+    "target": 100,
+    "unit": "%",
+    "frequency": "Quarterly",
+    "status": "Active",
+    "createdBy": "admin",
+    "dataPoints": [
+      {
+        "date": "2023-06-15",
+        "value": 90,
+        "recordedBy": "auditor_internal",
+        "active": true
+      },
+      {
+        "date": "2023-09-15",
+        "value": 94,
+        "recordedBy": "auditor_internal",
+        "active": true
+      },
+      {
+        "date": "2023-12-15",
+        "value": 96,
+        "recordedBy": "auditor_internal",
+        "active": true
+      },
+      {
+        "date": "2024-03-15",
+        "value": 98,
+        "recordedBy": "auditor_internal",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1765635468037,
+    "name": "Safety Incident Report",
+    "process": "Health & Safety",
+    "target": 0,
+    "unit": "Count",
+    "frequency": "Monthly",
+    "status": "Active",
+    "createdBy": "staff",
+    "dataPoints": [
+      {
+        "date": "2024-01-01",
+        "value": 2,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-02-01",
+        "value": 1,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-03-01",
+        "value": 0,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-04-01",
+        "value": 1,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-05-01",
+        "value": 0,
+        "recordedBy": "staff",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291012,
+    "name": "Near Miss Reporting",
+    "process": "Health & Safety",
+    "target": 5,
+    "unit": "Count",
+    "frequency": "Monthly",
+    "status": "Active",
+    "createdBy": "staff",
+    "dataPoints": [
+      {
+        "date": "2024-01-01",
+        "value": 2,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-02-01",
+        "value": 3,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-03-01",
+        "value": 4,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-04-01",
+        "value": 6,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-05-01",
+        "value": 7,
+        "recordedBy": "staff",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291013,
+    "name": "Safety Training Completion",
+    "process": "Health & Safety",
+    "target": 100,
+    "unit": "%",
+    "frequency": "Quarterly",
+    "status": "Active",
+    "createdBy": "admin",
+    "dataPoints": [
+      {
+        "date": "2023-06-30",
+        "value": 85,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2023-09-30",
+        "value": 88,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2023-12-30",
+        "value": 92,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-03-30",
+        "value": 95,
+        "recordedBy": "staff",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702299999,
+    "name": "Machine Downtime",
+    "process": "Maintenance",
+    "target": 5,
+    "unit": "%",
+    "frequency": "Monthly",
+    "status": "Active",
+    "createdBy": "staff",
+    "dataPoints": [
+      {
+        "date": "2024-01-17",
+        "value": 8,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-02-17",
+        "value": 7,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-03-17",
+        "value": 6,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-04-17",
+        "value": 23,
+        "recordedBy": "staff",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291014,
+    "name": "Preventive Maintenance Compliance",
+    "process": "Maintenance",
+    "target": 95,
+    "unit": "%",
+    "frequency": "Monthly",
+    "status": "Active",
+    "createdBy": "quality_manager",
+    "dataPoints": [
+      {
+        "date": "2024-01-01",
+        "value": 88,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-02-01",
+        "value": 90,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-03-01",
+        "value": 91,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-04-01",
+        "value": 93,
+        "recordedBy": "staff",
+        "active": true
+      },
+      {
+        "date": "2024-05-01",
+        "value": 92,
+        "recordedBy": "staff",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": 1702291015,
+    "name": "Employee Turnover Rate",
+    "process": "HR",
+    "target": 5,
+    "unit": "%",
+    "frequency": "Quarterly",
+    "status": "Active",
+    "createdBy": "admin",
+    "dataPoints": [
+      {
+        "date": "2023-06-30",
+        "value": 6.5,
+        "recordedBy": "hr_manager",
+        "active": true
+      },
+      {
+        "date": "2023-09-30",
+        "value": 5.8,
+        "recordedBy": "hr_manager",
+        "active": true
+      },
+      {
+        "date": "2023-12-30",
+        "value": 5,
+        "recordedBy": "hr_manager",
+        "active": true
+      },
+      {
+        "date": "2024-03-30",
+        "value": 4.2,
+        "recordedBy": "hr_manager",
+        "active": true
+      },
+      {
+        "date": "2025-12-03",
+        "value": 4,
+        "recordedBy": "staff",
+        "active": true,
+        "previousValue": 2,
+        "lastEditedBy": "User",
+        "lastEditedAt": "2025-12-16T22:37:42.642Z"
+      }
+    ]
+  },
+  {
+    "id": 1702291016,
+    "name": "Training Hours per Employee",
+    "process": "HR",
+    "target": 20,
+    "unit": "Hours",
+    "frequency": "Yearly",
+    "status": "Active",
+    "createdBy": "hr_manager",
+    "dataPoints": [
+      {
+        "date": "2023-12-30",
+        "value": 45,
+        "recordedBy": "hr_manager",
+        "active": true,
+        "previousValue": 22,
+        "lastEditedBy": "User",
+        "lastEditedAt": "2025-12-17T11:53:56.238Z"
+      },
+      {
+        "date": "2025-12-19",
+        "value": 102,
+        "recordedBy": "quality_manager",
+        "active": true,
+        "archivedBy": "User",
+        "archivedAt": "2025-12-17T11:53:49.214Z"
+      }
+    ]
+  }
+]

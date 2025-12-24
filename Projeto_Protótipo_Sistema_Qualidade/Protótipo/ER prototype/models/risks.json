@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1715424000000,
+    "description": "Supply chain disruption",
+    "prob": 4,
+    "impact": 5,
+    "score": 20
+  },
+  {
+    "id": 1715424000001,
+    "description": "Server downtime",
+    "prob": 2,
+    "impact": 4,
+    "score": 8
+  }
+]

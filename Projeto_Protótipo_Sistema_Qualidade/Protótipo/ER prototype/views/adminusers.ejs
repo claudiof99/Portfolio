@@ -1,0 +1,25 @@
+
+<h2>User Management</h2>
+<table class="table">
+  <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Change Role</th></tr></thead>
+  <tbody>
+    <% users.forEach(u => { %>
+      <tr>
+        <td><%= u.id %></td>
+        <td><%= u.name %></td>
+        <td><%= u.email %></td>
+        <td><%= u.role %></td>
+        <td>
+          <form method="POST" action="/admin/users/<%= u.id %>/role" class="d-flex">
+            <select name="role" class="form-select form-select-sm me-2">
+              <option value="admin" <%= u.role==='admin' ? 'selected' : '' %>>admin</option>
+              <option value="quality_manager" <%= u.role==='quality_manager' ? 'selected' : '' %>>quality_manager</option>
+              <option value="staff" <%= u.role==='staff' ? 'selected' : '' %>>staff</option>
+            </select>
+            <button class="btn btn-sm btn-primary">Save</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

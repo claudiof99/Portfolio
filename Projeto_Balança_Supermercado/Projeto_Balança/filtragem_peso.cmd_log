@@ -1,0 +1,6 @@
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/ent_peso.v -lang verilog -prj Projeto_F1v2 -o filtragem_peso.spl -module filtragem_peso -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 filtragem_peso.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/filtragem_peso.sym 
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/filtragem_peso.v -lang verilog -prj Projeto_F1v2 -o filtragem_peso.spl -module filtragem_peso -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 filtragem_peso.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/filtragem_peso.sym 
+vhdtdtfi -lib work C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/filtragem_peso.v -lang verilog -prj Projeto_F1v2 -o filtragem_peso.spl -module filtragem_peso -template C:/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 
+spl2sym -intstyle ise -family artix7 filtragem_peso.spl C:/Users/joaoc/Desktop/PROJETOS/Projeto_F1v2/filtragem_peso.sym 

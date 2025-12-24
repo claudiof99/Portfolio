@@ -1,0 +1,17 @@
+<% layout('layout') -%>
+<h3>Complaint #<%= complaint.id %></h3>
+<p><strong>Customer:</strong> <%= complaint.customerName %></p>
+<p><strong>Description:</strong> <%= complaint.description %></p>
+<p><strong>Severity:</strong> <%= complaint.severity %></p>
+<p><strong>Status:</strong> <%= complaint.status %></p>
+<form method="POST" action="/complaints/<%= complaint.id %>?_method=PUT">
+  <div class="mb-3">
+    <label>Change status</label>
+    <select name="status" class="form-select">
+      <option value="open" <%= complaint.status==='open' ? 'selected' : '' %>>Open</option>
+      <option value="closed" <%= complaint.status==='closed' ? 'selected' : '' %>>Closed</option>
+    </select>
+  </div>
+  <button class="btn btn-primary">Update</button>
+  <a class="btn btn-secondary" href="/complaints">Back</a>
+</form>

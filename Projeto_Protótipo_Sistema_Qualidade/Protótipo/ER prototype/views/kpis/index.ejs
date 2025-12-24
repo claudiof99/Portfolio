@@ -1,0 +1,126 @@
+<%- include('../partials/header') %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-sitemap text-primary"></i> Process Dashboard</h1>
+    
+    <div class="d-flex gap-2">
+        <a href="/dashboard" class="btn btn-outline-secondary">Back to Dashboard</a>
+    </div>
+</div>
+
+<div class="card bg-light border-0 shadow-sm mb-4">
+    <div class="card-body">
+        <form action="/kpis" method="GET" class="d-flex gap-2">
+            <input 
+                type="text" 
+                name="search" 
+                class="form-control" 
+                placeholder="Search for a Process (e.g. Manufacturing)..." 
+                value="<%= locals.searchQuery || '' %>"
+            >
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search"></i> Search
+            </button>
+            <% if (locals.searchQuery) { %>
+                <a href="/kpis" class="btn btn-outline-secondary" title="Clear Search">
+                    <i class="fas fa-times"></i>
+                </a>
+            <% } %>
+        </form>
+    </div>
+</div>
+
+<% if (currentUser.role === 'quality_manager' || currentUser.role === 'admin') { %>
+<div class="card mb-5 border-primary">
+    <div class="card-header bg-primary text-white">
+        <i class="fas fa-plus-circle"></i> Define New KPI
+    </div>
+    <div class="card-body">
+        <form action="/kpis/add" method="POST" class="row g-2 align-items-center">
+            <div class="col-md-3">
+                <input type="text" name="name" class="form-control" placeholder="KPI Name" required>
+            </div>
+            <div class="col-md-3">
+                <input type="text" name="process" class="form-control" list="processOptions" placeholder="Process Name" required>
+                <datalist id="processOptions">
+                    <option value="Manufacturing">
+                    <option value="Sales & Marketing">
+                    <option value="Supply Chain">
+                    <option value="HR">
+                    <option value="Quality Assurance">
+                </datalist>
+            </div>
+            <div class="col-md-2">
+                <input type="number" step="0.01" name="target" class="form-control" placeholder="Target" required>
+            </div>
+            <div class="col-md-2">
+                <input type="text" name="unit" class="form-control" placeholder="Unit (e.g. %)" required>
+            </div>
+            <div class="col-md-2">
+                <select name="frequency" class="form-select">
+                    <option>Monthly</option>
+                    <option>Quarterly</option>
+                    <option>Yearly</option>
+                </select>
+            </div>
+            <div class="col-12 mt-2 text-end">
+                <button class="btn btn-success">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+<% } %>
+
+<% const processNames = Object.keys(kpisByProcess).sort(); %>
+
+<% if (processNames.length === 0) { %>
+    <div class="text-center py-5 text-muted">
+        <h4><i class="fas fa-search"></i> No Processes Found</h4>
+        <p>Try adjusting your search terms.</p>
+    </div>
+<% } else { %>
+    
+    <% processNames.forEach(process => { %>
+        <div class="process-section mb-5">
+            <div class="d-flex align-items-center border-bottom pb-2 mb-3">
+                <h3 class="text-secondary m-0"><i class="fas fa-cogs me-2"></i><%= process %></h3>
+                <span class="badge bg-light text-secondary ms-3 border">
+                    <%= kpisByProcess[process].length %> Indicators
+                </span>
+            </div>
+
+            <div class="row">
+                <% kpisByProcess[process].forEach(kpi => { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm border-0 hover-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="card-title fw-bold text-dark mb-0"><%= kpi.name %></h5>
+                                    
+                                    <% if (kpi.status === 'Pending') { %>
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    <% } else if (kpi.status === 'Inactive') { %>
+                                        <span class="badge bg-secondary">Inactive</span>
+                                    <% } %>
+                                </div>
+
+                                <p class="card-text text-muted small mb-3">
+                                    Target: <strong><%= kpi.target %> <%= kpi.unit %></strong> 
+                                    <span class="mx-1">|</span> 
+                                    <%= kpi.frequency %>
+                                </p>
+
+                                <a href="/kpis/<%= kpi.id %>" class="btn btn-outline-primary btn-sm w-100">
+                                    View Data & Trends
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    <% }) %>
+
+<% } %>
+
+<%- include('../partials/footer') %>

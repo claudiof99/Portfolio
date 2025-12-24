@@ -1,0 +1,16 @@
+[Inputs]
+clk
+rst
+fim_compra
+taxa
+=preco_produto[10:0]=
+=peso_produto[10:0]=
+[Outputs]
+emissao_talao
+=soma_final[10:0]=
+=soma_peso[10:0]=
+=valor_taxa[4:0]=
+[BiDir]
+[ATTRIBUTES]
+VeriModel somador_preco_peso
+

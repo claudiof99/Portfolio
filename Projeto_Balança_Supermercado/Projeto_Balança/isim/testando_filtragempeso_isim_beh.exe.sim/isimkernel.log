@@ -1,0 +1,29 @@
+Command line:
+   testando_filtragempeso_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  63757
+
+Sat Dec 23 13:08:00 2023
+
+
+ Elaboration Time: 0.046875 sec
+
+ Current Memory Usage: 5149.89 Meg
+
+ Total Signals          : 19
+ Total Nets             : 60
+ Total Signal Drivers   : 11
+ Total Blocks           : 3
+ Total Primitive Blocks : 2
+ Total Processes        : 15
+ Total Traceable Variables  : 25
+ Total Scalar Nets and Variables : 198
+Total Line Count : 39
+
+ Total Simulation Time: 0.0625 sec
+
+ Current Memory Usage: 4678.03 Meg
+
+Sat Dec 23 13:15:06 2023
+

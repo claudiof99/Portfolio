@@ -1,0 +1,73 @@
+<h2>Clause <%= clause.code %> — <%= clause.title %></h2>
+<p><em><%= clause.definition %></em></p>
+
+<a class="btn btn-success mb-3" href="/clauses/<%= clause.id %>/new">
+  <% if(clause.code === '6') { %> Add Risk/Opportunity <% } else { %> Add Entry <% } %>
+</a>
+
+<table class="table table-sm table-hover">
+  <thead class="table-light">
+    <tr>
+      <% if(clause.code === '6') { %>
+        <th>Risk/Opportunity</th>
+        <th>Impact (Severity)</th>
+        <th>Treatment/Mitigation</th>
+        <th>Status</th>
+        <th>Actions</th>
+      <% } else { %>
+        <th>Title</th>
+        <th>Value</th>
+        <th>Unit</th>
+        <th>Target</th>
+        <th>Status</th>
+        <th>Actions</th>
+      <% } %>
+    </tr>
+  </thead>
+  <tbody>
+    <% entries.forEach(e => { %>
+      <tr>
+        <% if(clause.code === '6') { %>
+          <td><strong><%= e.title %></strong></td>
+          <td><%= e.impact || 'Medium' %></td> <td><%= e.mitigation || 'Monitor' %></td> <% } else { %>
+          <td><%= e.title %></td>
+          <td><%= (e.value === null ? '-' : e.value) %></td>
+          <td><%= e.unit %></td>
+          <td><%= (e.target === null ? '-' : e.target) %></td>
+        <% } %>
+
+        <td>
+          <% if(e.status === 'approved') { %>
+            <span class="badge bg-success">Approved</span>
+          <% } else { %>
+            <span class="badge bg-warning text-dark">Pending Validation</span>
+          <% } %>
+        </td>
+
+        <td>
+          <div class="btn-group" role="group">
+            <a class="btn btn-sm btn-outline-primary" href="/clauses/entries/<%= e.id %>/edit">Edit</a>
+
+            <a class="btn btn-sm btn-outline-secondary" href="/clauses/entries/<%= e.id %>/history" title="View Change Log">
+              History
+            </a>
+
+            <% if(currentUser.role === 'quality_manager' && e.status !== 'approved') { %>
+              <form method="POST" action="/clauses/entries/<%= e.id %>/approve" style="display:inline">
+                <button class="btn btn-sm btn-success">Approve</button>
+              </form>
+            <% } %>
+
+            <form method="POST" action="/clauses/entries/<%= e.id %>?_method=DELETE" style="display:inline">
+              <button class="btn btn-sm btn-outline-danger">Archive</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+    <% }) %>
+
+    <% if(entries.length === 0) { %>
+      <tr><td colspan="6" class="text-center text-muted">No entries found for this clause.</td></tr>
+    <% } %>
+  </tbody>
+</table>

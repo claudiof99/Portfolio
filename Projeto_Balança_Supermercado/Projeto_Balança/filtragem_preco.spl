@@ -1,0 +1,11 @@
+[Inputs]
+=produto[1:0]=
+=preco_banana[8:0]=
+=preco_maracuja[8:0]=
+=preco_tangerina[8:0]=
+[Outputs]
+=preco_fil[8:0]=
+[BiDir]
+[ATTRIBUTES]
+VeriModel filtragem_preco
+

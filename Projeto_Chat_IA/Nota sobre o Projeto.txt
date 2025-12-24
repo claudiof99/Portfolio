@@ -1,0 +1,1 @@
+A ligação com a base de dados MongoDb já não existe. Logo o login não funciona.

@@ -1,0 +1,24 @@
+<% layout('layout') -%>
+<h3>New Complaint</h3>
+<% if(errors && errors.length) { %>
+  <div class="alert alert-danger"><ul><% errors.forEach(e => { %><li><%= e %></li><% }) %></ul></div>
+<% } %>
+<form method="POST" action="/complaints">
+  <div class="mb-3">
+    <label>Customer Name</label>
+    <input name="customerName" class="form-control" value="<%= complaint ? complaint.customerName : '' %>"/>
+  </div>
+  <div class="mb-3">
+    <label>Description</label>
+    <textarea name="description" class="form-control"><%= complaint ? complaint.description : '' %></textarea>
+  </div>
+  <div class="mb-3">
+    <label>Severity</label>
+    <select name="severity" class="form-select">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+  </div>
+  <button class="btn btn-primary">Create</button>
+</form>

@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Button
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Button\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=_buttonName\ _width\ _height
+comment1.target=Button(java.lang.String,\ int,\ int)
+comment1.text=\r\n\ Constructor\ for\ Button\ class,\ will\ create\ the\ desired\ button\ with\ its\ name\ and\ dimensions.\r\n\ Probably\ should\ have\ created\ a\ function\ for\ it\ but\ it\ works\r\n\ \r\n\ @param\ String\ _buttonName\ -\ Text\ displayed\ by\ the\ button\r\n\ @param\ int\ _width\ -\ Width\ dimension\ for\ the\ button\r\n\ @param\ int\ _height\ -\ Height\ dimension\ for\ the\ button\r\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\r\n\ How\ button\ will\ act\ from\ the\ point\ the\ user\ clicks\ "Run"\r\n
+comment3.params=
+comment3.target=void\ checkMouse()
+comment3.text=\r\n\ Checks\ if\ the\ mouse\ is\ over\ the\ button\ and\ adjusts\ the\ transparency\ to\ half\ the\ original\ alpha\ value\ if\ button\ is\ over.\r\n\ Restores\ the\ alpha\ value\ to\ 255\ if\ mouse\ is\ not\ over\ it\r\n
+comment4.params=adjust
+comment4.target=void\ adjustTransparency(int)
+comment4.text=\r\n\ Adjusts\ the\ transparency\ of\ any\ image\ in\ regard\ to\ the\ parameter\ passed\ down\r\n\ @param\ int\ adjust\ -\ value\ to\ which\ the\ image's\ transparency\ must\ be\ adjusted\ to\r\n
+numComments=5

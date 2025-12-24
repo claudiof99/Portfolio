@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-history text-secondary me-2"></i>Deleted Records Log</h1>
+    <a href="/ncs" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-1"></i> Back to Active Issues
+    </a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Severity</th>
+                        <th>Deleted By</th>
+                        <th>Deleted At</th>
+                        <th>Reason / Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (ncs.length === 0) { %>
+                        <tr>
+                            <td colspan="6" class="text-center py-4 text-muted">
+                                <i class="fas fa-archive fa-2x mb-2"></i><br>
+                                No deleted records found.
+                            </td>
+                        </tr>
+                    <% } else { %>
+                        <% ncs.forEach(nc => { %>
+                            <tr>
+                                <td><small class="text-muted"><%= nc.id %></small></td>
+                                <td class="fw-bold"><%= nc.titulo %></td>
+                                <td>
+                                    <span class="badge bg-secondary"><%= nc.gravidade %></span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-danger">
+                                        <i class="fas fa-user-slash me-1"></i><%= nc.deletedBy || 'Unknown' %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <%= nc.deletedAt ? new Date(nc.deletedAt).toLocaleString() : 'N/A' %>
+                                </td>
+                                <td class="text-muted small text-truncate" style="max-width: 200px;">
+                                    <%= nc.descricao %>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

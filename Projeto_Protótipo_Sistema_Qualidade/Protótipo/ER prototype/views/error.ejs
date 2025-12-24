@@ -1,0 +1,9 @@
+<%- include('partials/header') %>
+<div class="alert alert-danger mt-5">
+    <h4>Action Failed</h4>
+    <p><%= message %></p>
+    <hr>
+    <p><strong>To fix this:</strong> <%= solution %></p>
+    <button onclick="history.back()" class="btn btn-secondary mt-3">Go Back</button>
+</div>
+<%- include('partials/footer') %>

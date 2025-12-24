@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=ExitButton
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ ExitButton\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=ExitButton()
+comment1.text=\r\n\ If\ teacher\ alredy\ read\ the\ previous\ documentation,\ you\ already\ know\ this\ should've\ been\ a\ function.\r\n\ It\ gets\ better\ than\ this\ I\ promise\r\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\r\n\ Checks\ if\ mouse\ clicks\ it\ and\ stops\ the\ game\ from\ running\ when\ it\ does\r\n
+comment3.params=
+comment3.target=void\ stop()
+comment3.text=\r\n\ Stops\ the\ program\ if\ mouse\ clicks\ the\ button\r\n
+numComments=4
