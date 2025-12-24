@@ -1,0 +1,110 @@
+EK626|"B767-300ER"|"Taipei Taoyuan International Airport (TPE) - Taipei, Taiwan"|"Aeroporto EDA"|12|12
+TK2489529870|Ava|WILSON|Egyptian
+TK1481305958|Isabella|WILSON|Swiss
+TK6204168388|Charlotte|ROBINSON|Vietnamese
+TK2708926456|Elizabeth|JACKSON|Finnish
+TK8875634723|Michael|THOMAS|Cambodian
+TK4843906507|Jacob|CLARK|Ukrainian
+TK8260355073|Emily|TAYLOR|Vietnamese
+TK3162352413|Emma|LEE|Cambodian
+TK8251334273|Harper|WALKER|Dutch
+TK3130036406|Scarlett|RODRIGUEZ|Portuguese
+TK7198989905|Ava|ALLEN|Egyptian
+TK7558393834|Sophia|WILLIAMS|Portuguese
+SK111|"B737-900ER"|"Oslo Airport (OSL) - Oslo, Norway"|"Aeroporto EDA"|7|7
+TK2456097734|Daniel|WHITE|Mongolian
+TK9374457817|Evelyn|HARRIS|Ukrainian
+TK3390522547|Mia|MOORE|Finnish
+TK6101892549|Liam|YOUNG|Jamaican
+TK5153866051|Harper|ALLEN|Vietnamese
+TK1162389385|Ava|RODRIGUEZ|Dutch
+TK3993789039|Noah|MARTINEZ|Icelandic
+IB444|"B737 MAX 200"|"Ben Gurion Airport (TLV) - Tel Aviv, Israel"|"Aeroporto EDA"|9|9
+TK3085543868|Michael|MOORE|Portuguese
+TK8879395672|Isabella|WILLIAMS|Swiss
+TK7120848179|Lucas|MOORE|Icelandic
+TK1130622811|Amelia|RODRIGUEZ|Irish
+TK9467475420|Abigail|KING|Nigerian
+TK5947341604|Evelyn|MILLER|Dutch
+TK7770069738|Amelia|SMITH|Peruvian
+TK1818014615|Mia|THOMPSON|Vietnamese
+TK5501419062|Alexander|ANDERSON|Kenyan
+DL101|"B787-9"|"McCarran International Airport (LAS) - Las Vegas, Nevada, USA"|"Aeroporto EDA"|13|13
+TK2017819276|William|MOORE|Kenyan
+TK2149789238|Ethan|DAVIS|Lebanese
+TK7013597052|Mason|HALL|Icelandic
+TK9640173745|Noah|BROWN|Malaysian
+TK3982726781|Emily|JACKSON|Moroccan
+TK5872785976|Daniel|LEE|Australian
+TK0428191045|Alexander|ALLEN|Moroccan
+TK3409004390|Ethan|WALKER|Swiss
+TK1812137375|Jackson|WHITE|Portuguese
+TK8938269785|Lucas|WHITE|Icelandic
+TK0414898176|Emma|SMITH|Lebanese
+TK8916020806|Noah|MARTINEZ|Egyptian
+TK9627144469|Noah|BROWN|Dutch
+UA252|"B787-10"|"Soekarno–Hatta International Airport (CGK) - Jakarta, Indonesia"|"Aeroporto EDA"|8|8
+TK8198087553|Isabella|MOORE|Cambodian
+TK8044321549|William|JOHNSON|Irish
+TK6554226191|Mia|JOHNSON|Egyptian
+TK7517712531|Grace|GARCIA|Lebanese
+TK3853185583|Michael|WILSON|Dutch
+TK5261121321|Ethan|MARTIN|Portuguese
+TK3219096235|Ethan|MOORE|Egyptian
+TK7098091333|Evelyn|SMITH|Lebanese
+LH020|"A330"|"Dallas/Fort Worth International Airport (DFW) - Dallas/Fort Worth, Texas, USA"|"Aeroporto EDA"|12|12
+TK7793196301|Abigail|ROBINSON|Egyptian
+TK1747776960|Elijah|MARTINEZ|Lebanese
+TK9517833097|Amelia|WILSON|Moroccan
+TK4145308937|Elizabeth|MILLER|Dutch
+TK5046631830|Emily|LEE|Portuguese
+TK4935754577|Abigail|DAVIS|Peruvian
+TK6627051177|Alexander|WHITE|Nigerian
+TK5689092655|Lucas|YOUNG|Jamaican
+TK9011169855|Liam|JOHNSON|Irish
+TK2861206003|William|WILLIAMS|Irish
+TK0900723043|Emma|DAVIS|Irish
+TK8402346179|Charlotte|THOMPSON|Jamaican
+AC848|"A350"|"King Fahd International Airport (DMM) - Dammam, Saudi Arabia"|"Aeroporto EDA"|10|10
+TK3732282153|Scarlett|WALKER|Nigerian
+TK4609176299|Harper|CLARK|Vietnamese
+TK2869198093|William|JONES|Swiss
+TK9969845418|Evelyn|JACKSON|Peruvian
+TK7104786069|Elizabeth|CLARK|Lebanese
+TK8588279177|Alexander|GARCIA|Kenyan
+TK9708818686|James|JONES|Malaysian
+TK5254570289|Alexander|MOORE|Mongolian
+TK1634276738|Grace|LEWIS|Portuguese
+TK0452690438|James|MILLER|Egyptian
+BA456|"B737-900ER"|"Taipei Taoyuan International Airport (TPE) - Taipei, Taiwan"|"Aeroporto EDA"|10|10
+TK1564204683|Henry|CLARK|Malaysian
+TK9590588863|Noah|THOMAS|Lebanese
+TK3755341870|Scarlett|KING|Nigerian
+TK1247937305|Charlotte|ROBINSON|Irish
+TK9510602972|Alexander|SMITH|Kenyan
+TK2334246032|Harper|MOORE|Australian
+TK7049793249|Jacob|TAYLOR|Nigerian
+TK6745951202|Daniel|GARCIA|Egyptian
+TK0219992177|Elizabeth|WALKER|Portuguese
+TK4217918929|Elizabeth|WALKER|Jamaican
+AC202|"B737-800	"|"Ben Gurion Airport (TLV) - Tel Aviv, Israel"|"Aeroporto EDA"|8|8
+TK4442097969|Jacob|WILLIAMS|Irish
+TK1807802536|Michael|MILLER|Australian
+TK6613268032|Noah|MOORE|Malaysian
+TK8230781183|William|RODRIGUEZ|Brazilian
+TK3911033654|Elizabeth|LEE|Icelandic
+TK1468750716|Amelia|RODRIGUEZ|Peruvian
+TK0167713767|Abigail|LEE|Jamaican
+TK5965386485|Daniel|YOUNG|Kenyan
+SQ727|"A320"|"San Francisco International Airport (SFO) - San Francisco, California, USA"|"Aeroporto EDA"|11|11
+TK6314635170|Alexander|THOMAS|Greek
+TK7847700149|Amelia|GARCIA|Brazilian
+TK8311547560|Ava|HALL|Brazilian
+TK8893683633|Ava|RODRIGUEZ|Australian
+TK2939830499|Abigail|LEWIS|Egyptian
+TK6733157015|Jacob|BROWN|Moroccan
+TK8165418774|Isabella|GARCIA|Jamaican
+TK8811098700|Mia|ALLEN|Icelandic
+TK8422188886|Elizabeth|HERNANDEZ|Kenyan
+TK2403740135|Abigail|YOUNG|Nigerian
+TK7739844798|Henry|SMITH|Kenyan

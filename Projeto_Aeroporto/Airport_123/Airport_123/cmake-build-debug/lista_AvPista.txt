@@ -1,0 +1,20 @@
+LH656|"B737-700"|"Aeroporto EDA"|"Sydney Airport (SYD) - Sydney, Australia"|8|8
+TK8199373716|Harper|RODRIGUEZ|Egyptian
+TK8492938373|Alexander|JOHNSON|Kenyan
+TK0175818662|William|RODRIGUEZ|Ukrainian
+TK9110724799|Emma|CLARK|Mongolian
+TK8506463191|Jackson|WALKER|Irish
+TK4755301056|Grace|RODRIGUEZ|Greek
+TK1870724294|Daniel|ROBINSON|Lebanese
+TK0656541797|Ava|DAVIS|Irish
+SK343|"A319neo"|"Aeroporto EDA"|"Incheon International Airport (ICN) - Seoul, South Korea"|10|10
+TK9345056788|Alexander|LEE|Irish
+TK1618699579|Henry|TAYLOR|Irish
+TK7769978763|Amelia|CLARK|Moroccan
+TK0337616294|Mason|THOMPSON|Peruvian
+TK5641260639|Alexander|JOHNSON|Irish
+TK9462504521|Isabella|ROBINSON|Cambodian
+TK1759965914|Mason|ALLEN|Malaysian
+TK7510646645|Grace|WILLIAMS|Swiss
+TK1527802327|Benjamin|THOMAS|Greek
+TK1282183303|Emily|LEWIS|Dutch
