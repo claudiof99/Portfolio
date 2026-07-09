@@ -1,0 +1,576 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="AccessDenied_Body" xml:space="preserve"><value>Vous n'avez pas la permission d'accéder à cette page.</value></data>
+  <data name="AccessDenied_GoHome" xml:space="preserve"><value>Aller à l'Accueil</value></data>
+  <data name="AccessDenied_Heading" xml:space="preserve"><value>Accès Refusé</value></data>
+  <data name="Account_AuthUnavailable" xml:space="preserve"><value>Le service d'authentification est temporairement indisponible. Veuillez réessayer.</value></data>
+  <data name="Account_EmailNotFound" xml:space="preserve"><value>E-mail introuvable</value></data>
+  <data name="Account_EmailPasswordRequired" xml:space="preserve"><value>L'e-mail et le mot de passe sont requis.</value></data>
+  <data name="Account_InvalidCredentials" xml:space="preserve"><value>Identifiants invalides.</value></data>
+  <data name="Account_RegisterFailed" xml:space="preserve"><value>Échec de l'inscription de l'utilisateur.</value></data>
+  <data name="Account_ResetFailed" xml:space="preserve"><value>Impossible de réinitialiser le mot de passe.</value></data>
+  <data name="Account_ResetFieldsRequired" xml:space="preserve"><value>L'e-mail, le code et le nouveau mot de passe sont requis.</value></data>
+  <data name="Account_ResetSuccess" xml:space="preserve"><value>Mot de passe réinitialisé avec succès. Veuillez vous connecter.</value></data>
+  <data name="Account_ResetTokenExpired" xml:space="preserve"><value>Code de réinitialisation expiré.</value></data>
+  <data name="Account_ResetTokenInvalidOrExpired" xml:space="preserve"><value>Code de réinitialisation invalide ou expiré.</value></data>
+  <data name="Account_SignInAfterRegisterFailed" xml:space="preserve"><value>Impossible de se connecter après l'inscription.</value></data>
+  <data name="Account_UserAlreadyExists" xml:space="preserve"><value>L'utilisateur existe déjà.</value></data>
+  <data name="AddPass_CancelButton" xml:space="preserve"><value>Annuler</value></data>
+  <data name="AddPass_CompleteNotConfigured" xml:space="preserve"><value>Les passes complets n'ont pas encore été configurés pour ce festival. Veuillez les configurer d'abord.</value></data>
+  <data name="AddPass_ConfirmButton" xml:space="preserve"><value>Confirmer</value></data>
+  <data name="AddPass_ConfirmHeading" xml:space="preserve"><value>Confirmer l'Ajout</value></data>
+  <data name="AddPass_ConfirmMessage" xml:space="preserve"><value>Êtes-vous sûr de vouloir ajouter {0} pour {1} à votre panier ?</value></data>
+  <data name="AddPass_DailyNotConfigured" xml:space="preserve"><value>Les passes journaliers n'ont pas encore été configurés pour ce festival. Veuillez les configurer d'abord.</value></data>
+  <data name="AddTicket_NotConfigured" xml:space="preserve"><value>Aucun billet configuré pour cette séance.</value></data>
+  <data name="Admin_ActiveSessions" xml:space="preserve"><value>Séances Actives</value></data>
+  <data name="Admin_Heading" xml:space="preserve"><value>Tableau de Bord Admin</value></data>
+  <data name="Admin_ManagementHub" xml:space="preserve"><value>Centre de Gestion</value></data>
+  <data name="Admin_PageTitle" xml:space="preserve"><value>Tableau de Bord Admin</value></data>
+  <data name="Admin_TotalFestivals" xml:space="preserve"><value>Total des Festivals</value></data>
+  <data name="Admin_TotalFilms" xml:space="preserve"><value>Total des Films</value></data>
+  <data name="Admin_TotalPurchases" xml:space="preserve"><value>Total des Achats</value></data>
+  <data name="Alert_Information" xml:space="preserve"><value>Information :</value></data>
+  <data name="Alert_NotYetAvailable" xml:space="preserve"><value>Pas Encore Disponible</value></data>
+  <data name="Award_Active" xml:space="preserve"><value>Actif</value></data>
+  <data name="Award_ActiveAwards" xml:space="preserve"><value>Récompenses Actives/Inactives</value></data>
+  <data name="Award_AddAwardsHeading" xml:space="preserve"><value>Ajouter des Récompenses</value></data>
+  <data name="Award_AddAwardsSubtitle" xml:space="preserve"><value>Créez de nouvelles récompenses pour votre festival, nommez films, acteurs, réalisateurs et plus.</value></data>
+  <data name="Award_AddNominees" xml:space="preserve"><value>Ajouter des nominés</value></data>
+  <data name="Award_AwardLabel" xml:space="preserve"><value>Récompense :</value></data>
+  <data name="Award_AwardNameDirector" xml:space="preserve"><value>Nom de la récompense (ex., Meilleur Réalisateur)</value></data>
+  <data name="Award_AwardNamePerformance" xml:space="preserve"><value>Nom de la récompense (ex., Meilleure Interprétation)</value></data>
+  <data name="Award_AwardNamePlaceholder" xml:space="preserve"><value>Nom de la récompense (ex., Meilleur Film)</value></data>
+  <data name="Award_AwardNameScreenplay" xml:space="preserve"><value>Nom de la récompense (ex., Meilleur Scénario)</value></data>
+  <data name="Award_CategoryActor" xml:space="preserve"><value>Acteur</value></data>
+  <data name="Award_CategoryDirector" xml:space="preserve"><value>Réalisateur</value></data>
+  <data name="Award_CategoryFilm" xml:space="preserve"><value>Film</value></data>
+  <data name="Award_CategoryLabel" xml:space="preserve"><value>Catégorie :</value></data>
+  <data name="Award_CategoryWriting" xml:space="preserve"><value>Scénario</value></data>
+  <data name="Award_DaysRemaining" xml:space="preserve"><value>Il reste {0} jours avant la fin de ce prix</value></data>
+  <data name="Award_DaysRemainingOne" xml:space="preserve"><value>Il reste 1 jour avant la fin de ce prix</value></data>
+  <data name="Award_Deactivate" xml:space="preserve"><value>Désactiver la récompense</value></data>
+  <data name="Award_EndDateDisplay" xml:space="preserve"><value>Le vote se termine le {0}</value></data>
+  <data name="Award_EndDateInvalid" xml:space="preserve"><value>Veuillez saisir une date de fin valide.</value></data>
+  <data name="Award_EndDateLabel" xml:space="preserve"><value>Date de fin du prix</value></data>
+  <data name="Award_EndDateMustBeFuture" xml:space="preserve"><value>La date de fin doit être aujourd'hui ou ultérieure.</value></data>
+  <data name="Award_EndDateRequired" xml:space="preserve"><value>Veuillez choisir quand ce prix doit se terminer.</value></data>
+  <data name="Award_EndsToday" xml:space="preserve"><value>Ce prix se termine aujourd'hui</value></data>
+  <data name="Award_FestivalLabel" xml:space="preserve"><value>Festival :</value></data>
+  <data name="Award_FestivalRequired" xml:space="preserve"><value>Veuillez sélectionner un festival.</value></data>
+  <data name="Award_Inactive" xml:space="preserve"><value>Inactif</value></data>
+  <data name="Award_InsufficientOptions" xml:space="preserve"><value>Vous devez avoir au moins quatre options différentes à nominer.</value></data>
+  <data name="Award_NameRequired" xml:space="preserve"><value>Veuillez entrer un nom de récompense.</value></data>
+  <data name="Award_NoAwards" xml:space="preserve"><value>Aucune récompense pour le moment.</value></data>
+  <data name="Award_NoNominees" xml:space="preserve"><value>Aucun nominé listé pour le moment.</value></data>
+  <data name="Award_Nominee1" xml:space="preserve"><value>Nominé 1</value></data>
+  <data name="Award_Nominee2" xml:space="preserve"><value>Nominé 2</value></data>
+  <data name="Award_Nominee3" xml:space="preserve"><value>Nominé 3</value></data>
+  <data name="Award_Nominee4" xml:space="preserve"><value>Nominé 4</value></data>
+  <data name="Award_NomineesHeading" xml:space="preserve"><value>Nominés</value></data>
+  <data name="Award_NomineesLabel" xml:space="preserve"><value>Nominés</value></data>
+  <data name="Award_NomineesSubtitle" xml:space="preserve"><value>Choisissez vos nominés pour cette récompense.</value></data>
+  <data name="Award_PageTitle" xml:space="preserve"><value>Récompenses</value></data>
+  <data name="Award_RepeatedNominees" xml:space="preserve"><value>Vous avez des nominés répétés. Chaque nominé doit être unique.</value></data>
+  <data name="Award_Save" xml:space="preserve"><value>Enregistrer</value></data>
+  <data name="Award_SelectFestival" xml:space="preserve"><value>Sélectionner le Festival</value></data>
+  <data name="Award_SelectFourNominees" xml:space="preserve"><value>Veuillez sélectionner les quatre nominés.</value></data>
+  <data name="Award_Subtitle" xml:space="preserve"><value>Récompenses/nominations du festival et votes en direct.</value></data>
+  <data name="Award_UnknownNominee" xml:space="preserve"><value>Nommé inconnu</value></data>
+  <data name="Cart_AddFailed" xml:space="preserve"><value>Échec de l'ajout de l'article au panier.</value></data>
+  <data name="Cart_AddRentalFailed" xml:space="preserve"><value>Échec de l'ajout de la location au panier.</value></data>
+  <data name="Cart_Checkout" xml:space="preserve"><value>Passer à la caisse</value></data>
+  <data name="Cart_DuplicateItem" xml:space="preserve"><value>Vous avez déjà ce {0} dans votre panier.</value></data>
+  <data name="Cart_Empty" xml:space="preserve"><value>Aucun article pour le moment</value></data>
+  <data name="Cart_Heading" xml:space="preserve"><value>Votre Panier</value></data>
+  <data name="Cart_PageTitle" xml:space="preserve"><value>Panier</value></data>
+  <data name="Cart_ProductNotFound" xml:space="preserve"><value>Produit introuvable.</value></data>
+  <data name="Cart_QuantityInvalid" xml:space="preserve"><value>La quantité doit être supérieure à zéro.</value></data>
+  <data name="Cart_QuantityPrice" xml:space="preserve"><value>Qté : {0} • Prix : {1}</value></data>
+  <data name="Cart_Remove" xml:space="preserve"><value>Retirer</value></data>
+  <data name="Cart_RemoveFailed" xml:space="preserve"><value>Échec de la suppression de l'article du panier.</value></data>
+  <data name="Cart_Total" xml:space="preserve"><value>Total :</value></data>
+  <data name="Checkout_CardNumber" xml:space="preserve"><value>Numéro de Carte</value></data>
+  <data name="Checkout_CardPlaceholder" xml:space="preserve"><value>**** **** **** 1234</value></data>
+  <data name="Checkout_NameOnCard" xml:space="preserve"><value>Nom sur la Carte</value></data>
+  <data name="Checkout_NamePlaceholder" xml:space="preserve"><value>Jean Dupont</value></data>
+  <data name="Checkout_PayNow" xml:space="preserve"><value>Payer Maintenant (Placeholder)</value></data>
+  <data name="Checkout_Subtitle" xml:space="preserve"><value>Finalisez l'achat de billets avec un flux de confirmation rapide.</value></data>
+  <data name="Common_All" xml:space="preserve"><value>Tous</value></data>
+  <data name="Common_Awards" xml:space="preserve"><value>Récompenses</value></data>
+  <data name="Common_Back" xml:space="preserve"><value>Retour</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Annuler</value></data>
+  <data name="Common_Close" xml:space="preserve"><value>Fermer</value></data>
+  <data name="Common_ComingSoon" xml:space="preserve"><value>Bientôt disponible</value></data>
+  <data name="Common_Confirm" xml:space="preserve"><value>Confirmer</value></data>
+  <data name="Common_ConfirmDelete" xml:space="preserve"><value>Êtes-vous sûr ?</value></data>
+  <data name="Common_CreateFestival" xml:space="preserve"><value>Créer un Festival</value></data>
+  <data name="Common_Delete" xml:space="preserve"><value>Supprimer</value></data>
+  <data name="Common_Description" xml:space="preserve"><value>Description</value></data>
+  <data name="Common_Details" xml:space="preserve"><value>Détails</value></data>
+  <data name="Common_Edit" xml:space="preserve"><value>Modifier</value></data>
+  <data name="Common_Email" xml:space="preserve"><value>E-mail</value></data>
+  <data name="Common_EmailPlaceholder" xml:space="preserve"><value>vous@exemple.com</value></data>
+  <data name="Common_Error" xml:space="preserve"><value>Erreur</value></data>
+  <data name="Common_Festivals" xml:space="preserve"><value>Festivals</value></data>
+  <data name="Common_Films" xml:space="preserve"><value>Films</value></data>
+  <data name="Common_Genre" xml:space="preserve"><value>Genre</value></data>
+  <data name="Common_Go" xml:space="preserve"><value>Aller</value></data>
+  <data name="Common_InvalidPrice" xml:space="preserve"><value>Veuillez entrer un prix numérique positif valide.</value></data>
+  <data name="Common_Name" xml:space="preserve"><value>Nom</value></data>
+  <data name="Common_NextPage" xml:space="preserve"><value>Page suivante</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>N/D</value></data>
+  <data name="Common_Open" xml:space="preserve"><value>Ouvrir</value></data>
+  <data name="Common_Password" xml:space="preserve"><value>Mot de passe</value></data>
+  <data name="Common_PasswordPlaceholder" xml:space="preserve"><value>••••••••</value></data>
+  <data name="Common_PosterFor" xml:space="preserve"><value>Affiche de {0}</value></data>
+  <data name="Common_PreviousPage" xml:space="preserve"><value>Page précédente</value></data>
+  <data name="Common_Reviews" xml:space="preserve"><value>Critiques</value></data>
+  <data name="Common_Save" xml:space="preserve"><value>Enregistrer</value></data>
+  <data name="Common_Sessions" xml:space="preserve"><value>Séances</value></data>
+  <data name="Common_Stop" xml:space="preserve"><value>Stop !</value></data>
+  <data name="Common_Submit" xml:space="preserve"><value>Soumettre</value></data>
+  <data name="Common_Success" xml:space="preserve"><value>Succès !</value></data>
+  <data name="Common_To" xml:space="preserve"><value>à</value></data>
+  <data name="Common_Unavailable" xml:space="preserve"><value>Indisponible</value></data>
+  <data name="Common_UnexpectedError" xml:space="preserve"><value>Une erreur s'est produite. Veuillez réessayer.</value></data>
+  <data name="Common_Unknown" xml:space="preserve"><value>Inconnu</value></data>
+  <data name="Common_UtcSuffix" xml:space="preserve"><value>UTC</value></data>
+  <data name="Countdown_AriaLabel" xml:space="preserve"><value>Compte à rebours</value></data>
+  <data name="Countdown_Days" xml:space="preserve"><value>jours</value></data>
+  <data name="Countdown_FestivalEnded" xml:space="preserve"><value>FESTIVAL TERMINÉ</value></data>
+  <data name="Countdown_Hours" xml:space="preserve"><value>heures</value></data>
+  <data name="Countdown_LiveNow" xml:space="preserve"><value>EN DIRECT</value></data>
+  <data name="Countdown_Mins" xml:space="preserve"><value>min</value></data>
+  <data name="Countdown_Secs" xml:space="preserve"><value>sec</value></data>
+  <data name="CreatePass_Complete" xml:space="preserve"><value>Complet</value></data>
+  <data name="CreatePass_Daily" xml:space="preserve"><value>Journalier</value></data>
+  <data name="CreatePass_Heading" xml:space="preserve"><value>Configurer le Pass {0}</value></data>
+  <data name="CreatePass_InvalidPrice" xml:space="preserve"><value>Veuillez entrer un prix numérique positif valide.</value></data>
+  <data name="CreatePass_PriceLabel" xml:space="preserve"><value>Prix</value></data>
+  <data name="CreatePass_PricePlaceholder" xml:space="preserve"><value>ex. 10.50</value></data>
+  <data name="CreatePass_SaveButton" xml:space="preserve"><value>Enregistrer le Pass</value></data>
+  <data name="CreditRole_Actor" xml:space="preserve"><value>Acteur</value></data>
+  <data name="CreditRole_Director" xml:space="preserve"><value>Réalisateur</value></data>
+  <data name="CreditRole_Writer" xml:space="preserve"><value>Scénariste</value></data>
+  <data name="EditProfile_Cancel" xml:space="preserve"><value>Annuler</value></data>
+  <data name="EditProfile_NameLength" xml:space="preserve"><value>Le nouveau nom doit contenir plus de 5 caractères et moins de 25.</value></data>
+  <data name="EditProfile_NameSpecialChars" xml:space="preserve"><value>Les caractères spéciaux ne sont pas autorisés.</value></data>
+  <data name="EditProfile_PageTitle" xml:space="preserve"><value>Modifier le Profil</value></data>
+  <data name="Error_GoHome" xml:space="preserve"><value>Retour à l'Accueil</value></data>
+  <data name="Error_Heading" xml:space="preserve"><value>Une erreur s'est produite</value></data>
+  <data name="Error_PageTitle" xml:space="preserve"><value>Erreur</value></data>
+  <data name="Error_RetrySubtitle" xml:space="preserve"><value>Une erreur inattendue s'est produite. Veuillez réessayer dans un instant.</value></data>
+  <data name="Error_Subtitle" xml:space="preserve"><value>Nous sommes désolés — une erreur inattendue s'est produite lors du traitement de votre demande.</value></data>
+  <data name="FestivalCreate_DaysBeforeHint" xml:space="preserve"><value>Nombre de jours avant l'ouverture du festival où la réduction est active</value></data>
+  <data name="FestivalCreate_DaysBeforeLabel" xml:space="preserve"><value>Jours Avant le Début du Festival</value></data>
+  <data name="FestivalCreate_DaysPlaceholder" xml:space="preserve"><value>ex. 7</value></data>
+  <data name="FestivalCreate_DiscountPercentHint" xml:space="preserve"><value>Réduction appliquée au pass complet/journalier du festival</value></data>
+  <data name="FestivalCreate_DiscountPercentLabel" xml:space="preserve"><value>Pourcentage de Réduction</value></data>
+  <data name="FestivalCreate_DiscountPlaceholder" xml:space="preserve"><value>ex. 15</value></data>
+  <data name="FestivalCreate_EarlyBirdHeading" xml:space="preserve"><value>Promotion Early Bird (optionnel)</value></data>
+  <data name="FestivalCreate_EndDateLabel" xml:space="preserve"><value>Date de Fin</value></data>
+  <data name="FestivalCreate_Heading" xml:space="preserve"><value>Créer un Nouveau Festival</value></data>
+  <data name="FestivalCreate_NameLabel" xml:space="preserve"><value>Nom du Festival</value></data>
+  <data name="FestivalCreate_PageTitle" xml:space="preserve"><value>Créer un Festival</value></data>
+  <data name="FestivalCreate_StartDateLabel" xml:space="preserve"><value>Date de Début</value></data>
+  <data name="FestivalCreate_Submit" xml:space="preserve"><value>Créer le Festival</value></data>
+  <data name="FestivalDetails_AccessOptions" xml:space="preserve"><value>Options d'Accès :</value></data>
+  <data name="FestivalDetails_AddFavorite" xml:space="preserve"><value>Ajouter aux favoris</value></data>
+  <data name="FestivalDetails_AddToCart" xml:space="preserve"><value>Ajouter au Panier</value></data>
+  <data name="FestivalDetails_AddWatchlist" xml:space="preserve"><value>Liste de lecture</value></data>
+  <data name="FestivalDetails_AwardsSection" xml:space="preserve"><value>Récompenses et Nominations</value></data>
+  <data name="FestivalDetails_AwardsSectionDesc" xml:space="preserve"><value>Donnez votre avis sur qui remporte les plus hautes distinctions du festival.</value></data>
+  <data name="FestivalDetails_ConfigureDailyPass" xml:space="preserve"><value>Configurer le Pass Journalier</value></data>
+  <data name="FestivalDetails_ConfigureFullPass" xml:space="preserve"><value>Configurer le Pass Complet</value></data>
+  <data name="FestivalDetails_ConfirmRemoveFilm" xml:space="preserve"><value>Êtes-vous sûr de vouloir retirer ce film du festival ?</value></data>
+  <data name="FestivalDetails_DailyPass" xml:space="preserve"><value>Pass Journalier</value></data>
+  <data name="FestivalDetails_DailyPassDesc" xml:space="preserve"><value>Accès 24h à toutes les séances en streaming.</value></data>
+  <data name="FestivalDetails_EarlyBirdBadge" xml:space="preserve"><value>Early Bird : {0}% de réduction sur le Pass Journalier/Complet si vous achetez {1} jours avant</value></data>
+  <data name="FestivalDetails_EarlyBirdPercent" xml:space="preserve"><value>Early Bird -{0}%</value></data>
+  <data name="FestivalDetails_FilmsInFestival" xml:space="preserve"><value>Films de ce Festival</value></data>
+  <data name="FestivalDetails_FullPass" xml:space="preserve"><value>Pass Complet</value></data>
+  <data name="FestivalDetails_FullPassDesc" xml:space="preserve"><value>Accès illimité pour toute la durée du festival.</value></data>
+  <data name="FestivalDetails_ImportFilms" xml:space="preserve"><value>Importer des Films</value></data>
+  <data name="FestivalDetails_IncludedInPass" xml:space="preserve"><value>Inclus dans le Pass</value></data>
+  <data name="FestivalDetails_ManageSessions" xml:space="preserve"><value>Gérer les Séances</value></data>
+  <data name="FestivalDetails_ManagerTools" xml:space="preserve"><value>Outils de Gestion</value></data>
+  <data name="FestivalDetails_NoDescription" xml:space="preserve"><value>Aucune description disponible.</value></data>
+  <data name="FestivalDetails_NoFilms" xml:space="preserve"><value>Aucun film associé pour le moment.</value></data>
+  <data name="FestivalDetails_NoRentalYet" xml:space="preserve"><value>Aucune location disponible pour le moment</value></data>
+  <data name="FestivalDetails_PageTitle" xml:space="preserve"><value>Détails du Festival</value></data>
+  <data name="FestivalDetails_Purchased" xml:space="preserve"><value>Acheté</value></data>
+  <data name="FestivalDetails_RemoveFavorite" xml:space="preserve"><value>Retirer des favoris</value></data>
+  <data name="FestivalDetails_RemoveMovie" xml:space="preserve"><value>Retirer le Film</value></data>
+  <data name="FestivalDetails_RemoveWatchlist" xml:space="preserve"><value>Retirer de la liste</value></data>
+  <data name="FestivalDetails_RentDigitally" xml:space="preserve"><value>Louer Numériquement (48h)</value></data>
+  <data name="FestivalDetails_SessionMeta" xml:space="preserve"><value>{0} min | {1} séance(s) programmée(s)</value></data>
+  <data name="FestivalDetails_StartsOn" xml:space="preserve"><value>Commence le {0}</value></data>
+  <data name="FestivalDetails_VoteNow" xml:space="preserve"><value>Voter Maintenant</value></data>
+  <data name="FestivalDetails_WatchNowPass" xml:space="preserve"><value>Regarder Maintenant (Pass)</value></data>
+  <data name="FestivalDetails_WatchNowRental" xml:space="preserve"><value>Regarder Maintenant (Location Active)</value></data>
+  <data name="FestivalDetails_WorldPremiere" xml:space="preserve"><value>Première Mondiale</value></data>
+  <data name="FestivalEdit_DaysBeforeHint" xml:space="preserve"><value>Nombre de jours avant l'ouverture du festival où la réduction est active</value></data>
+  <data name="FestivalEdit_DaysBeforeLabel" xml:space="preserve"><value>Jours Avant le Début du Festival</value></data>
+  <data name="FestivalEdit_DiscountPercentHint" xml:space="preserve"><value>Réduction appliquée au pass complet/journalier du festival</value></data>
+  <data name="FestivalEdit_DiscountPercentLabel" xml:space="preserve"><value>Pourcentage de Réduction</value></data>
+  <data name="FestivalEdit_EarlyBirdHeading" xml:space="preserve"><value>Promotion Early Bird (optionnel)</value></data>
+  <data name="FestivalEdit_EndDateLabel" xml:space="preserve"><value>Date de fin (UTC)</value></data>
+  <data name="FestivalEdit_PageTitle" xml:space="preserve"><value>Modifier le Festival</value></data>
+  <data name="FestivalEdit_SaveChanges" xml:space="preserve"><value>Enregistrer les Modifications</value></data>
+  <data name="FestivalEdit_StartDateLabel" xml:space="preserve"><value>Date de début (UTC)</value></data>
+  <data name="FestivalIndex_Heading" xml:space="preserve"><value>Parcourir les Festivals</value></data>
+  <data name="FestivalIndex_PageTitle" xml:space="preserve"><value>Festivals</value></data>
+  <data name="Festival_CannotDeletePurchases" xml:space="preserve"><value>Ce festival est associé à des achats et ne peut pas être supprimé.</value></data>
+  <data name="Festival_CannotRemoveFilm" xml:space="preserve"><value>Impossible de retirer ce film du festival car il est lié à des paniers ou achats.</value></data>
+  <data name="Festival_DeleteInfoPurchases" xml:space="preserve"><value>Des utilisateurs ont déjà acheté des billets ; la suppression détruirait leur historique.</value></data>
+  <data name="Festival_DeleteSuccess" xml:space="preserve"><value>Festival supprimé avec succès.</value></data>
+  <data name="Festival_HasPurchases_UseHide" xml:space="preserve"><value>Ce festival a des achats existants et ne peut pas être supprimé. Utilisez « Masquer » pour le retirer de la navigation publique.</value></data>
+  <data name="Festival_Hidden" xml:space="preserve"><value>Masqué</value></data>
+  <data name="Festival_HiddenBadgeTitle" xml:space="preserve"><value>Ce festival est masqué de la navigation publique</value></data>
+  <data name="Festival_HideButton" xml:space="preserve"><value>Masquer</value></data>
+  <data name="Festival_HideSuccess" xml:space="preserve"><value>Le festival est maintenant masqué de la navigation publique.</value></data>
+  <data name="Festival_UnhideButton" xml:space="preserve"><value>Afficher</value></data>
+  <data name="Festival_UnhideSuccess" xml:space="preserve"><value>Le festival est maintenant visible par le public.</value></data>
+  <data name="Festival_EndDateBeforeStart" xml:space="preserve"><value>La date de fin doit être postérieure à la date de début.</value></data>
+  <data name="Festival_ImportFailed" xml:space="preserve"><value>Impossible d'importer le film pour le moment.</value></data>
+  <data name="Festival_ImportIdsRequired" xml:space="preserve"><value>Le festival et le film TMDb sont requis.</value></data>
+  <data name="Festival_ImportSuccess" xml:space="preserve"><value>Film lié au festival.</value></data>
+  <data name="Festival_TmdbApiKeyNotConfigured" xml:space="preserve"><value>Clé API TMDb non configurée.</value></data>
+  <data name="Festival_TmdbDetailsFailed" xml:space="preserve"><value>Impossible d'obtenir les détails TMDb pour le moment.</value></data>
+  <data name="Festival_TmdbIdRequired" xml:space="preserve"><value>L'identifiant TMDb du film est requis.</value></data>
+  <data name="Festival_TmdbQueryRequired" xml:space="preserve"><value>Le terme de recherche est requis.</value></data>
+  <data name="Festival_TmdbSearchFailed" xml:space="preserve"><value>Impossible d'obtenir les résultats TMDb pour le moment.</value></data>
+  <data name="FilmDetails_CastCrew" xml:space="preserve"><value>Distribution et Équipe ({0})</value></data>
+  <data name="FilmDetails_ConfirmDelete" xml:space="preserve"><value>Êtes-vous sûr de vouloir supprimer ce film ?</value></data>
+  <data name="FilmDetails_DeleteMovie" xml:space="preserve"><value>Supprimer le Film</value></data>
+  <data name="FilmDetails_GoToFestival" xml:space="preserve"><value>Aller au Festival</value></data>
+  <data name="FilmDetails_NoCastCrew" xml:space="preserve"><value>Aucune information sur la distribution et l'équipe pour ce film.</value></data>
+  <data name="FilmDetails_NoScreenings" xml:space="preserve"><value>Aucune projection ou option d'accès disponible pour ce film.</value></data>
+  <data name="FilmDetails_PageTitle" xml:space="preserve"><value>Détails du Film</value></data>
+  <data name="FilmDetails_RentDigitally" xml:space="preserve"><value>Louer Numériquement</value></data>
+  <data name="FilmDetails_ScreeningsHeading" xml:space="preserve"><value>Projections et Accès</value></data>
+  <data name="FilmDetails_UnknownFestival" xml:space="preserve"><value>Festival Inconnu</value></data>
+  <data name="FilmDetails_Watch" xml:space="preserve"><value>Regarder</value></data>
+  <data name="FilmDetails_WatchScheduled" xml:space="preserve"><value>Prévu pour {0} UTC</value></data>
+  <data name="FilmEdit_GenrePlaceholder" xml:space="preserve"><value>Drame, Documentaire, etc.</value></data>
+  <data name="FilmEdit_Heading" xml:space="preserve"><value>Modifier le Film</value></data>
+  <data name="FilmEdit_Subtitle" xml:space="preserve"><value>Formulaire initial pour les opérations de création/mise à jour.</value></data>
+  <data name="FilmEdit_TitlePlaceholder" xml:space="preserve"><value>Entrez le titre du film</value></data>
+  <data name="FilmIndex_BrowseFestivals" xml:space="preserve"><value>Parcourir les Festivals</value></data>
+  <data name="FilmIndex_DurationLabel" xml:space="preserve"><value>Durée : {0} min</value></data>
+  <data name="FilmIndex_Heading" xml:space="preserve"><value>Parcourir les Films</value></data>
+  <data name="FilmIndex_MaxDurationPlaceholder" xml:space="preserve"><value>Max min</value></data>
+  <data name="FilmIndex_MinDurationPlaceholder" xml:space="preserve"><value>Min min</value></data>
+  <data name="FilmIndex_NoDescription" xml:space="preserve"><value>Aucune description disponible.</value></data>
+  <data name="FilmIndex_NoMoviesFound" xml:space="preserve"><value>Aucun film trouvé.</value></data>
+  <data name="FilmIndex_OpenTmdb" xml:space="preserve"><value>Ouvrir TMDb</value></data>
+  <data name="FilmIndex_PageTitle" xml:space="preserve"><value>Films</value></data>
+  <data name="FilmIndex_TmdbHeading" xml:space="preserve"><value>Films (Résultats TMDb)</value></data>
+  <data name="FilmIndex_Uncategorized" xml:space="preserve"><value>Non classé</value></data>
+  <data name="Film_CannotDelete" xml:space="preserve"><value>Impossible de supprimer ce film. Il est lié à un festival, a des avis, séances ou achats.</value></data>
+  <data name="ForgotPassword_Heading" xml:space="preserve"><value>Réinitialiser votre mot de passe</value></data>
+  <data name="ForgotPassword_PageTitle" xml:space="preserve"><value>Mot de Passe Oublié</value></data>
+  <data name="ForgotPassword_Submit" xml:space="preserve"><value>Envoyer le Lien</value></data>
+  <data name="ForgotPassword_Subtitle" xml:space="preserve"><value>Entrez votre e-mail et nous vous enverrons un lien de réinitialisation.</value></data>
+  <data name="Home_BrowseFestival" xml:space="preserve"><value>Parcourir le Festival</value></data>
+  <data name="Home_EmptyFavorites" xml:space="preserve"><value>Il n'y a pas encore de films favoris. Ajoutez un film aux favoris pour qu'il apparaisse dans cette liste.</value></data>
+  <data name="Home_EmptyRecommendations" xml:space="preserve"><value>Les recommandations apparaîtront lorsque vous explorerez plus de films et que d'autres utilisateurs laisseront des avis.</value></data>
+  <data name="Home_EmptySeen" xml:space="preserve"><value>Aucun film pour le moment. Lorsque vous regarderez un film auquel vous avez accès, il apparaîtra ici.</value></data>
+  <data name="Home_EmptyWatchlist" xml:space="preserve"><value>Il n'y a pas encore de films dans votre watchlist. Ajoutez un film à votre watchlist pour qu'il apparaisse dans cette liste.</value></data>
+  <data name="Home_MyFavorites" xml:space="preserve"><value>Mes favoris</value></data>
+  <data name="Home_MyWatchlist" xml:space="preserve"><value>Films à regarder</value></data>
+  <data name="Home_NextFestival" xml:space="preserve"><value>Prochain Festival</value></data>
+  <data name="Home_PageTitle" xml:space="preserve"><value>Accueil</value></data>
+  <data name="Home_RecommendedForYou" xml:space="preserve"><value>Recommandé pour vous</value></data>
+  <data name="Home_ScrollFavoritesLeft" xml:space="preserve"><value>Faire défiler les favoris vers la gauche</value></data>
+  <data name="Home_ScrollFavoritesRight" xml:space="preserve"><value>Faire défiler les favoris vers la droite</value></data>
+  <data name="Home_ScrollRecommendationsLeft" xml:space="preserve"><value>Faire défiler les recommandations vers la gauche</value></data>
+  <data name="Home_ScrollRecommendationsRight" xml:space="preserve"><value>Faire défiler les recommandations vers la droite</value></data>
+  <data name="Home_ScrollSeenLeft" xml:space="preserve"><value>Faire défiler les vus vers la gauche</value></data>
+  <data name="Home_ScrollSeenRight" xml:space="preserve"><value>Faire défiler les vus vers la droite</value></data>
+  <data name="Home_ScrollWatchlistLeft" xml:space="preserve"><value>Faire défiler la liste vers la gauche</value></data>
+  <data name="Home_ScrollWatchlistRight" xml:space="preserve"><value>Faire défiler la liste vers la droite</value></data>
+  <data name="Home_Seen" xml:space="preserve"><value>Vus</value></data>
+  <data name="Layout_AccessDenied" xml:space="preserve"><value>Accès refusé</value></data>
+  <data name="Layout_Footer" xml:space="preserve"><value>© 2026 UmaFestHub · Plateforme de Festivals de Cinéma</value></data>
+  <data name="Layout_FooterCollab" xml:space="preserve"><value>En collaboration avec</value></data>
+  <data name="Layout_TitleSuffix" xml:space="preserve"><value>UmaFestHub</value></data>
+  <data name="Login_CreateOne" xml:space="preserve"><value>Créer un compte</value></data>
+  <data name="Login_ForgotPassword" xml:space="preserve"><value>Mot de passe oublié ?</value></data>
+  <data name="Login_Heading" xml:space="preserve"><value>Se connecter</value></data>
+  <data name="Login_NoAccount" xml:space="preserve"><value>Vous n'avez pas de compte ?</value></data>
+  <data name="Login_PageTitle" xml:space="preserve"><value>Connexion</value></data>
+  <data name="Login_Submit" xml:space="preserve"><value>Se Connecter</value></data>
+  <data name="Login_Subtitle" xml:space="preserve"><value>Bon retour sur la plateforme de festivals</value></data>
+  <data name="Manage_ActionsColumn" xml:space="preserve"><value>Actions</value></data>
+  <data name="Manage_AwardsDescription" xml:space="preserve"><value>Configurez les catégories de récompenses, nominés et suivez les votes.</value></data>
+  <data name="Manage_EndDateColumn" xml:space="preserve"><value>Date de Fin</value></data>
+  <data name="Manage_FestivalsDescription" xml:space="preserve"><value>Créez et configurez les événements de festival, dates et lieux.</value></data>
+  <data name="Manage_FestivalsHeading" xml:space="preserve"><value>Gérer les Festivals</value></data>
+  <data name="Manage_FilmsDescription" xml:space="preserve"><value>Gérez le catalogue de films et importez les métadonnées depuis TMDb.</value></data>
+  <data name="Manage_Heading" xml:space="preserve"><value>Espace Organisateur</value></data>
+  <data name="Manage_ImportButton" xml:space="preserve"><value>Importer</value></data>
+  <data name="Manage_ImportFilmsHeading" xml:space="preserve"><value>Importer des Films depuis TMDb</value></data>
+  <data name="Manage_ImportNoOverview" xml:space="preserve"><value>Aucun synopsis disponible.</value></data>
+  <data name="Manage_ImportSearchRequired" xml:space="preserve"><value>Veuillez entrer un terme de recherche.</value></data>
+  <data name="Manage_ImportSearching" xml:space="preserve"><value>Recherche...</value></data>
+  <data name="Manage_ImportYearLabel" xml:space="preserve"><value>Année :</value></data>
+  <data name="Manage_Imported" xml:space="preserve"><value>Importé !</value></data>
+  <data name="Manage_Importing" xml:space="preserve"><value>Importation...</value></data>
+  <data name="Manage_ManageFestival" xml:space="preserve"><value>Gérer le Festival</value></data>
+  <data name="Manage_NoFestivalsFound" xml:space="preserve"><value>Aucun festival trouvé.</value></data>
+  <data name="Manage_PageTitle" xml:space="preserve"><value>Espace Organisateur</value></data>
+  <data name="Manage_ReviewsDescription" xml:space="preserve"><value>Modérez les avis, notes et retours signalés.</value></data>
+  <data name="Manage_SessionsDescription" xml:space="preserve"><value>Planifiez les horaires de projection, fenêtres d'accès et premières.</value></data>
+  <data name="Manage_StartDateColumn" xml:space="preserve"><value>Date de Début</value></data>
+  <data name="Modal_DuplicateCart_ContinueBrowsing" xml:space="preserve"><value>Continuer la Navigation</value></data>
+  <data name="Modal_DuplicateCart_GoToCart" xml:space="preserve"><value>Aller au Panier</value></data>
+  <data name="Modal_DuplicateCart_Message" xml:space="preserve"><value>Cet article est déjà dans votre panier.</value></data>
+  <data name="Modal_DuplicateCart_Title" xml:space="preserve"><value>Déjà dans le Panier</value></data>
+  <data name="Modal_Notification_Title" xml:space="preserve"><value>Notification</value></data>
+  <data name="Modal_Ok" xml:space="preserve"><value>OK</value></data>
+  <data name="Modal_SignInRequired_Body" xml:space="preserve"><value>Connectez-vous pour parcourir les séances.</value></data>
+  <data name="Modal_SignInRequired_Cta" xml:space="preserve"><value>Aller à la Connexion</value></data>
+  <data name="Modal_SignInRequired_Title" xml:space="preserve"><value>Connexion requise</value></data>
+  <data name="Nav_AdminHub" xml:space="preserve"><value>Espace Admin</value></data>
+  <data name="Nav_AriaMain" xml:space="preserve"><value>Navigation principale</value></data>
+  <data name="Nav_Festivals" xml:space="preserve"><value>Festivals</value></data>
+  <data name="Nav_Films" xml:space="preserve"><value>Films</value></data>
+  <data name="Nav_Language" xml:space="preserve"><value>Langue</value></data>
+  <data name="Nav_LanguageEn" xml:space="preserve"><value>English</value></data>
+  <data name="Nav_LanguageFr" xml:space="preserve"><value>Français</value></data>
+  <data name="Nav_LanguagePt" xml:space="preserve"><value>Português</value></data>
+  <data name="Nav_Logout" xml:space="preserve"><value>Se déconnecter</value></data>
+  <data name="Nav_MyCart" xml:space="preserve"><value>Mon Panier</value></data>
+  <data name="Nav_MyProfile" xml:space="preserve"><value>Mon Profil</value></data>
+  <data name="Nav_OrganizerHub" xml:space="preserve"><value>Espace Organisateur</value></data>
+  <data name="Nav_PurchaseHistory" xml:space="preserve"><value>Historique d'achats</value></data>
+  <data name="Nav_SearchAriaLabel" xml:space="preserve"><value>Rechercher des films</value></data>
+  <data name="Nav_SearchPlaceholder" xml:space="preserve"><value>Rechercher des films</value></data>
+  <data name="Nav_SignIn" xml:space="preserve"><value>Se connecter</value></data>
+  <data name="Nav_ThemeToggleAria" xml:space="preserve"><value>Basculer thème clair/sombre</value></data>
+  <data name="Nav_ThemeToggleTitle" xml:space="preserve"><value>Changer de thème</value></data>
+  <data name="Nav_WatchHistory" xml:space="preserve"><value>Historique de visionnage</value></data>
+  <data name="Nomination_CreditCannotReferenceFestivalFilm" xml:space="preserve"><value>Cette catégorie ne peut pas référencer directement un film du festival.</value></data>
+  <data name="Nomination_CreditRoleMissing" xml:space="preserve"><value>Rôle du crédit manquant.</value></data>
+  <data name="Nomination_FilmCannotReferenceCredit" xml:space="preserve"><value>La catégorie Film ne peut pas référencer un crédit de personne.</value></data>
+  <data name="Nomination_FilmMustReferenceFestivalFilm" xml:space="preserve"><value>La catégorie Film doit référencer un film du festival.</value></data>
+  <data name="Nomination_Invalid" xml:space="preserve"><value>Nomination invalide.</value></data>
+  <data name="Nomination_MustBeActor" xml:space="preserve"><value>Le nommé doit avoir le rôle 'Actor'.</value></data>
+  <data name="Nomination_MustBeDirector" xml:space="preserve"><value>Le nommé doit avoir le rôle 'Director'.</value></data>
+  <data name="Nomination_MustBeWriter" xml:space="preserve"><value>Le nommé doit avoir le rôle 'Writer'.</value></data>
+  <data name="Nomination_MustReferenceCredit" xml:space="preserve"><value>La nomination doit référencer un crédit/personne.</value></data>
+  <data name="Nomination_NoValidator" xml:space="preserve"><value>Aucun validateur de nomination enregistré pour cette catégorie.</value></data>
+  <data name="Notification_AwardFinalResults" xml:space="preserve"><value>Résultats finaux :</value></data>
+  <data name="Notification_AwardResultLine" xml:space="preserve"><value>• {0} : {1}%</value></data>
+  <data name="Notification_AwardVotingClosedTitle" xml:space="preserve"><value>Vote clos pour la Récompense : {0}</value></data>
+  <data name="Notification_EndingVerySoon" xml:space="preserve"><value>se termine très bientôt</value></data>
+  <data name="Notification_FestivalEndingDefaultName" xml:space="preserve"><value>Un festival auquel vous participez</value></data>
+  <data name="Notification_FestivalEndingMessage" xml:space="preserve"><value>{0} se termine le {1} (UTC) — {2}.</value></data>
+  <data name="Notification_FestivalEndingTitle" xml:space="preserve"><value>Festival se terminant bientôt</value></data>
+  <data name="Notification_LessThan1Day" xml:space="preserve"><value>moins d'1 jour restant</value></data>
+  <data name="Notification_LessThan1Hour" xml:space="preserve"><value>moins d'1 heure restante</value></data>
+  <data name="Notification_LessThanDays" xml:space="preserve"><value>moins de {0} jours restants</value></data>
+  <data name="Notification_LessThanHours" xml:space="preserve"><value>moins de {0} heures restantes</value></data>
+  <data name="Notification_PurchaseCompletedMessage" xml:space="preserve"><value>Votre achat a été effectué avec succès. Total : {0}.</value></data>
+  <data name="Notification_PurchaseCompletedTitle" xml:space="preserve"><value>Achat terminé</value></data>
+  <data name="Notification_RentalDefaultFilm" xml:space="preserve"><value>Votre location</value></data>
+  <data name="Notification_RentalExpiringMessage" xml:space="preserve"><value>L'accès à « {0} » se termine le {1} (UTC) — {2}.</value></data>
+  <data name="Notification_RentalExpiringTitle" xml:space="preserve"><value>Location expirant bientôt</value></data>
+  <data name="Notification_ReviewApprovedTitle" xml:space="preserve"><value>Votre avis a été approuvé</value></data>
+  <data name="Notification_ReviewOutcomeFestival" xml:space="preserve"><value>Festival : {0}</value></data>
+  <data name="Notification_ReviewOutcomeFilm" xml:space="preserve"><value>Film : {0}</value></data>
+  <data name="Notification_ReviewOutcomeRating" xml:space="preserve"><value>Note : {0}/5</value></data>
+  <data name="Notification_ReviewOutcomeResponse" xml:space="preserve"><value>Réponse : {0}</value></data>
+  <data name="Notification_ReviewOutcomeYourReview" xml:space="preserve"><value>Votre avis :</value></data>
+  <data name="Notification_ReviewPendingMessage" xml:space="preserve"><value>Un client a soumis un avis nécessitant modération.</value></data>
+  <data name="Notification_ReviewPendingTitle" xml:space="preserve"><value>Nouvel avis en attente d'approbation</value></data>
+  <data name="Notification_ReviewRejectedTitle" xml:space="preserve"><value>Votre avis a été rejeté</value></data>
+  <data name="Notification_ReplyApprovedTitle" xml:space="preserve"><value>Votre réponse a été approuvée</value></data>
+  <data name="Notification_ReplyOutcomeYourReply" xml:space="preserve"><value>Votre réponse :</value></data>
+  <data name="Notification_ReplyPendingMessage" xml:space="preserve"><value>Un client a soumis une réponse nécessitant modération.</value></data>
+  <data name="Notification_ReplyPendingTitle" xml:space="preserve"><value>Nouvelle réponse en attente d'approbation</value></data>
+  <data name="Notification_ReplyRejectedTitle" xml:space="preserve"><value>Votre réponse a été rejetée</value></data>
+  <data name="Pass_CompletePass" xml:space="preserve"><value>Pass Complet</value></data>
+  <data name="Pass_DailyPass" xml:space="preserve"><value>Pass Journalier</value></data>
+  <data name="Pass_MissingInfo" xml:space="preserve"><value>Informations requises manquantes pour créer le pass.</value></data>
+  <data name="Pass_UnknownType" xml:space="preserve"><value>Type de pass inconnu : {0}. Attendu 'DailyPass' ou 'CompletePass'.</value></data>
+  <data name="PersonalList_NoFilterMatches" xml:space="preserve"><value>Aucun film ne correspond à vos filtres. Effacez les recherches ou choisissez « Tous » sous Festival et réessayez.</value></data>
+  <data name="PersonalList_RemoveFromList" xml:space="preserve"><value>Retirer de la liste</value></data>
+  <data name="PersonalList_SubtitleFavorites" xml:space="preserve"><value>Films que vous avez marqués comme favoris.</value></data>
+  <data name="PersonalList_SubtitleSeen" xml:space="preserve"><value>Films que vous avez déjà regardés.</value></data>
+  <data name="PersonalList_SubtitleWatchlist" xml:space="preserve"><value>Films que vous prévoyez de regarder pendant le festival.</value></data>
+  <data name="PersonalList_TabFavorites" xml:space="preserve"><value>Favoris</value></data>
+  <data name="PersonalList_TabSeen" xml:space="preserve"><value>Vus</value></data>
+  <data name="PersonalList_TabWatchlist" xml:space="preserve"><value>Liste de lecture</value></data>
+  <data name="PersonalList_TitleFavorites" xml:space="preserve"><value>Mes Favoris</value></data>
+  <data name="PersonalList_TitleSeen" xml:space="preserve"><value>Vus</value></data>
+  <data name="PersonalList_TitleWatchlist" xml:space="preserve"><value>Ma Liste de Lecture</value></data>
+  <data name="ProductType_CompletePass" xml:space="preserve"><value>pass complet</value></data>
+  <data name="ProductType_DailyPass" xml:space="preserve"><value>pass journalier</value></data>
+  <data name="ProductType_Rental" xml:space="preserve"><value>location</value></data>
+  <data name="ProductType_Ticket" xml:space="preserve"><value>billet</value></data>
+  <data name="Profile_PageTitle" xml:space="preserve"><value>Mon Profil</value></data>
+  <data name="PurchaseHistory_Empty" xml:space="preserve"><value>Aucun achat pour le moment.</value></data>
+  <data name="PurchaseHistory_Heading" xml:space="preserve"><value>Historique d'Achats</value></data>
+  <data name="PurchaseHistory_PageTitle" xml:space="preserve"><value>Historique d'Achats</value></data>
+  <data name="PurchaseHistory_Subtitle" xml:space="preserve"><value>Consultez vos réservations précédentes et vos billets.</value></data>
+  <data name="PurchaseHistory_SuccessMessage" xml:space="preserve"><value>Succès !</value></data>
+  <data name="Purchase_AlreadyOwnCompletePass" xml:space="preserve"><value>Vous possédez déjà un pass complet pour ce festival.</value></data>
+  <data name="Purchase_AlreadyOwnDailyPass" xml:space="preserve"><value>Vous possédez déjà un pass journalier pour ce festival.</value></data>
+  <data name="Purchase_AlreadyOwnRental" xml:space="preserve"><value>Vous possédez déjà une location pour ce film.</value></data>
+  <data name="Purchase_CheckoutEmpty" xml:space="preserve"><value>Au moins un article est requis pour finaliser l'achat.</value></data>
+  <data name="Purchase_FestivalEnded" xml:space="preserve"><value>Le festival '{0}' est terminé. Les achats ne sont plus disponibles.</value></data>
+  <data name="Purchase_FestivalNotFound" xml:space="preserve"><value>Festival introuvable.</value></data>
+  <data name="Purchase_PaymentFailed" xml:space="preserve"><value>Le paiement a échoué. Veuillez réessayer.</value></data>
+  <data name="Purchase_SessionAlreadyStarted" xml:space="preserve"><value>Cette séance a déjà commencé. Les billets ne sont plus disponibles.</value></data>
+  <data name="Purchase_SessionNotFound" xml:space="preserve"><value>Séance introuvable.</value></data>
+  <data name="Purchase_StatusCompleted" xml:space="preserve"><value>Terminé</value></data>
+  <data name="Purchase_StatusFailed" xml:space="preserve"><value>Échoué</value></data>
+  <data name="Purchase_StatusPending" xml:space="preserve"><value>En attente</value></data>
+  <data name="Register_FullName" xml:space="preserve"><value>Nom complet</value></data>
+  <data name="Register_HasAccount" xml:space="preserve"><value>Vous avez déjà un compte ?</value></data>
+  <data name="Register_Heading" xml:space="preserve"><value>Créer un compte</value></data>
+  <data name="Register_PageTitle" xml:space="preserve"><value>Inscription</value></data>
+  <data name="Register_SignIn" xml:space="preserve"><value>Se connecter</value></data>
+  <data name="Register_Submit" xml:space="preserve"><value>Créer le Compte</value></data>
+  <data name="Register_Subtitle" xml:space="preserve"><value>Rejoignez la communauté des festivals</value></data>
+  <data name="Rental_Cancel" xml:space="preserve"><value>Annuler</value></data>
+  <data name="Rental_CreateHeading" xml:space="preserve"><value>Créer une Location</value></data>
+  <data name="Rental_CreateSubmit" xml:space="preserve"><value>Créer la Location</value></data>
+  <data name="Rental_DurationLabel" xml:space="preserve"><value>Durée</value></data>
+  <data name="Rental_MissingInfo" xml:space="preserve"><value>Informations requises manquantes pour créer une location numérique.</value></data>
+  <data name="Rental_PriceLabel" xml:space="preserve"><value>Prix (€)</value></data>
+  <data name="Rental_UnitDays" xml:space="preserve"><value>Jours</value></data>
+  <data name="Rental_UnitHours" xml:space="preserve"><value>Heures</value></data>
+  <data name="Rental_UnitLabel" xml:space="preserve"><value>Unité</value></data>
+  <data name="Rental_UnitMinutes" xml:space="preserve"><value>Minutes</value></data>
+  <data name="ResetPassword_ConfirmPasswordLabel" xml:space="preserve"><value>Confirmer le mot de passe</value></data>
+  <data name="ResetPassword_DevEmailNote" xml:space="preserve"><value>En production, ceci serait envoyé par e-mail</value></data>
+  <data name="ResetPassword_Heading" xml:space="preserve"><value>Choisissez un nouveau mot de passe</value></data>
+  <data name="ResetPassword_NewPasswordLabel" xml:space="preserve"><value>Nouveau mot de passe</value></data>
+  <data name="ResetPassword_PageTitle" xml:space="preserve"><value>Réinitialiser le Mot de Passe</value></data>
+  <data name="ResetPassword_ResetCodeLabel" xml:space="preserve"><value>Votre code de réinitialisation est :</value></data>
+  <data name="ResetPassword_Submit" xml:space="preserve"><value>Réinitialiser le Mot de Passe</value></data>
+  <data name="ResetPassword_Subtitle" xml:space="preserve"><value>Entrez votre nouveau mot de passe ci-dessous.</value></data>
+  <data name="ResetPassword_TokenLabel" xml:space="preserve"><value>Jeton</value></data>
+  <data name="ResetPassword_TokenPlaceholder" xml:space="preserve"><value>Entrez le code à 6 chiffres</value></data>
+  <data name="Review_AddHeading" xml:space="preserve"><value>Rédiger une Critique</value></data>
+  <data name="Review_Approve" xml:space="preserve"><value>Approuver</value></data>
+  <data name="Review_ApproveReply" xml:space="preserve"><value>Approuver la réponse</value></data>
+  <data name="Review_AuthorLabel" xml:space="preserve"><value>Auteur :</value></data>
+  <data name="Review_CharLimit" xml:space="preserve"><value>Jusqu'à 1200 caractères.</value></data>
+  <data name="Review_Clear" xml:space="preserve"><value>Effacer</value></data>
+  <data name="Review_CommentLabel" xml:space="preserve"><value>Commentaire</value></data>
+  <data name="Review_CommentMaxLength" xml:space="preserve"><value>Le commentaire doit contenir 1200 caractères ou moins.</value></data>
+  <data name="Review_CommentPrefix" xml:space="preserve"><value>Commentaire :</value></data>
+  <data name="Review_CommentRequired" xml:space="preserve"><value>Le commentaire est requis.</value></data>
+  <data name="Review_DateLabel" xml:space="preserve"><value>Date :</value></data>
+  <data name="Review_ExternalFilmLabel" xml:space="preserve"><value>Externe #{0}</value></data>
+  <data name="Review_Filter" xml:space="preserve"><value>Filtrer</value></data>
+  <data name="Review_Hide" xml:space="preserve"><value>Masquer</value></data>
+  <data name="Review_HideConfirm" xml:space="preserve"><value>Êtes-vous sûr de vouloir masquer cet avis ? Il sera retiré de la vue publique.</value></data>
+  <data name="Review_HideReply" xml:space="preserve"><value>Masquer la réponse</value></data>
+  <data name="Review_InvalidFestivalFilm" xml:space="preserve"><value>Film du festival invalide.</value></data>
+  <data name="Review_InvalidRequest" xml:space="preserve"><value>Requête invalide.</value></data>
+  <data name="Review_InvalidReviewId" xml:space="preserve"><value>Avis invalide.</value></data>
+  <data name="Review_LoginLink" xml:space="preserve"><value>vous connecter</value></data>
+  <data name="Review_LoginPrompt" xml:space="preserve"><value>Veuillez {0} pour ajouter un avis.</value></data>
+  <data name="Review_LoginToRespond" xml:space="preserve"><value>Veuillez {0} pour répondre à cet avis.</value></data>
+  <data name="Review_LoginToRespondLink" xml:space="preserve"><value>vous connecter</value></data>
+  <data name="Review_ManageFilterHelp" xml:space="preserve"><value>Utilisez les filtres ci-dessus pour affiner les résultats.</value></data>
+  <data name="Review_ManageSearchAuthor" xml:space="preserve"><value>Rechercher par Nom d'Auteur</value></data>
+  <data name="Review_ManageSearchDate" xml:space="preserve"><value>Rechercher par Date</value></data>
+  <data name="Review_ManageSearchMovie" xml:space="preserve"><value>Rechercher par Nom de Film</value></data>
+  <data name="Review_ManageStatus" xml:space="preserve"><value>Statut</value></data>
+  <data name="Review_ManageSubtitle" xml:space="preserve"><value>Tous les avis et leurs réponses.</value></data>
+  <data name="Review_NoReplies" xml:space="preserve"><value>Aucune réponse pour le moment.</value></data>
+  <data name="Review_NoResults" xml:space="preserve"><value>Aucun avis ou réponse trouvé.</value></data>
+  <data name="Review_NoReviews" xml:space="preserve"><value>Aucun avis pour le moment. Soyez le premier !</value></data>
+  <data name="Review_NotFoundForTitle" xml:space="preserve"><value>Avis introuvable pour ce titre.</value></data>
+  <data name="Review_PageTitle" xml:space="preserve"><value>Critiques</value></data>
+  <data name="Review_PublicHidden" xml:space="preserve"><value>Liste publique : Masqué du public</value></data>
+  <data name="Review_RateAria" xml:space="preserve"><value>Noter {0} sur 5</value></data>
+  <data name="Review_RatingLabel" xml:space="preserve"><value>Note (1-5)</value></data>
+  <data name="Review_RatingRange" xml:space="preserve"><value>La note doit être entre 1 et 5.</value></data>
+  <data name="Review_Replies" xml:space="preserve"><value>Réponses</value></data>
+  <data name="Review_Report" xml:space="preserve"><value>Signaler</value></data>
+  <data name="Review_Respond" xml:space="preserve"><value>Répondre</value></data>
+  <data name="Review_RespondTo" xml:space="preserve"><value>Répondre à {0}</value></data>
+  <data name="Review_ResponsePlaceholder" xml:space="preserve"><value>Écrivez votre réponse…</value></data>
+  <data name="Review_SelectRating" xml:space="preserve"><value>Sélectionnez une note</value></data>
+  <data name="Review_StatusApproved" xml:space="preserve"><value>Approuvé</value></data>
+  <data name="Review_StatusPending" xml:space="preserve"><value>En attente</value></data>
+  <data name="Review_StatusRejected" xml:space="preserve"><value>Rejeté</value></data>
+  <data name="Review_StatusReported" xml:space="preserve"><value>Signalé</value></data>
+  <data name="Review_SubmitReview" xml:space="preserve"><value>Soumettre la Critique</value></data>
+  <data name="Review_YourComment" xml:space="preserve"><value>Votre commentaire</value></data>
+  <data name="SeedFestival_UmaSpringFest_Description" xml:space="preserve"><value>Rejoignez-nous pour une semaine de films indépendants et internationaux célébrant des histoires diverses.</value></data>
+  <data name="SeedFilm_MidnightFrames_Description" xml:space="preserve"><value>Film seed pour le développement local initial.</value></data>
+  <data name="SessionAccess_Denied" xml:space="preserve"><value>Accès refusé. Aucun droit valide trouvé.</value></data>
+  <data name="SessionAccess_NoRentalProduct" xml:space="preserve"><value>Aucun produit de location n'existe pour ce film.</value></data>
+  <data name="SessionAccess_NoValidTicket" xml:space="preserve"><value>Vous n'avez pas de billet valide pour cette séance.</value></data>
+  <data name="SessionAccess_PassRequired" xml:space="preserve"><value>Vous avez besoin d'un pass valide pour regarder ce film.</value></data>
+  <data name="SessionAccess_RentalWindow" xml:space="preserve"><value>Cette location n'est disponible que du {0} au {1}.</value></data>
+  <data name="SessionAccess_SessionNotFound" xml:space="preserve"><value>Séance introuvable.</value></data>
+  <data name="SessionAccess_NotStartedYet" xml:space="preserve"><value>Cette séance est prévue pour {0} UTC. Vous ne pouvez pas la regarder avant.</value></data>
+  <data name="SessionAccess_SessionEnded" xml:space="preserve"><value>Cette séance est terminée.</value></data>
+  <data name="Session_AccessEndUtc" xml:space="preserve"><value>Fin d'Accès (UTC)</value></data>
+  <data name="Session_AccessStartUtc" xml:space="preserve"><value>Début d'Accès (UTC)</value></data>
+  <data name="Session_BuyTicket" xml:space="preserve"><value>Acheter un Billet</value></data>
+  <data name="Session_CreateFailed" xml:space="preserve"><value>Échec de la création de la séance.</value></data>
+  <data name="Session_CreateHeading" xml:space="preserve"><value>Créer une Séance</value></data>
+  <data name="Session_CreateSubmit" xml:space="preserve"><value>Créer la Séance</value></data>
+  <data name="Session_DuplicateStartTime" xml:space="preserve"><value>Une séance de ce type existe déjà à cette heure de début.</value></data>
+  <data name="Session_EndUtc" xml:space="preserve"><value>Fin (UTC)</value></data>
+  <data name="Session_FestivalFilmRequired" xml:space="preserve"><value>Un film du festival est requis pour créer la séance.</value></data>
+  <data name="Session_FestivalNotStarted" xml:space="preserve"><value>Le festival '{0}' n'a pas encore commencé. Le streaming commence le {1}.</value></data>
+  <data name="Session_InvalidSchedule" xml:space="preserve"><value>L'heure de fin doit être postérieure à l'heure de début.</value></data>
+  <data name="Session_Manage" xml:space="preserve"><value>Gérer les Séances</value></data>
+  <data name="Session_NoSessions" xml:space="preserve"><value>Aucune séance programmée.</value></data>
+  <data name="Session_PageTitle" xml:space="preserve"><value>Séances</value></data>
+  <data name="Session_Price" xml:space="preserve"><value>Prix ($)</value></data>
+  <data name="Session_RentalAccess" xml:space="preserve"><value>Accès par Location</value></data>
+  <data name="Session_SelectType" xml:space="preserve"><value>-- Sélectionner le Type --</value></data>
+  <data name="Session_StartUtc" xml:space="preserve"><value>Début (UTC)</value></data>
+  <data name="Session_Subtitle" xml:space="preserve"><value>Consultez les créneaux de projection et les horaires disponibles.</value></data>
+  <data name="Session_TypeAccessWindow" xml:space="preserve"><value>Fenêtre d'Accès</value></data>
+  <data name="Session_TypeFixed" xml:space="preserve"><value>Fixe</value></data>
+  <data name="Session_TypeLabel" xml:space="preserve"><value>Type de Séance</value></data>
+  <data name="Session_TypePassAccess" xml:space="preserve"><value>Accès par Pass</value></data>
+  <data name="Session_TypePremier" xml:space="preserve"><value>Première</value></data>
+  <data name="Session_UnknownType" xml:space="preserve"><value>Type de séance inconnu : '{0}'.</value></data>
+  <data name="Validation_Compare" xml:space="preserve"><value>Les mots de passe ne correspondent pas.</value></data>
+  <data name="Validation_DurationRange" xml:space="preserve"><value>La durée doit être entre 1 et 365.</value></data>
+  <data name="Validation_Email" xml:space="preserve"><value>Veuillez entrer une adresse e-mail valide.</value></data>
+  <data name="Validation_MinLength" xml:space="preserve"><value>Doit contenir au moins {1} caractères.</value></data>
+  <data name="Validation_PriceRange" xml:space="preserve"><value>Le prix doit être entre 0,01 et 999,99.</value></data>
+  <data name="Validation_Required" xml:space="preserve"><value>Ce champ est requis.</value></data>
+  <data name="Vote_AlreadyVotedAward" xml:space="preserve"><value>Vous avez déjà voté pour cette récompense.</value></data>
+  <data name="Vote_AlreadyVotedNominee" xml:space="preserve"><value>Vous avez déjà voté pour cette nomination.</value></data>
+  <data name="Vote_AwardClosed" xml:space="preserve"><value>Cette récompense n'est pas ouverte au vote.</value></data>
+  <data name="Vote_AwardLabel" xml:space="preserve"><value>Récompense :</value></data>
+  <data name="Vote_CategoryLabel" xml:space="preserve"><value>Catégorie :</value></data>
+  <data name="Vote_FestivalLabel" xml:space="preserve"><value>Festival :</value></data>
+  <data name="Vote_NoAwards" xml:space="preserve"><value>Aucune récompense disponible pour le vote pour le moment.</value></data>
+  <data name="Vote_NominationNotFound" xml:space="preserve"><value>Nomination introuvable.</value></data>
+  <data name="Vote_OneAtATime" xml:space="preserve"><value>Un seul vote peut être soumis à la fois.</value></data>
+  <data name="Vote_PageTitle" xml:space="preserve"><value>Voter</value></data>
+  <data name="Vote_ResultsClosed" xml:space="preserve"><value>Ce prix est terminé — résultats finaux</value></data>
+  <data name="Vote_ResultsInDays" xml:space="preserve"><value>Il reste {0} jours pour les résultats de ce prix</value></data>
+  <data name="Vote_ResultsInOneDay" xml:space="preserve"><value>Il reste 1 jour pour les résultats de ce prix</value></data>
+  <data name="Vote_ResultsToday" xml:space="preserve"><value>Résultats de ce prix aujourd'hui</value></data>
+  <data name="Vote_SelectOneNominee" xml:space="preserve"><value>Veuillez sélectionner exactement un nominé pour soumettre votre vote.</value></data>
+  <data name="Vote_Submitted" xml:space="preserve"><value>Vote soumis.</value></data>
+  <data name="Vote_Subtitle" xml:space="preserve"><value>Choisissez un nominé pour chaque récompense. Vous ne pouvez soumettre qu'un vote à la fois.</value></data>
+  <data name="Vote_VotesDone" xml:space="preserve"><value>Votes effectués</value></data>
+  <data name="Vote_YourChoice" xml:space="preserve"><value>Votre choix</value></data>
+  <data name="Watch_CinemaSuffix" xml:space="preserve"><value>UmaFestHub Cinema</value></data>
+  <data name="Watch_DurationFormat" xml:space="preserve"><value>{0}h {1}m</value></data>
+  <data name="Watch_Enjoy" xml:space="preserve"><value>Profitez du Film !</value></data>
+  <data name="Watch_NowPlaying" xml:space="preserve"><value>En cours — {0}</value></data>
+  <data name="Watch_PageTitle" xml:space="preserve"><value>Regarder le Film</value></data>
+  <data name="Watch_ScreeningUnavailable" xml:space="preserve"><value>Projection Indisponible</value></data>
+  <data name="Watch_ScreeningUnavailableBody" xml:space="preserve"><value>Cette projection n'est pas disponible pour le moment.</value></data>
+  <data name="Watch_VideoUnsupported" xml:space="preserve"><value>Votre navigateur ne prend pas en charge la vidéo HTML.</value></data>
+<data name="Watch_WatchParty" xml:space="preserve"><value>Soirée Cinéma</value></data></root>

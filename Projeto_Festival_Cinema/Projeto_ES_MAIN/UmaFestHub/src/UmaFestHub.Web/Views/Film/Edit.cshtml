@@ -1,0 +1,24 @@
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["FilmDetails_PageTitle"].Value;
+}
+
+<!-- Admin-facing placeholder form for future CRUD wiring. -->
+<section class="page-hero">
+	<div class="container">
+		<h1>@Localizer["FilmEdit_Heading"]</h1>
+		<p>@Localizer["FilmEdit_Subtitle"]</p>
+	</div>
+</section>
+
+<section class="container info-panel">
+	<form class="simple-form" method="post" asp-route="FilmEdit" asp-route-id="@Model.Id">
+		<label for="title">@Localizer["Common_Name"]</label>
+		<input id="title" name="title" type="text" placeholder="@Localizer["FilmEdit_TitlePlaceholder"]" />
+
+		<label for="genre">@Localizer["Common_Genre"]</label>
+		<input id="genre" name="genre" type="text" placeholder="@Localizer["FilmEdit_GenrePlaceholder"]" />
+
+		<button class="btn btn-primary" type="submit">@Localizer["FestivalEdit_SaveChanges"]</button>
+	</form>
+</section>

@@ -1,0 +1,107 @@
+@*
+  Horizontal film strip for Home signed-in users (watchlist, favorites, Seen).
+  Scroll via personalListCarouselHomePage.js (hubScrollFavorites). Remove uses PersonalListController.Remove with ListType from the model.
+*@
+@using UmaFestHub.Domain.Entities
+@model UmaFestHub.Web.ViewModels.PersonalListCarouselViewModel
+
+<section class="hub-section hub-reveal" id="@Model.SectionId">
+	<div class="hub-section-header">
+		@if (!string.IsNullOrWhiteSpace(Model.SectionTitleHref))
+		{
+			<h2><a href="@Model.SectionTitleHref" class="hub-section-title-link">@Model.SectionTitle</a></h2>
+		}
+		else
+		{
+			<h2>@Model.SectionTitle</h2>
+		}
+	</div>
+	@if (Model.Films.Count == 0)
+	{
+		<div class="hub-empty-state">@Model.EmptyMessage</div>
+	}
+	else
+	{
+		var rowId = Model.RowElementId;
+		var homeReturnUrl = Model.RemoveReturnUrl ?? (Url.Action("Index", "Home") ?? "/") + "#" + Model.SectionId;
+		var showArrows = Model.Films.Count > 9;
+		/* Viewport must be at least card height (245px) or overflow:hidden clips rounded corners */
+		var viewportStyle = showArrows
+			? "padding: 0 28px; min-height: 268px; display:flex; align-items:center;"
+			: "padding: 0 12px; min-height: 268px; display:flex; align-items:center;";
+		<div class="hub-empty-state py-1 px-3 position-relative" style="border-radius: 12px; overflow: hidden; min-height: 280px;">
+			@if (showArrows)
+			{
+				<button type="button"
+				        class="btn btn-outline-light rounded-circle position-absolute top-50 start-0 translate-middle-y"
+				        style="z-index: 2; width: 34px; height: 34px; margin-left: 3px; padding: 0; font-size: 22px; line-height: 1;"
+				        aria-label="@Model.ScrollLeftAriaLabel"
+				        onclick="hubScrollFavorites('@rowId', -420);">
+					←
+				</button>
+			}
+
+			<div id="@rowId" class="hub-favorites-viewport" style="@viewportStyle">
+				<div id="@($"{rowId}-track")"
+				     class="hub-favorites-track"
+				     style="display:flex; flex-direction:row; flex-wrap:nowrap; align-items:center; gap:6px;">
+					@foreach (var film in Model.Films)
+					{
+						<div class="hub-festival-card" data-tilt
+						     style="position:relative; background: #111; width:120px; height:245px; display:flex; flex-direction:column; flex:0 0 120px; padding:2px; border-radius:12px;">
+							<a href="/films/@film.Id" style="display:block; text-decoration:none; color:inherit;">
+								<div class="hub-thumb"
+								     style="background: #111; border-radius: 10px; overflow: hidden; margin: 0; width: 100%; height: 180px;">
+									@if (!string.IsNullOrWhiteSpace(film.ImageUrl))
+									{
+										<img src="@film.ImageUrl"
+										     alt="@film.Name"
+										     style="width:100%; height:100%; object-fit:cover; display:block;" />
+									}
+									else
+									{
+										var cardInitial = string.IsNullOrWhiteSpace(film.Name) ? "?" : film.Name.Substring(0, 1).ToUpperInvariant();
+										<span>@cardInitial</span>
+									}
+								</div>
+							</a>
+
+							<div style="margin-top: 6px; padding: 0 2px; display:flex; align-items:flex-start; justify-content:space-between; gap:6px;">
+								<div style="font-size: 0.85rem; line-height: 1.15; color: #eaeaea; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; min-width: 0;">
+									<strong>@film.Name</strong>
+								</div>
+
+								<form method="post" action="/PersonalList/Remove" class="m-0" style="flex: 0 0 auto;">
+									@Html.AntiForgeryToken()
+									<input type="hidden" name="type" value="@Model.ListType" />
+									<input type="hidden" name="filmId" value="@film.Id" />
+									<input type="hidden" name="returnUrl" value="@homeReturnUrl" />
+									<button type="submit"
+									        class="btn btn-sm text-dark"
+									        style="background:#ffc107; border-color:#ffc107; padding: 0 6px; line-height: 1.2;"
+									        title="@Model.RemoveTooltip"
+									        data-bs-toggle="tooltip"
+									        data-bs-placement="top"
+									        aria-label="@Model.RemoveAriaLabel">
+										@Model.RemoveButtonGlyph
+									</button>
+								</form>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+
+			@if (showArrows)
+			{
+				<button type="button"
+				        class="btn btn-outline-light rounded-circle position-absolute top-50 end-0 translate-middle-y"
+				        style="z-index: 2; width: 34px; height: 34px; margin-right: 3px; padding: 0; font-size: 22px; line-height: 1;"
+				        aria-label="@Model.ScrollRightAriaLabel"
+				        onclick="hubScrollFavorites('@rowId', 420);">
+					→
+				</button>
+			}
+		</div>
+	}
+</section>

@@ -1,0 +1,14 @@
+@model string
+@using UmaFestHub.Web.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> Localizer
+@{
+    ViewData["Title"] = Localizer["Watch_PageTitle"].Value;
+}
+<div class="container mt-5 text-center">
+    <h2>@Localizer["Watch_Enjoy"]</h2>
+    <video width="800" controls autoplay>
+        <source src="@Model" type="video/mp4">
+        @Localizer["Watch_VideoUnsupported"]
+    </video>
+</div>

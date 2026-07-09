@@ -1,0 +1,49 @@
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["Register_PageTitle"].Value;
+}
+
+<div class="hub-auth-wrap">
+	<div class="hub-auth-card">
+		<div class="hub-auth-brand">
+			<div class="hub-brand-mark">UF</div>
+			<div>UmaFestHub</div>
+		</div>
+
+		<h2>@Localizer["Register_Heading"]</h2>
+		<p class="hub-auth-subtitle">@Localizer["Register_Subtitle"]</p>
+
+		@if (!ViewData.ModelState.IsValid)
+		{
+			<div class="alert alert-danger">
+				@foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+				{
+					<div>@error.ErrorMessage</div>
+				}
+			</div>
+		}
+
+		<form method="post" asp-route="RegisterPost" class="hub-auth-form">
+			@Html.AntiForgeryToken()
+			<div>
+				<label>@Localizer["Register_FullName"]</label>
+				<input name="FullName" type="text" placeholder="@Localizer["Register_FullName"]" required />
+			</div>
+			<div>
+				<label>@Localizer["Common_Email"]</label>
+				<input name="Email" type="email" placeholder="@Localizer["Common_EmailPlaceholder"]" required />
+			</div>
+			<div>
+				<label>@Localizer["Common_Password"]</label>
+				<input name="Password" type="password" placeholder="@Localizer["Common_PasswordPlaceholder"]" required />
+			</div>
+
+			<button type="submit" class="hub-auth-btn">@Localizer["Register_Submit"]</button>
+		</form>
+
+		<p class="hub-auth-meta">
+			@Localizer["Register_HasAccount"]
+			<a class="fw-bold" asp-route="Login">@Localizer["Register_SignIn"]</a>
+		</p>
+	</div>
+</div>

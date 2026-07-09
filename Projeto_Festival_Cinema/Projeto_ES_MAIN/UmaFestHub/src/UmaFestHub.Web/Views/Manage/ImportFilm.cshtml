@@ -1,0 +1,143 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = ViewBag.FestivalName + " - " + Localizer["Common_Films"].Value;
+}
+
+<section class="container hub-section mt-4">
+    <a href="/festivals/@ViewBag.FestivalId" class="btn btn-hub-outline mb-4">
+        @Localizer["Common_Back"] @ViewBag.FestivalName
+    </a>
+    
+    <div class="hub-hero-panel p-4 mb-4">
+        <h2 class="mb-4">@Localizer["Manage_ImportFilmsHeading"]</h2>
+        
+        <div class="row g-3 align-items-end">
+            <div class="col-md-10">
+                <label for="tmdbSearchQuery" class="form-label">@Localizer["Nav_SearchPlaceholder"]</label>
+                <input type="text" id="tmdbSearchQuery" class="form-control" placeholder="@Localizer["Nav_SearchPlaceholder"]" />
+            </div>
+            <div class="col-md-2 d-grid">
+                <button id="tmdbSearchBtn" class="btn btn-primary">@Localizer["Common_Go"]</button>
+            </div>
+        </div>
+    </div>
+
+    <form id="antiForgeryForm">
+        @Html.AntiForgeryToken()
+    </form>
+
+    <div id="tmdbResults" class="hub-festival-grid mt-4">
+        <!-- Search results will dynamically populate here -->
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const noOverview = @Json.Serialize(Localizer["Manage_ImportNoOverview"].Value);
+        const yearLabel = @Json.Serialize(Localizer["Manage_ImportYearLabel"].Value);
+        const importButtonLabel = @Json.Serialize(Localizer["Manage_ImportButton"].Value);
+        const importingLabel = @Json.Serialize(Localizer["Manage_Importing"].Value);
+        const importedLabel = @Json.Serialize(Localizer["Manage_Imported"].Value);
+        const goLabel = @Json.Serialize(Localizer["Common_Go"].Value);
+        const searchingLabel = @Json.Serialize(Localizer["Manage_ImportSearching"].Value);
+        const searchRequiredLabel = @Json.Serialize(Localizer["Manage_ImportSearchRequired"].Value);
+        const errorLabel = @Json.Serialize(Localizer["Common_Error"].Value);
+        const notAvailableLabel = @Json.Serialize(Localizer["Common_NotAvailable"].Value);
+        const noMoviesLabel = @Json.Serialize(Localizer["FilmIndex_NoMoviesFound"].Value);
+
+        document.getElementById("tmdbSearchBtn").addEventListener("click", async (e) => {
+            e.preventDefault();
+            const query = document.getElementById("tmdbSearchQuery").value;
+            const btn = e.target;
+            const container = document.getElementById("tmdbResults");
+            const token = document.querySelector('#antiForgeryForm input[name="__RequestVerificationToken"]').value;
+
+            if (!query) return alert(searchRequiredLabel);
+
+            btn.disabled = true;
+            btn.innerText = searchingLabel;
+            container.innerHTML = "<div>" + searchingLabel + "</div>";
+
+            try {
+                const formData = new URLSearchParams();
+                formData.append('query', query);
+                formData.append('__RequestVerificationToken', token);
+
+                const resp = await fetch('/festivals/import/search', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData.toString()
+                });
+
+                if (!resp.ok) throw new Error(await resp.text());
+
+                const results = await resp.json();
+                container.innerHTML = "";
+
+                if (!results || results.length === 0) {
+                    container.innerHTML = '<div>' + noMoviesLabel + '</div>';
+                    return;
+                }
+
+                results.forEach(r => {
+                    const article = document.createElement("article");
+                    article.className = "hub-festival-card d-flex flex-column shadow-sm p-3";
+
+                    const imgUrl = r.imageUrl || '';
+                    const imgHtml = imgUrl
+                        ? `<img src="${imgUrl}" alt="${r.title}" class="img-fluid rounded mb-3 shadow-sm w-100" style="aspect-ratio: 2/3; object-fit: cover;" />`
+                        : `<div class="rounded mb-3 shadow-sm d-flex align-items-center justify-content-center bg-secondary w-100" style="aspect-ratio: 2/3;"><i class="bi bi-film fs-1 text-light"></i></div>`;
+
+                    const year = r.releaseDate ? r.releaseDate.split('-')[0] : notAvailableLabel;
+                    const overview = r.description
+                        ? (r.description.length > 100 ? r.description.substring(0, 100) + '...' : r.description)
+                        : noOverview;
+
+                    article.innerHTML = `
+                        ${imgHtml}
+                        <h5 class="mb-1 fw-bold">${r.title}</h5>
+                        <p class="small text-secondary mb-2">${yearLabel} ${year}</p>
+                        <p class="small text-secondary mb-3 flex-grow-1" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${overview}</p>
+                        <button class="btn btn-outline-success mt-auto fw-bold w-100 import-btn">${importButtonLabel}</button>
+                    `;
+
+                    article.querySelector(".import-btn").addEventListener("click", async function() {
+                        const importBtn = this;
+                        importBtn.disabled = true;
+                        importBtn.innerText = importingLabel;
+
+                        const importData = new URLSearchParams();
+                        importData.append('festivalId', '@ViewBag.FestivalId');
+                        importData.append('tmdbId', r.id);
+                        importData.append('__RequestVerificationToken', token);
+
+                        try {
+                            const importResp = await fetch('/festivals/import/add-film', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                body: importData.toString()
+                            });
+
+                            if (!importResp.ok) throw new Error(await importResp.text());
+
+                            importBtn.className = "btn btn-success mt-auto fw-bold w-100";
+                            importBtn.innerText = importedLabel;
+                        } catch (err) {
+                            alert(errorLabel + ": " + err.message);
+                            importBtn.disabled = false;
+                            importBtn.innerText = importButtonLabel;
+                        }
+                    });
+
+                    container.appendChild(article);
+                });
+
+            } catch (err) {
+                container.innerHTML = `<div class="text-danger">${errorLabel}: ${err.message}</div>`;
+            } finally {
+                btn.disabled = false;
+                btn.innerText = goLabel;
+            }
+        });
+    });
+</script>

@@ -1,0 +1,63 @@
+@model UmaFestHub.Web.ViewModels.FestivalViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = Localizer["FestivalCreate_PageTitle"].Value;
+}
+
+<section class="container hub-section mt-4">
+    <div class="hub-section-header mb-4">
+        <h2>@Localizer["FestivalCreate_Heading"]</h2>
+    </div>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger mb-4">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@error.ErrorMessage</div>
+            }
+        </div>
+    }
+    <div class="card shadow-sm hub-festival-create-card" style="max-width: 600px;">
+        <div class="card-body p-4">
+            <form method="post" action="/festivals/create" class="hub-festival-create-form">
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    <label class="form-label text-light">@Localizer["FestivalCreate_NameLabel"]</label>
+                    <input type="text" name="Name" value="@Model?.Name" class="form-control bg-dark text-light border-secondary" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-light">@Localizer["Common_Description"]</label>
+                    <textarea name="Description" class="form-control bg-dark text-light border-secondary" rows="4">@Model?.Description</textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label text-light">@Localizer["FestivalCreate_StartDateLabel"]</label>
+                        <input type="date" name="StartDateUtc" min="@DateTime.Today.ToString("yyyy-MM-dd")" value="@((Model?.StartDateUtc is DateTime start && start != DateTime.MinValue) ? start.ToString("yyyy-MM-dd") : "")" class="form-control bg-dark text-light border-secondary" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label text-light">@Localizer["FestivalCreate_EndDateLabel"]</label>
+                        <input type="date" name="EndDateUtc" min="@DateTime.Today.ToString("yyyy-MM-dd")" value="@((Model?.EndDateUtc is DateTime end && end != DateTime.MinValue) ? end.ToString("yyyy-MM-dd") : "")" class="form-control bg-dark text-light border-secondary" required />
+                    </div>
+                </div>
+                <div class="mt-3 hub-early-bird-panel">
+                    <h5 class="text-light mb-3">@Localizer["FestivalCreate_EarlyBirdHeading"]</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-light">@Localizer["FestivalCreate_DiscountPercentLabel"]</label>
+                            <input type="number" name="EarlyBirdDiscountPercent" value="@Model?.EarlyBirdDiscountPercent" class="form-control bg-dark text-light border-secondary" step="0.1" min="0" max="100" placeholder="@Localizer["FestivalCreate_DiscountPlaceholder"]" />
+                            <small class="text-white-50">@Localizer["FestivalCreate_DiscountPercentHint"]</small>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-light">@Localizer["FestivalCreate_DaysBeforeLabel"]</label>
+                            <input type="number" name="EarlyBirdDaysBeforeStart" value="@Model?.EarlyBirdDaysBeforeStart" class="form-control bg-dark text-light border-secondary" min="1" placeholder="@Localizer["FestivalCreate_DaysPlaceholder"]" />
+                            <small class="text-white-50">@Localizer["FestivalCreate_DaysBeforeHint"]</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary w-100 fw-bold">@Localizer["FestivalCreate_Submit"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

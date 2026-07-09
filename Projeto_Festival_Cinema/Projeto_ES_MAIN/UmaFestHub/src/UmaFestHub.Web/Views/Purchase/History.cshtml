@@ -1,0 +1,62 @@
+@model IReadOnlyList<UmaFestHub.Web.ViewModels.PurchaseViewModel>
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["PurchaseHistory_PageTitle"].Value;
+
+	string LocalizePurchaseStatus(string status) => status.ToLowerInvariant() switch
+	{
+		"completed" => Localizer["Purchase_StatusCompleted"].Value,
+		"failed" => Localizer["Purchase_StatusFailed"].Value,
+		"pending" => Localizer["Purchase_StatusPending"].Value,
+		_ => status
+	};
+}
+
+<section class="page-hero hub-reveal">
+	<div class="container">
+		<h1>@Localizer["PurchaseHistory_Heading"]</h1>
+		<p>@Localizer["PurchaseHistory_Subtitle"]</p>
+	</div>
+</section>
+
+@if (TempData["SuccessMessage"] is string successMsg && !string.IsNullOrWhiteSpace(successMsg))
+{
+	<div data-confetti="true" aria-hidden="true"></div>
+	<section class="container mt-3">
+		<div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+			<i class="bi bi-check-circle-fill me-2"></i> <strong>@Localizer["Common_Success"]</strong> @successMsg
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@Localizer["Common_Close"]"></button>
+		</div>
+	</section>
+}
+
+<section class="container info-panel hub-reveal">
+	@if (Model is null || Model.Count == 0)
+	{
+		<p>@Localizer["PurchaseHistory_Empty"]</p>
+	}
+	else
+	{
+		<ul class="timeline-list">
+			@foreach (var purchase in Model)
+			{
+				var statusClass = purchase.Status.Equals("Completed", StringComparison.OrdinalIgnoreCase)
+					? "bg-success"
+					: purchase.Status.Equals("Failed", StringComparison.OrdinalIgnoreCase)
+						? "bg-danger"
+						: "bg-warning text-dark";
+
+				<li class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+					<div>
+						<strong class="text-white">#@purchase.Id.ToString()[..8]</strong>
+						<span class="text-white">— @purchase.DateUtc.ToString("dd MMM yyyy")</span>
+					</div>
+					<div class="d-flex align-items-center gap-2">
+						<span class="text-white">@purchase.TotalAmount.ToString("C")</span>
+						<span class="badge @statusClass">@LocalizePurchaseStatus(purchase.Status)</span>
+					</div>
+				</li>
+			}
+		</ul>
+	}
+</section>

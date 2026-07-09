@@ -1,0 +1,23 @@
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["PurchaseHistory_PageTitle"].Value;
+}
+
+<section class="page-hero">
+	<div class="container">
+		<h1>@Localizer["Cart_Checkout"]</h1>
+		<p>@Localizer["Checkout_Subtitle"]</p>
+	</div>
+</section>
+
+<section class="container info-panel">
+	<form class="simple-form" method="post" asp-route="PurchaseCheckout">
+		<label for="cardName">@Localizer["Checkout_NameOnCard"]</label>
+		<input id="cardName" name="cardName" type="text" placeholder="@Localizer["Checkout_NamePlaceholder"]" />
+
+		<label for="cardNumber">@Localizer["Checkout_CardNumber"]</label>
+		<input id="cardNumber" name="cardNumber" type="text" placeholder="@Localizer["Checkout_CardPlaceholder"]" />
+
+		<button class="btn btn-primary" type="submit">@Localizer["Checkout_PayNow"]</button>
+	</form>
+</section>

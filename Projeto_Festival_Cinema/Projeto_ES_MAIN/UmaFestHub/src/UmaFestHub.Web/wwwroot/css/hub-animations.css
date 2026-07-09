@@ -1,0 +1,369 @@
+/* ═══════════════════════════════════════════════════════════
+   hub-animations.css
+   Animation keyframes, scroll-reveal, page transitions,
+   skeleton loaders, custom scrollbar, animated brand mark.
+   OCP: extends existing classes — never overrides.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. Page Entry Animations ─────────────────────────────── */
+
+@keyframes hubFadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hubFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hubScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Staggered entry for main page sections */
+.hub-hero,
+.hub-hero-panel {
+  animation: hubFadeSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hub-section {
+  animation: hubFadeSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hub-section:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.hub-section:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.hub-section:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.hub-section:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.hub-section:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+/* Info panels / cards also get a subtle entry */
+.info-panel,
+.info-card {
+  animation: hubFadeSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.08s;
+}
+
+/* ── 2. Scroll-Reveal Base Classes ────────────────────────── */
+
+.hub-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.hub-reveal.hub-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children inside a reveal container */
+.hub-reveal-stagger > .hub-reveal:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.hub-reveal-stagger > .hub-reveal:nth-child(2) {
+  transition-delay: 0.06s;
+}
+
+.hub-reveal-stagger > .hub-reveal:nth-child(3) {
+  transition-delay: 0.12s;
+}
+
+.hub-reveal-stagger > .hub-reveal:nth-child(4) {
+  transition-delay: 0.18s;
+}
+
+.hub-reveal-stagger > .hub-reveal:nth-child(5) {
+  transition-delay: 0.24s;
+}
+
+.hub-reveal-stagger > .hub-reveal:nth-child(6) {
+  transition-delay: 0.3s;
+}
+
+.hub-reveal-stagger > .hub-reveal:nth-child(7) {
+  transition-delay: 0.36s;
+}
+
+.hub-reveal-stagger > .hub-reveal:nth-child(8) {
+  transition-delay: 0.42s;
+}
+
+.hub-reveal-stagger > .hub-reveal:nth-child(9) {
+  transition-delay: 0.48s;
+}
+
+.hub-reveal-stagger > .hub-reveal:nth-child(10) {
+  transition-delay: 0.54s;
+}
+
+.hub-reveal-stagger > .hub-reveal:nth-child(11) {
+  transition-delay: 0.6s;
+}
+
+.hub-reveal-stagger > .hub-reveal:nth-child(12) {
+  transition-delay: 0.66s;
+}
+
+/* ── 3. Skeleton Shimmer ──────────────────────────────────── */
+
+@keyframes hubShimmer {
+  0% {
+    background-position: -400px 0;
+  }
+
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.hub-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 800px 100%;
+  animation: hubShimmer 1.6s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* ── 4. Custom Scrollbar ──────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--hub-bg, #141414);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--hub-accent, #e50914), #7a0d12);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff1a26, var(--hub-accent, #e50914));
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--hub-accent, #e50914) var(--hub-bg, #141414);
+}
+
+/* ── 5. Animated Brand Mark ───────────────────────────────── */
+
+@keyframes hubBrandGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px rgba(229, 9, 20, 0.3),
+      0 4px 12px rgba(229, 9, 20, 0.15);
+  }
+
+  50% {
+    box-shadow:
+      0 0 16px rgba(229, 9, 20, 0.5),
+      0 4px 20px rgba(229, 9, 20, 0.3);
+  }
+}
+
+@keyframes hubBrandRotate {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.hub-brand-mark {
+  background: linear-gradient(
+    135deg,
+    #e50914 0%,
+    #ff4d56 25%,
+    #e50914 50%,
+    #7a0d12 75%,
+    #e50914 100%
+  );
+  background-size: 200% 200%;
+  animation:
+    hubBrandRotate 4s linear infinite,
+    hubBrandGlow 3s ease-in-out infinite;
+}
+
+.hub-brand:hover .hub-brand-mark {
+  animation-duration: 1.5s, 1.5s;
+}
+
+/* ── 6. Film Grain Overlay (Global) ───────────────────────── */
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* ── 7. Smooth Page-level Transitions ─────────────────────── */
+
+.app-shell {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.app-shell.hub-content-ready {
+  opacity: 1;
+}
+
+body.hub-instant-page .app-shell {
+  opacity: 1;
+}
+
+body.hub-instant-page .hub-page-skeleton {
+  display: none;
+}
+
+body.hub-instant-page .hub-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+body.hub-instant-page .app-main {
+  animation: none;
+}
+
+body.hub-checkout-pending .app-shell {
+  visibility: hidden;
+}
+
+body.hub-checkout-pending::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 99990;
+  background: var(--hub-bg, #141414);
+}
+
+.app-main {
+  animation: hubFadeIn 0.4s ease both;
+}
+
+/* ── 7b. Page Skeleton Loader ─────────────────────────────── */
+
+.hub-page-skeleton {
+  position: fixed;
+  inset: 0;
+  z-index: 99990;
+  background: var(--hub-bg, #141414);
+  padding: 5rem 1.5rem 2rem;
+  pointer-events: none;
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.hub-page-skeleton-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.hub-page-skeleton-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.hub-page-skeleton-hero {
+  height: 220px;
+  border-radius: 16px;
+}
+
+.hub-page-skeleton-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+}
+
+.hub-page-skeleton-card {
+  height: 180px;
+  border-radius: 12px;
+}
+
+.hub-page-skeleton-bar {
+  height: 28px;
+  width: 40%;
+  border-radius: 8px;
+}
+
+/* ── 8. Responsive: Reduce Motion ─────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hub-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .app-shell {
+    opacity: 1;
+  }
+
+  .hub-page-skeleton {
+    display: none;
+  }
+}

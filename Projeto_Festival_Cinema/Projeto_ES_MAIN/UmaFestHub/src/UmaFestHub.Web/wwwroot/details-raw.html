@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Festival Details - UmaFestHub</title>
+
+	<!-- Bootstrap 5 and Bootstrap Icons for consistent UI components/icons -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+	<link rel="stylesheet" href="/css/site.css?v=xUnWIEfRV_oPkGXScEs7lXXF0_H2pXQzm7BlaXGcvmU" />
+	<link rel="stylesheet" href="/css/hub-theme.css?v=3fAKj89EsaHZi2IsGPt9bEKar4Q2GleHjoD5t0bmR9s" />
+	<link rel="stylesheet" href="/css/hub-animations.css?v=mhsRSqspoKzD6ilZzAKZxm9i62iKI1z4ZMD67skXW9k" />
+	<link rel="stylesheet" href="/css/hub-enhancements.css?v=Zk_I8hkfYEGtD8jFIuSnbgQm1nPt4yXrsZ_URUaJSAw" />
+</head>
+<body data-signalr-notifications="false" data-notification-csrf="">
+	<div class="app-shell">
+		
+<header class="hub-navbar">
+	<div class="container hub-navbar-inner">
+		<a class="hub-brand" href="/">
+			<span class="hub-brand-mark">UF</span>
+			<span>UmaFestHub</span>
+		</a>
+
+		<nav class="hub-nav-links" aria-label="Main navigation">
+				<a href="/festivals">Festivals</a>
+				<a href="/films">Films</a>
+		</nav>
+
+		<div class="hub-search-wrap">
+			<form class="hub-search-form" method="get" action="/films">
+				<i class="bi bi-search"></i>
+				<input type="search" name="title" value="" placeholder="Search movies" aria-label="Search movies" />
+			</form>
+		</div>
+
+		<div class="hub-nav-action" style="display: flex; align-items: center; gap: 0.5rem;">
+			<button type="button" class="hub-theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">
+				<i class="bi bi-sun-fill hub-icon-sun"></i>
+				<i class="bi bi-moon-fill hub-icon-moon"></i>
+			</button>
+				<a class="hub-auth-btn" href="/login">Sign in</a>
+		</div>
+	</div>
+</header>
+
+		<main role="main" class="app-main">
+			
+<section class="container hub-section mt-4">
+
+
+
+
+		<div class="hub-hero-panel mb-5 position-relative">
+			<div class="row align-items-center g-5">
+				<!-- Left Column: Info -->
+				<div class="col-md-7">
+					<div class="d-flex flex-wrap gap-2 mb-3">
+						<span class="hero-chip">
+							<i class="bi bi-calendar3"></i> Apr 20 - Apr 27, 2026
+						</span>
+						<span class="hero-chip">
+							<i class="bi bi-film"></i> 5 Films
+						</span>
+					</div>
+
+					<h1 class="hero-title text-start">Uma Spring Fest</h1>
+					
+						<p class="hero-desc text-start mb-4">Join us for a week of independent and international films celebrating diverse storytelling.</p>
+
+					<div data-countdown-target="2026-04-20T00:00:00.0000000" data-countdown-end="2026-04-27T00:00:00.0000000"></div>
+
+				</div>
+
+				<!-- Right Column: Passes -->
+				<div class="col-md-5">
+					<div class="row g-3 h-100">
+						<!-- Daily Pass Card -->
+						<div class="col-sm-6">
+							<div class="pass-card">
+								<div class="pass-icon"><i class="bi bi-ticket-perforated"></i></div>
+								<h4 class="h5 mb-1 fw-bold">Daily Pass</h4>
+								<p class="small mb-2 flex-grow-1" style="color: var(--hub-muted, #a3a3a3);">24h access to all streaming sessions.</p>
+								
+										<p class="fw-bold mb-3 text-success">&#x20AC;22,00</p>
+										<a class="btn btn-hub-outline rounded-pill w-100 text-center text-decoration-none" style="display: inline-block; padding: 6px 12px;" href="/cart/add-pass/d96b6b25-2b87-4e10-8f50-6d194ab49022?type=Day">Add to Cart</a>
+							</div>
+						</div>
+						
+						<!-- Full Pass Card -->
+						<div class="col-sm-6">
+							<div class="pass-card pass-card-featured">
+								<div class="pass-icon"><i class="bi bi-star-fill"></i></div>
+								<h4 class="h5 mb-1 fw-bold">Full Pass</h4>
+								<p class="small mb-2 flex-grow-1" style="color: var(--hub-muted, #a3a3a3);">Unlimited access for the entire festival.</p>
+								
+										<p class="fw-bold mb-3 text-success">&#x20AC;111,00</p>
+										<a class="btn btn-hub-outline rounded-pill w-100 text-center text-decoration-none" style="display: inline-block; padding: 6px 12px;" href="/cart/add-pass/d96b6b25-2b87-4e10-8f50-6d194ab49022?type=Complete">Add to Cart</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="festival-films-section" class="hub-section hub-reveal mt-4">
+			<div class="hub-section-header">
+				<h2>Films in this festival</h2>
+			</div>
+
+				<div class="container px-0">
+					<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4 hub-reveal-stagger">
+							<div class="col d-flex hub-reveal">
+								<article id="film-373d90c1-5f20-4789-9cb0-7ee1c09dfbc8" data-tilt class="hub-festival-card flex-fill d-flex flex-column w-100 shadow-sm" style="background-color: var(--hub-surface-2); border-radius: 12px; overflow: hidden; min-width: 100%; border: 1px solid var(--hub-border, rgba(255,255,255,0.1)); color: var(--hub-text);">
+									<a href="/films/373d90c1-5f20-4789-9cb0-7ee1c09dfbc8" class="text-decoration-none d-block">
+										<div class="hub-thumb position-relative" style="aspect-ratio: 2/3; overflow: hidden;">
+												<img src="https://image.tmdb.org/t/p/w500/13lK8Ytp218J0mPullUzpvHjNrX.jpg" alt="Computer Chess" class="img-fluid w-100 h-100" style="object-fit: cover;" />
+										</div>
+									</a>
+									<div class="p-4 pb-3 d-flex flex-column flex-grow-1">
+										<strong>Computer Chess</strong>
+										<p style="font-size:.9rem; color: var(--hub-muted, #a3a3a3); margin: .75rem 0;">
+											At the American Computer Chess Convention, enthusiasts gather to pit their programs against other computer chess program...
+										</p>
+										<small style="color: var(--hub-accent, #e50914); font-weight: 500;">Comedy</small>
+										<small style="color: var(--hub-muted, #a3a3a3);">91 mins | 1 session(s) scheduled</small>
+
+										<div class="d-flex flex-wrap gap-2 mt-3 mb-auto">
+											<a href="/films/373d90c1-5f20-4789-9cb0-7ee1c09dfbc8" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">Details</a>
+											<a href="/Review?festivalFilmId=279ab90b-589a-4f71-98ee-b944e24804f7" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">Reviews</a>
+												<form method="post" action="/PersonalList/Add" class="m-0">
+													<input name="__RequestVerificationToken" type="hidden" value="CfDJ8JGUXMEb8Y5NtMMFt438gohNpLD9eOjiXJS_d3eq8umKt-JC_0eQKF3A9CDD6l0zNDBWueTWOg45H6ly9sO5-Ub0s6vrWCjrV67BjEJMuiuBsvIkYqy7fnGUMIcmC2Cfhba609lZyI1-czpO4jgjYjE" />
+													<input type="hidden" name="type" value="Favorites" />
+													<input type="hidden" name="filmId" value="373d90c1-5f20-4789-9cb0-7ee1c09dfbc8" />
+													<input type="hidden" name="returnUrl" value="/festival/details/d96b6b25-2b87-4e10-8f50-6d194ab49022#film-373d90c1-5f20-4789-9cb0-7ee1c09dfbc8" />
+													<button type="submit" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">⭐ Add to favorites</button>
+												</form>
+												<form method="post" action="/PersonalList/Add" class="m-0">
+													<input name="__RequestVerificationToken" type="hidden" value="CfDJ8JGUXMEb8Y5NtMMFt438gohNpLD9eOjiXJS_d3eq8umKt-JC_0eQKF3A9CDD6l0zNDBWueTWOg45H6ly9sO5-Ub0s6vrWCjrV67BjEJMuiuBsvIkYqy7fnGUMIcmC2Cfhba609lZyI1-czpO4jgjYjE" />
+													<input type="hidden" name="type" value="Watchlist" />
+													<input type="hidden" name="filmId" value="373d90c1-5f20-4789-9cb0-7ee1c09dfbc8" />
+													<input type="hidden" name="returnUrl" value="/festival/details/d96b6b25-2b87-4e10-8f50-6d194ab49022#film-373d90c1-5f20-4789-9cb0-7ee1c09dfbc8" />
+													<button type="submit" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;"> + Watchlist</button>
+												</form>
+										</div>
+									</div>
+
+									<div class="px-4 pb-4 pt-3 border-top mt-auto" style="border-color: var(--hub-border, rgba(255,255,255,0.1)) !important;">
+											<p class="mb-2" style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3);">Access Options:</p>
+											<div class="d-flex flex-column gap-2">
+
+
+																<a class="btn rounded-pill w-100 fw-semibold" style="background: var(--hub-accent, #e50914); color: #ffffff; border: none;" href="/tickets/add?sessionId=08dec0ae-90fe-4c2b-86cb-d05f01806e19">
+																	🎟️ FixedSession — Jun 02, 14:55 UTC
+																</a>
+														<p style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3); text-align: center; margin: 0;">
+															🕐 No rental available yet
+														</p>
+
+											</div>
+										</div>
+								</article>
+							</div>
+							<div class="col d-flex hub-reveal">
+								<article id="film-8aee9d0d-c3f3-4435-842b-99305b81c513" data-tilt class="hub-festival-card flex-fill d-flex flex-column w-100 shadow-sm" style="background-color: var(--hub-surface-2); border-radius: 12px; overflow: hidden; min-width: 100%; border: 1px solid var(--hub-border, rgba(255,255,255,0.1)); color: var(--hub-text);">
+									<a href="/films/8aee9d0d-c3f3-4435-842b-99305b81c513" class="text-decoration-none d-block">
+										<div class="hub-thumb position-relative" style="aspect-ratio: 2/3; overflow: hidden;">
+												<img src="https://image.tmdb.org/t/p/w500/vXfUKvAHTIifAU7IP17kl1ZBGh6.jpg" alt="The Computer Wore Tennis Shoes" class="img-fluid w-100 h-100" style="object-fit: cover;" />
+										</div>
+									</a>
+									<div class="p-4 pb-3 d-flex flex-column flex-grow-1">
+										<strong>The Computer Wore Tennis Shoes</strong>
+										<p style="font-size:.9rem; color: var(--hub-muted, #a3a3a3); margin: .75rem 0;">
+											Some college students manage to persuade the town&#x27;s big businessman, A. J. Arno, to donate a computer to their college. ...
+										</p>
+										<small style="color: var(--hub-accent, #e50914); font-weight: 500;">Comedy, Family, Drama</small>
+										<small style="color: var(--hub-muted, #a3a3a3);">91 mins | 0 session(s) scheduled</small>
+
+										<div class="d-flex flex-wrap gap-2 mt-3 mb-auto">
+											<a href="/films/8aee9d0d-c3f3-4435-842b-99305b81c513" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">Details</a>
+											<a href="/Review?festivalFilmId=3beb974d-f474-4588-8917-7546561de6eb" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">Reviews</a>
+												<form method="post" action="/PersonalList/Add" class="m-0">
+													<input name="__RequestVerificationToken" type="hidden" value="CfDJ8JGUXMEb8Y5NtMMFt438gohNpLD9eOjiXJS_d3eq8umKt-JC_0eQKF3A9CDD6l0zNDBWueTWOg45H6ly9sO5-Ub0s6vrWCjrV67BjEJMuiuBsvIkYqy7fnGUMIcmC2Cfhba609lZyI1-czpO4jgjYjE" />
+													<input type="hidden" name="type" value="Favorites" />
+													<input type="hidden" name="filmId" value="8aee9d0d-c3f3-4435-842b-99305b81c513" />
+													<input type="hidden" name="returnUrl" value="/festival/details/d96b6b25-2b87-4e10-8f50-6d194ab49022#film-8aee9d0d-c3f3-4435-842b-99305b81c513" />
+													<button type="submit" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">⭐ Add to favorites</button>
+												</form>
+												<form method="post" action="/PersonalList/Add" class="m-0">
+													<input name="__RequestVerificationToken" type="hidden" value="CfDJ8JGUXMEb8Y5NtMMFt438gohNpLD9eOjiXJS_d3eq8umKt-JC_0eQKF3A9CDD6l0zNDBWueTWOg45H6ly9sO5-Ub0s6vrWCjrV67BjEJMuiuBsvIkYqy7fnGUMIcmC2Cfhba609lZyI1-czpO4jgjYjE" />
+													<input type="hidden" name="type" value="Watchlist" />
+													<input type="hidden" name="filmId" value="8aee9d0d-c3f3-4435-842b-99305b81c513" />
+													<input type="hidden" name="returnUrl" value="/festival/details/d96b6b25-2b87-4e10-8f50-6d194ab49022#film-8aee9d0d-c3f3-4435-842b-99305b81c513" />
+													<button type="submit" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;"> + Watchlist</button>
+												</form>
+										</div>
+									</div>
+
+									<div class="px-4 pb-4 pt-3 border-top mt-auto" style="border-color: var(--hub-border, rgba(255,255,255,0.1)) !important;">
+											<p class="mb-2" style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3);">Access Options:</p>
+											<div class="d-flex flex-column gap-2">
+
+
+														<p style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3); text-align: center; margin: 0;">
+															🕐 No rental available yet
+														</p>
+
+											</div>
+										</div>
+								</article>
+							</div>
+							<div class="col d-flex hub-reveal">
+								<article id="film-38b84542-4bf6-4575-a47b-ee8434f25b76" data-tilt class="hub-festival-card flex-fill d-flex flex-column w-100 shadow-sm" style="background-color: var(--hub-surface-2); border-radius: 12px; overflow: hidden; min-width: 100%; border: 1px solid var(--hub-border, rgba(255,255,255,0.1)); color: var(--hub-text);">
+									<a href="/films/38b84542-4bf6-4575-a47b-ee8434f25b76" class="text-decoration-none d-block">
+										<div class="hub-thumb position-relative" style="aspect-ratio: 2/3; overflow: hidden;">
+												<img src="https://image.tmdb.org/t/p/w500/woCEj83TTEu8h1ONDwFJExkfYot.jpg" alt="COMPUTER" class="img-fluid w-100 h-100" style="object-fit: cover;" />
+										</div>
+									</a>
+									<div class="p-4 pb-3 d-flex flex-column flex-grow-1">
+										<strong>COMPUTER</strong>
+										<p style="font-size:.9rem; color: var(--hub-muted, #a3a3a3); margin: .75rem 0;">
+											Because of Ilji&#x27;s game addiction, Juyeon leaves the house they lived in together. He plans to destroy his computer befor...
+										</p>
+										<small style="color: var(--hub-accent, #e50914); font-weight: 500;">Mystery, Drama</small>
+										<small style="color: var(--hub-muted, #a3a3a3);">20 mins | 0 session(s) scheduled</small>
+
+										<div class="d-flex flex-wrap gap-2 mt-3 mb-auto">
+											<a href="/films/38b84542-4bf6-4575-a47b-ee8434f25b76" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">Details</a>
+											<a href="/Review?festivalFilmId=4177a82f-74e6-4418-bcd3-5dc95f677791" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">Reviews</a>
+												<form method="post" action="/PersonalList/Add" class="m-0">
+													<input name="__RequestVerificationToken" type="hidden" value="CfDJ8JGUXMEb8Y5NtMMFt438gohNpLD9eOjiXJS_d3eq8umKt-JC_0eQKF3A9CDD6l0zNDBWueTWOg45H6ly9sO5-Ub0s6vrWCjrV67BjEJMuiuBsvIkYqy7fnGUMIcmC2Cfhba609lZyI1-czpO4jgjYjE" />
+													<input type="hidden" name="type" value="Favorites" />
+													<input type="hidden" name="filmId" value="38b84542-4bf6-4575-a47b-ee8434f25b76" />
+													<input type="hidden" name="returnUrl" value="/festival/details/d96b6b25-2b87-4e10-8f50-6d194ab49022#film-38b84542-4bf6-4575-a47b-ee8434f25b76" />
+													<button type="submit" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">⭐ Add to favorites</button>
+												</form>
+												<form method="post" action="/PersonalList/Add" class="m-0">
+													<input name="__RequestVerificationToken" type="hidden" value="CfDJ8JGUXMEb8Y5NtMMFt438gohNpLD9eOjiXJS_d3eq8umKt-JC_0eQKF3A9CDD6l0zNDBWueTWOg45H6ly9sO5-Ub0s6vrWCjrV67BjEJMuiuBsvIkYqy7fnGUMIcmC2Cfhba609lZyI1-czpO4jgjYjE" />
+													<input type="hidden" name="type" value="Watchlist" />
+													<input type="hidden" name="filmId" value="38b84542-4bf6-4575-a47b-ee8434f25b76" />
+													<input type="hidden" name="returnUrl" value="/festival/details/d96b6b25-2b87-4e10-8f50-6d194ab49022#film-38b84542-4bf6-4575-a47b-ee8434f25b76" />
+													<button type="submit" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;"> + Watchlist</button>
+												</form>
+										</div>
+									</div>
+
+									<div class="px-4 pb-4 pt-3 border-top mt-auto" style="border-color: var(--hub-border, rgba(255,255,255,0.1)) !important;">
+											<p class="mb-2" style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3);">Access Options:</p>
+											<div class="d-flex flex-column gap-2">
+
+
+														<p style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3); text-align: center; margin: 0;">
+															🕐 No rental available yet
+														</p>
+
+											</div>
+										</div>
+								</article>
+							</div>
+							<div class="col d-flex hub-reveal">
+								<article id="film-6e75788b-0a9c-4602-a5de-e53a1f6d3a01" data-tilt class="hub-festival-card flex-fill d-flex flex-column w-100 shadow-sm" style="background-color: var(--hub-surface-2); border-radius: 12px; overflow: hidden; min-width: 100%; border: 1px solid var(--hub-border, rgba(255,255,255,0.1)); color: var(--hub-text);">
+									<a href="/films/6e75788b-0a9c-4602-a5de-e53a1f6d3a01" class="text-decoration-none d-block">
+										<div class="hub-thumb position-relative" style="aspect-ratio: 2/3; overflow: hidden;">
+												<div class="d-flex align-items-center justify-content-center w-100 h-100" style="background-color: var(--hub-surface, #141414);">
+													<span style="font-size: 3rem; color: #adb5bd; font-weight: bold;">M</span>
+												</div>
+										</div>
+									</a>
+									<div class="p-4 pb-3 d-flex flex-column flex-grow-1">
+										<strong>Midnight Frames</strong>
+										<p style="font-size:.9rem; color: var(--hub-muted, #a3a3a3); margin: .75rem 0;">
+											Seed film for initial local development.
+										</p>
+										<small style="color: var(--hub-accent, #e50914); font-weight: 500;"></small>
+										<small style="color: var(--hub-muted, #a3a3a3);">112 mins | 0 session(s) scheduled</small>
+
+										<div class="d-flex flex-wrap gap-2 mt-3 mb-auto">
+											<a href="/films/6e75788b-0a9c-4602-a5de-e53a1f6d3a01" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">Details</a>
+											<a href="/Review?festivalFilmId=8d690e52-e89c-4b9d-b994-7f4e67d9e323" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">Reviews</a>
+												<form method="post" action="/PersonalList/Add" class="m-0">
+													<input name="__RequestVerificationToken" type="hidden" value="CfDJ8JGUXMEb8Y5NtMMFt438gohNpLD9eOjiXJS_d3eq8umKt-JC_0eQKF3A9CDD6l0zNDBWueTWOg45H6ly9sO5-Ub0s6vrWCjrV67BjEJMuiuBsvIkYqy7fnGUMIcmC2Cfhba609lZyI1-czpO4jgjYjE" />
+													<input type="hidden" name="type" value="Favorites" />
+													<input type="hidden" name="filmId" value="6e75788b-0a9c-4602-a5de-e53a1f6d3a01" />
+													<input type="hidden" name="returnUrl" value="/festival/details/d96b6b25-2b87-4e10-8f50-6d194ab49022#film-6e75788b-0a9c-4602-a5de-e53a1f6d3a01" />
+													<button type="submit" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">⭐ Add to favorites</button>
+												</form>
+												<form method="post" action="/PersonalList/Add" class="m-0">
+													<input name="__RequestVerificationToken" type="hidden" value="CfDJ8JGUXMEb8Y5NtMMFt438gohNpLD9eOjiXJS_d3eq8umKt-JC_0eQKF3A9CDD6l0zNDBWueTWOg45H6ly9sO5-Ub0s6vrWCjrV67BjEJMuiuBsvIkYqy7fnGUMIcmC2Cfhba609lZyI1-czpO4jgjYjE" />
+													<input type="hidden" name="type" value="Watchlist" />
+													<input type="hidden" name="filmId" value="6e75788b-0a9c-4602-a5de-e53a1f6d3a01" />
+													<input type="hidden" name="returnUrl" value="/festival/details/d96b6b25-2b87-4e10-8f50-6d194ab49022#film-6e75788b-0a9c-4602-a5de-e53a1f6d3a01" />
+													<button type="submit" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;"> + Watchlist</button>
+												</form>
+										</div>
+									</div>
+
+									<div class="px-4 pb-4 pt-3 border-top mt-auto" style="border-color: var(--hub-border, rgba(255,255,255,0.1)) !important;">
+											<p class="mb-2" style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3);">Access Options:</p>
+											<div class="d-flex flex-column gap-2">
+
+
+														<p style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3); text-align: center; margin: 0;">
+															🕐 No rental available yet
+														</p>
+
+											</div>
+										</div>
+								</article>
+							</div>
+							<div class="col d-flex hub-reveal">
+								<article id="film-53c3bd3d-f131-4bea-9b38-432296b57318" data-tilt class="hub-festival-card flex-fill d-flex flex-column w-100 shadow-sm" style="background-color: var(--hub-surface-2); border-radius: 12px; overflow: hidden; min-width: 100%; border: 1px solid var(--hub-border, rgba(255,255,255,0.1)); color: var(--hub-text);">
+									<a href="/films/53c3bd3d-f131-4bea-9b38-432296b57318" class="text-decoration-none d-block">
+										<div class="hub-thumb position-relative" style="aspect-ratio: 2/3; overflow: hidden;">
+												<img src="https://image.tmdb.org/t/p/w500/ezPIUg3vr8GHfnIjtteJR9Xdp7Q.jpg" alt="Flesh Computer" class="img-fluid w-100 h-100" style="object-fit: cover;" />
+										</div>
+									</a>
+									<div class="p-4 pb-3 d-flex flex-column flex-grow-1">
+										<strong>Flesh Computer</strong>
+										<p style="font-size:.9rem; color: var(--hub-muted, #a3a3a3); margin: .75rem 0;">
+											When his cybernetic pet project is put in jeopardy, the handyman of a decaying apartment building is forced to take a st...
+										</p>
+										<small style="color: var(--hub-accent, #e50914); font-weight: 500;">Science Fiction</small>
+										<small style="color: var(--hub-muted, #a3a3a3);">13 mins | 0 session(s) scheduled</small>
+
+										<div class="d-flex flex-wrap gap-2 mt-3 mb-auto">
+											<a href="/films/53c3bd3d-f131-4bea-9b38-432296b57318" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">Details</a>
+											<a href="/Review?festivalFilmId=ff85a532-d64d-4440-8990-ff949ab6fdf9" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">Reviews</a>
+												<form method="post" action="/PersonalList/Add" class="m-0">
+													<input name="__RequestVerificationToken" type="hidden" value="CfDJ8JGUXMEb8Y5NtMMFt438gohNpLD9eOjiXJS_d3eq8umKt-JC_0eQKF3A9CDD6l0zNDBWueTWOg45H6ly9sO5-Ub0s6vrWCjrV67BjEJMuiuBsvIkYqy7fnGUMIcmC2Cfhba609lZyI1-czpO4jgjYjE" />
+													<input type="hidden" name="type" value="Favorites" />
+													<input type="hidden" name="filmId" value="53c3bd3d-f131-4bea-9b38-432296b57318" />
+													<input type="hidden" name="returnUrl" value="/festival/details/d96b6b25-2b87-4e10-8f50-6d194ab49022#film-53c3bd3d-f131-4bea-9b38-432296b57318" />
+													<button type="submit" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">⭐ Add to favorites</button>
+												</form>
+												<form method="post" action="/PersonalList/Add" class="m-0">
+													<input name="__RequestVerificationToken" type="hidden" value="CfDJ8JGUXMEb8Y5NtMMFt438gohNpLD9eOjiXJS_d3eq8umKt-JC_0eQKF3A9CDD6l0zNDBWueTWOg45H6ly9sO5-Ub0s6vrWCjrV67BjEJMuiuBsvIkYqy7fnGUMIcmC2Cfhba609lZyI1-czpO4jgjYjE" />
+													<input type="hidden" name="type" value="Watchlist" />
+													<input type="hidden" name="filmId" value="53c3bd3d-f131-4bea-9b38-432296b57318" />
+													<input type="hidden" name="returnUrl" value="/festival/details/d96b6b25-2b87-4e10-8f50-6d194ab49022#film-53c3bd3d-f131-4bea-9b38-432296b57318" />
+													<button type="submit" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;"> + Watchlist</button>
+												</form>
+										</div>
+									</div>
+
+									<div class="px-4 pb-4 pt-3 border-top mt-auto" style="border-color: var(--hub-border, rgba(255,255,255,0.1)) !important;">
+											<p class="mb-2" style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3);">Access Options:</p>
+											<div class="d-flex flex-column gap-2">
+
+
+														<p style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3); text-align: center; margin: 0;">
+															🕐 No rental available yet
+														</p>
+
+											</div>
+										</div>
+								</article>
+							</div>
+					</div>
+				</div>
+</div>
+</section>
+
+		</main>
+
+		<footer class="app-footer">
+			<div class="container hub-footer-inner">
+				<p>© 2026 UmaFestHub · Film Festival Platform</p>
+			</div>
+		</footer>
+	</div>
+
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+		<div id="accessDeniedToast" class="toast text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="d-flex">
+				<div class="toast-body">Access denied</div>
+				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
+
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080; margin-bottom: 80px;">
+		<div id="validationErrorToast" class="toast text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true" data-error="">
+			<div class="d-flex">
+				<div class="toast-body"></div>
+				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="signInRequiredModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content hub-login-modal">
+				<div class="modal-header border-0 pb-0">
+					<h5 class="modal-title">Sign in required</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body pt-2">
+					<p class="mb-3">Sign in to browse screenings.</p>
+					<a class="hub-auth-btn d-inline-flex justify-content-center w-100" id="loginModalCta" href="/login">Go to Sign In</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="duplicateCartItemModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content hub-login-modal">
+				<div class="modal-header border-0 pb-0">
+					<h5 class="modal-title">Already in Cart</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body pt-2">
+					<p class="mb-3" id="duplicateCartItemMessage">This item is already in your cart.</p>
+					<div class="d-flex flex-column gap-2">
+						<a class="hub-auth-btn d-inline-flex justify-content-center w-100" href="/cart">Go to Cart</a>
+						<button type="button" class="btn btn-outline-light w-100" data-bs-dismiss="modal">Continue Browsing</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		// Show duplicate cart item modal
+		const duplicateMessage = document.getElementById("duplicateCartItemMessage");
+		if (duplicateMessage && duplicateMessage.textContent.trim()) {
+			const modal = document.getElementById("duplicateCartItemModal");
+			if (modal && window.bootstrap) {
+				bootstrap.Modal.getOrCreateInstance(modal).show();
+			}
+		}
+	</script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<script src="/js/hub-scroll-reveal.js?v=DruMszZtSZr_wN7TQ2t5kTAujyVvXp4_N8UC35XMJ5k"></script>
+	<script src="/js/hub-countdown.js?v=OV_suBFEhPp9glkLWPOJJ0j1PadaM3egtpkV0_mRl6s"></script>
+	<script src="/js/hub-confetti.js?v=EmmHLi50JJ2_zT5T6FHhSijlRsolobNg43Ja1SvRvCI"></script>
+	<script src="/js/hub-theme-toggle.js?v=6iMrQw5DEhnHFD8TLexrnchgwHh3c6BSHcFuh9PXE8M"></script>
+	<script src="/js/hub-tilt.js?v=6Kgp68MzfACq4jVP6WWe0Z2Dh58p6_QGBFJoGxr1HSI"></script>
+	<script src="/js/hub-carousel-enhanced.js?v=j3ejH8_X8RMd6rrELVepy0b9Oem5IIlmy1N-XD-qPJI"></script>
+	<script src="/js/hub-star-rating.js?v=eqeC6t8VT_xnW4r4uN1I2vnxVbiNh1O3aOHXj22eSac"></script>
+	<script>
+		document.addEventListener("click", function (event) {
+			const link = event.target.closest("a.requires-auth");
+			if (!link) {
+				return;
+			}
+
+			const needsLogin = link.dataset.authenticated === "false";
+			if (!needsLogin) {
+				return;
+			}
+
+			event.preventDefault();
+			const loginUrl = link.dataset.loginUrl || "/login";
+			const cta = document.getElementById("loginModalCta");
+			if (cta) {
+				cta.setAttribute("href", loginUrl);
+			}
+
+			if (window.bootstrap) {
+				const modalElement = document.getElementById("signInRequiredModal");
+				if (modalElement) {
+					bootstrap.Modal.getOrCreateInstance(modalElement).show();
+				}
+			}
+		});
+
+		const params = new URLSearchParams(window.location.search);
+		if (params.get("toast") === "access-denied" && window.bootstrap) {
+			const toastElement = document.getElementById("accessDeniedToast");
+			if (toastElement) {
+				bootstrap.Toast.getOrCreateInstance(toastElement).show();
+			}
+		}
+
+		// Show validation error toast only if there's actual error content
+		const toastElement = document.getElementById("validationErrorToast");
+		if (toastElement && toastElement.dataset.error && window.bootstrap) {
+			bootstrap.Toast.getOrCreateInstance(toastElement).show();
+		}
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,67 @@
+@model IReadOnlyList<UmaFestHub.Web.ViewModels.FestivalViewModel>
+@using UmaFestHub.Web.Security
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["FestivalIndex_PageTitle"].Value;
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+	<div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+		<i class="bi bi-check-circle-fill me-2"></i> <strong>@Localizer["Common_Success"]</strong> @TempData["SuccessMessage"]
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@Localizer["Common_Close"]"></button>
+	</div>
+	TempData.Remove("SuccessMessage");
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+	<div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+		<i class="bi bi-exclamation-circle-fill me-2"></i> <strong>@Localizer["Common_Error"]:</strong> @TempData["ErrorMessage"]
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@Localizer["Common_Close"]"></button>
+	</div>
+	TempData.Remove("ErrorMessage");
+}
+
+<section class="container hub-section hub-reveal mt-4">
+	<div class="hub-section-header d-flex align-items-center justify-content-between mb-4">
+		<h2>@Localizer["FestivalIndex_Heading"]</h2>
+		@if (User.IsInRole(RoleConstants.Organizer) || User.IsInRole(RoleConstants.Admin))
+		{
+			<a asp-route="FestivalCreateView" class="btn btn-primary">@Localizer["Common_CreateFestival"]</a>
+		}
+	</div>
+
+	@if (Model is null || Model.Count == 0)
+	{
+		<div class="hub-empty-state">@Localizer["Common_ComingSoon"]</div>
+	}
+	else
+	{
+		<div class="hub-festival-grid hub-reveal-stagger">
+		@foreach (var festival in Model)
+		{
+			<a class="hub-festival-card hub-reveal" data-tilt asp-route="FestivalDetails" asp-route-id="@festival.Id" style="position:relative; text-decoration:none; color:inherit;">
+				<div class="hub-thumb @(string.IsNullOrWhiteSpace(festival.CoverImageUrl) ? "" : "hub-thumb--cover")">
+					@if (!string.IsNullOrWhiteSpace(festival.CoverImageUrl))
+					{
+						<img src="@festival.CoverImageUrl" alt="" class="hub-thumb-cover" aria-hidden="true" />
+					}
+					<span class="hub-thumb-initial">@festival.Name.Substring(0, 1).ToUpperInvariant()</span>
+					<div class="hub-card-overlay"><span>@Localizer["Common_Open"]</span></div>
+				</div>
+				<strong>
+					@festival.Name
+					@if (festival.IsHidden)
+					{
+						<span class="badge bg-secondary ms-2" style="font-size: 0.7em; vertical-align: middle;" title="@Localizer["Festival_HiddenBadgeTitle"]">
+							<i class="bi bi-eye-slash-fill me-1"></i>@Localizer["Festival_Hidden"]
+						</span>
+					}
+				</strong>
+				<small>@festival.StartDateUtc.ToString("dd MMM yyyy", CultureInfo.CurrentUICulture) @Localizer["Common_To"] @festival.EndDateUtc.ToString("dd MMM yyyy", CultureInfo.CurrentUICulture)</small>
+			</a>
+		}
+		</div>
+	}
+</section>

@@ -1,0 +1,12 @@
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["Error_PageTitle"].Value;
+}
+
+<section class="page-hero">
+	<div class="container">
+		<h1>@Localizer["Error_Heading"]</h1>
+		<p>@Localizer["Error_Subtitle"]</p>
+		<a class="btn btn-primary" href="/">@Localizer["Error_GoHome"]</a>
+	</div>
+</section>

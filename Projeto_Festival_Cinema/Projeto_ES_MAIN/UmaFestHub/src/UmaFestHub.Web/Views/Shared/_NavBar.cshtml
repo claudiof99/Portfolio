@@ -1,0 +1,109 @@
+@{
+	var isAuthenticated = User?.Identity?.IsAuthenticated ?? false;
+	var isAdmin = User?.IsInRole("Admin") ?? false;
+	var isManager = User?.IsInRole("Organizer") ?? false;
+	var searchQuery = Context?.Request?.Query["title"].ToString();
+	if (string.IsNullOrWhiteSpace(searchQuery))
+	{
+		searchQuery = Context?.Request?.Query["search"].ToString() ?? string.Empty;
+	}
+
+	var currentCulture = Context?.CurrentCultureCode() ?? "en";
+	var returnUrl = $"{Context?.Request.Path}{Context?.Request.QueryString}";
+}
+
+<header class="hub-navbar">
+	<div class="container hub-navbar-inner">
+		<a class="hub-brand" href="/">
+			<span class="hub-brand-mark">UF</span>
+			<span>UmaFestHub</span>
+		</a>
+
+		<nav class="hub-nav-links" aria-label="@Localizer["Nav_AriaMain"]">
+			@if (!isAuthenticated)
+			{
+				<a href="/festivals">@Localizer["Nav_Festivals"]</a>
+				<a href="/films">@Localizer["Nav_Films"]</a>
+			}
+			else
+			{
+				@if (isAdmin)
+				{
+					<a asp-route="AdminIndex" class="hub-admin-btn me-2">
+						<i class="bi bi-shield-check"></i> @Localizer["Nav_AdminHub"]
+					</a>
+				}
+				else if (isManager)
+				{
+					<a asp-route="ManageIndex" class="hub-admin-btn me-2">
+						<i class="bi bi-gear-fill"></i> @Localizer["Nav_OrganizerHub"]
+					</a>
+				}
+				<a asp-route="FestivalIndex">@Localizer["Nav_Festivals"]</a>
+				<a asp-route="FilmIndex">@Localizer["Nav_Films"]</a>
+				<a href="/cart" title="@Localizer["Nav_MyCart"]"><i class="bi bi-cart3"></i></a>
+			}
+		</nav>
+
+		<div class="hub-search-wrap">
+			<form class="hub-search-form" method="get" action="/films">
+				<i class="bi bi-search"></i>
+				<input type="search" name="title" value="@searchQuery" placeholder="@Localizer["Nav_SearchPlaceholder"]" aria-label="@Localizer["Nav_SearchAriaLabel"]" />
+			</form>
+		</div>
+
+		<div class="hub-nav-action" style="display: flex; align-items: center; gap: 0.5rem;">
+			<div class="dropdown hub-lang-dropdown">
+				<button type="button"
+				        class="hub-lang-toggle dropdown-toggle"
+				        data-bs-toggle="dropdown"
+				        aria-expanded="false"
+				        aria-label="@Localizer["Nav_Language"]"
+				        title="@Localizer["Nav_Language"]">
+					@Context!.CurrentCultureLabel()
+				</button>
+				<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark hub-lang-menu">
+					@foreach (var option in new[] { ("en", "EN", "Nav_LanguageEn"), ("pt", "PT", "Nav_LanguagePt"), ("fr", "FR", "Nav_LanguageFr") })
+					{
+						var isActive = string.Equals(currentCulture, option.Item1, StringComparison.OrdinalIgnoreCase);
+						<li>
+							<form method="post" asp-controller="Culture" asp-action="SetCulture" class="m-0">
+								@Html.AntiForgeryToken()
+								<input type="hidden" name="culture" value="@option.Item1" />
+								<input type="hidden" name="returnUrl" value="@returnUrl" />
+								<button type="submit" class="dropdown-item hub-lang-option@(isActive ? " active" : "")">
+									<span class="hub-lang-code">@option.Item2</span>
+									<span class="hub-lang-name">@Localizer[option.Item3]</span>
+								</button>
+							</form>
+						</li>
+					}
+				</ul>
+			</div>
+
+			<button type="button" class="hub-theme-toggle" aria-label="@Localizer["Nav_ThemeToggleAria"]" title="@Localizer["Nav_ThemeToggleTitle"]">
+				<i class="bi bi-sun-fill hub-icon-sun"></i>
+				<i class="bi bi-moon-fill hub-icon-moon"></i>
+			</button>
+			@if (!isAuthenticated)
+			{
+				<a class="hub-auth-btn" href="/login">@Localizer["Nav_SignIn"]</a>
+			}
+			else
+			{
+				<div class="dropdown">
+					<a class="hub-avatar" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+						@(User?.Identity?.Name?.FirstOrDefault().ToString().ToUpperInvariant() ?? "U")
+					</a>
+					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+						<li><a class="dropdown-item" href="/profile">@Localizer["Nav_MyProfile"]</a></li>
+						<li><a class="dropdown-item" asp-route="WatchHistoryIndex">@Localizer["Nav_WatchHistory"]</a></li>
+						<li><a class="dropdown-item" href="/history">@Localizer["Nav_PurchaseHistory"]</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" asp-route="Logout">@Localizer["Nav_Logout"]</a></li>
+					</ul>
+				</div>
+			}
+		</div>
+	</div>
+</header>

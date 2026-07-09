@@ -1,0 +1,26 @@
+@model UmaFestHub.Web.ViewModels.CartItemViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = Localizer["FestivalDetails_AddToCart"].Value;
+}
+
+<div class="hub-auth-wrap">
+    <div class="hub-auth-card text-center">
+        <h2>@Localizer["AddPass_ConfirmHeading"]</h2>
+        <p class="mt-3">@Localizer["AddPass_ConfirmMessage", ViewData["passType"], ViewData["festivalName"]]</p>
+        <h3 class="text-success mb-4">@Model.Price.ToString("C")</h3>
+        
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <form method="post" asp-route="AddPassPost" asp-route-festivalId="@ViewData["festivalId"]" class="m-0">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="type" value="@ViewData["type"]" />
+                @if (ViewData["returnUrl"] is string returnUrl && !string.IsNullOrWhiteSpace(returnUrl))
+                {
+                    <input type="hidden" name="returnUrl" value="@returnUrl" />
+                }
+                <button type="submit" class="btn btn-primary px-4">@Localizer["AddPass_ConfirmButton"]</button>
+            </form>
+            <a href="javascript:history.back()" class="btn btn-outline-light px-4">@Localizer["AddPass_CancelButton"]</a>
+        </div>
+    </div>
+</div>

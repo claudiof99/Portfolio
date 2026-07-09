@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/UmaFestHub.Application/UmaFestHub.Application.csproj" />
+  <Project Path="src/UmaFestHub.Domain/UmaFestHub.Domain.csproj" />
+  <Project Path="src/UmaFestHub.Infrastructure/UmaFestHub.Infrastructure.csproj" />
+  <Project Path="src/UmaFestHub.Web/UmaFestHub.Web.csproj" />
+</Solution>

@@ -1,0 +1,143 @@
+@model IReadOnlyList<UmaFestHub.Web.ViewModels.SessionViewModel>
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["Session_PageTitle"].Value;
+	var festivalId = ViewBag.FestivalId as Guid?;
+	var checkoutReturnUrl = festivalId.HasValue
+		? Url.RouteUrl("FestivalDetails", new { id = festivalId.Value })
+		: null;
+}
+
+<section class="page-hero">
+	<div class="container">
+		<h1>@Localizer["Session_PageTitle"]</h1>
+		<p>@Localizer["Session_Subtitle"]</p>
+	</div>
+</section>
+
+<section class="container info-panel">
+	@if (User.IsInRole("Organizer") || User.IsInRole("Admin"))
+	{
+		<div class="card mb-3">
+            <div class="card-body">
+                <h2 class="h5 text-white">@Localizer["Session_CreateHeading"]</h2>
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger py-2">@TempData["ErrorMessage"]</div>
+                }
+                <form method="post" asp-route="SessionCreate" class="row g-2">
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden" name="FestivalFilmId" value="@ViewBag.FestivalFilmId" />
+
+                    <div class="col-md-3">
+                        <label class="form-label text-white">@Localizer["Session_TypeLabel"]</label>
+                        <select name="SessionType" class="form-select" required>
+                            <option value="">@Localizer["Session_SelectType"]</option>
+                            <option value="FixedSession">@Localizer["Session_TypeFixed"]</option>
+                            <option value="PremierSession">@Localizer["Session_TypePremier"]</option>
+                            <option value="AccessWindowSession">@Localizer["Session_TypeAccessWindow"]</option>
+                        </select>
+                    </div>
+
+                    <div id="startEndFields" class="row g-2">
+                        <div class="col-md-3">
+                            <label class="form-label text-white">@Localizer["Session_StartUtc"]</label>
+                            <input type="datetime-local" name="StartTimeUtc" class="form-control" required />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label text-white">@Localizer["Session_EndUtc"]</label>
+                            <input type="datetime-local" name="EndTimeUtc" class="form-control" required />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" id="priceField">
+                        <label class="form-label text-white">@Localizer["Session_Price"]</label>
+                        <input type="number" step="0.01" min="0" name="Price" class="form-control" value="10.00" required />
+                    </div>
+
+                    <div id="accessWindowFields" class="row g-2" style="display:none;">
+                        <div class="col-md-3">
+                            <label class="form-label text-white">@Localizer["Session_AccessStartUtc"]</label>
+                            <input type="datetime-local" name="StartTimeUtc" class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label text-white">@Localizer["Session_AccessEndUtc"]</label>
+                            <input type="datetime-local" name="EndTimeUtc" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">@Localizer["Session_CreateSubmit"]</button>
+                    </div>
+                </form>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const sessionTypeSelect = document.querySelector('select[name="SessionType"]');
+                        if (!sessionTypeSelect) return;
+
+                        function updateFieldVisibility() {
+                            const isAccessWindow = sessionTypeSelect.value === 'AccessWindowSession';
+                            const startEndFields = document.getElementById('startEndFields');
+                            const accessWindowFields = document.getElementById('accessWindowFields');
+                            const priceField = document.getElementById('priceField');
+                            
+                            if (startEndFields) {
+                                startEndFields.style.display = isAccessWindow ? 'none' : '';
+                                startEndFields.querySelectorAll('input').forEach(i => i.disabled = isAccessWindow);
+                            }
+                            if (accessWindowFields) {
+                                accessWindowFields.style.display = isAccessWindow ? '' : 'none';
+                                accessWindowFields.querySelectorAll('input').forEach(i => i.disabled = !isAccessWindow);
+                            }
+                            if (priceField) {
+                                priceField.style.display = isAccessWindow ? 'none' : '';
+                                priceField.querySelectorAll('input').forEach(i => i.disabled = isAccessWindow);
+                            }
+                        }
+
+                        sessionTypeSelect.addEventListener('change', updateFieldVisibility);
+                        updateFieldVisibility();
+                    });
+                </script>
+            </div>
+        </div>
+	}
+
+	@if (Model is null || Model.Count == 0)
+	{
+		<p>@Localizer["Session_NoSessions"]</p>
+	}
+	else
+	{
+		<ul class="timeline-list">
+			@foreach (var session in Model)
+			{
+				<li class="d-flex align-items-center justify-content-between gap-2 flex-wrap">
+					<div>
+						<span class="badge bg-primary">@Localizer.LocalizeSessionType(session.SessionType)</span>
+						<strong class="text-white">@session.StartTimeUtc.ToString("dd MMM yyyy HH:mm")</strong>
+						<span class="text-white">@Localizer["Common_To"] @session.EndTimeUtc.ToString("dd MMM yyyy HH:mm")</span>
+					</div>
+					<div class="text-end">
+						@if (!session.SessionType.Contains("AccessWindow"))
+						{
+							<a asp-route="AddTicketIndex"
+							   asp-route-sessionId="@session.Id"
+							   asp-route-returnUrl="@checkoutReturnUrl"
+							   class="btn btn-sm btn-primary">
+								🎟️ @Localizer["Session_BuyTicket"]
+							</a>
+						}
+						else
+						{
+							<span class="badge bg-secondary">@Localizer["Session_RentalAccess"]</span>
+						}
+					</div>
+				</li>
+			}
+		</ul>
+	}
+</section>

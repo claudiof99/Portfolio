@@ -1,0 +1,67 @@
+@{
+    ViewData["Title"] = Localizer["Manage_PageTitle"].Value;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4 mb-5">
+    <h2 class="fw-bold mb-4" style="color: var(--hub-text);">@Localizer["Manage_Heading"]</h2>
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 hub-management-grid">
+        
+        <div class="col">
+            <div class="card h-100 shadow-sm hub-management-card hub-card-accent">
+                <div class="card-body d-flex flex-column text-center p-4">
+                    <div class="fs-1 mb-2">🎪</div>
+                    <h4 class="fw-bold mb-2" style="color: var(--hub-text);">@Localizer["Common_Festivals"]</h4>
+                    <p class="small flex-grow-1" style="color: var(--hub-muted);">@Localizer["Manage_FestivalsDescription"]</p>
+                    <a asp-route="ManageFestivals" class="btn btn-hub-outline rounded-pill mt-auto w-100">@Localizer["Common_Open"]</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow-sm hub-management-card hub-card-blue">
+                <div class="card-body d-flex flex-column text-center p-4">
+                    <div class="fs-1 mb-2">🎬</div>
+                    <h4 class="fw-bold mb-2" style="color: var(--hub-text);">@Localizer["Common_Films"]</h4>
+                    <p class="small flex-grow-1" style="color: var(--hub-muted);">@Localizer["Manage_FilmsDescription"]</p>
+                    <a asp-route="ManageFilms" class="btn btn-hub-outline rounded-pill mt-auto w-100">@Localizer["Common_Open"]</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow-sm hub-management-card hub-card-green">
+                <div class="card-body d-flex flex-column text-center p-4">
+                    <div class="fs-1 mb-2">📅</div>
+                    <h4 class="fw-bold mb-2" style="color: var(--hub-text);">@Localizer["Common_Sessions"]</h4>
+                    <p class="small flex-grow-1" style="color: var(--hub-muted);">@Localizer["Manage_SessionsDescription"]</p>
+                    <a asp-route="ManageSessions" class="btn btn-hub-outline rounded-pill mt-auto w-100">@Localizer["Common_Open"]</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow-sm hub-management-card hub-card-purple">
+                <div class="card-body d-flex flex-column text-center p-4">
+                    <div class="fs-1 mb-2">⭐</div>
+                    <h4 class="fw-bold mb-2" style="color: var(--hub-text);">@Localizer["Common_Reviews"]</h4>
+                    <p class="small flex-grow-1" style="color: var(--hub-muted);">@Localizer["Manage_ReviewsDescription"]</p>
+                    <a asp-route="ManageReviews" class="btn btn-hub-outline rounded-pill mt-auto w-100">@Localizer["Common_Open"]</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow-sm hub-management-card hub-card-orange">
+                <div class="card-body d-flex flex-column text-center p-4">
+                    <div class="fs-1 mb-2">🏆</div>
+                    <h4 class="fw-bold mb-2" style="color: var(--hub-text);">@Localizer["Common_Awards"]</h4>
+                    <p class="small flex-grow-1" style="color: var(--hub-muted);">@Localizer["Manage_AwardsDescription"]</p>
+                    <a asp-route="ManageAwards" class="btn btn-hub-outline rounded-pill mt-auto w-100">@Localizer["Common_Open"]</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

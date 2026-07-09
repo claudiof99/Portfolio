@@ -1,0 +1,255 @@
+@*
+  Awards, nominations & votes — Customer ballot: one radio group per award; completed votes shown below.
+*@
+@model UmaFestHub.Web.ViewModels.VoteIndexViewModel
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["Vote_PageTitle"].Value;
+}
+
+<section class="page-hero">
+	<div class="container">
+		<h1>@Localizer["Vote_PageTitle"]</h1>
+		<p>@Localizer["Vote_Subtitle"]</p>
+	</div>
+</section>
+
+<section class="container info-panel">
+	<div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+		<div style="width: 120px;" class="d-none d-md-block"></div>
+		<div class="flex-grow-1 text-center">
+			@if (!string.IsNullOrWhiteSpace(Model.FestivalName))
+			{
+				<p class="mb-0 text-white fw-semibold fs-4">@Localizer["Vote_FestivalLabel"] @Model.FestivalName</p>
+			}
+		</div>
+
+		<a class="btn btn-primary align-self-start fs-5" style="width: 120px;" href="@Url.Action("Details", "Festival", new { id = Model.FestivalId })">@Localizer["Common_Back"]</a>
+	</div>
+</section>
+
+<div class="container mt-3">
+	@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+	{
+		<div class="alert alert-danger mb-3" role="alert">
+			<p class="fw-semibold mb-0">@Model.ErrorMessage</p>
+		</div>
+	}
+	@if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+	{
+		<div class="alert alert-success mb-3" role="alert">
+			<p class="fw-semibold mb-0">@Model.SuccessMessage</p>
+		</div>
+	}
+</div>
+
+@if (Model.Awards.Count == 0 && Model.CompletedVotes.Count == 0)
+{
+	<section class="container info-panel mt-3">
+		<div class="alert alert-info mb-0" role="alert">@Localizer["Vote_NoAwards"]</div>
+	</section>
+}
+else
+{
+	@if (Model.Awards.Count > 0)
+	{
+		<div class="container mt-3">
+			<div class="row g-3">
+				@foreach (var award in Model.Awards)
+				{
+					void RenderNomineeRadios(string groupName)
+					{
+						var isPerson = award.Category != "Film";
+						var imgStyle = isPerson
+							? "width: 48px; height: 48px; object-fit: cover; border-radius: 50%;"
+							: "width: 48px; height: 72px; object-fit: cover; border-radius: 6px;";
+						var placeholderStyle = isPerson
+							? "width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.08);"
+							: "width: 48px; height: 72px; border-radius: 4px; background: rgba(255,255,255,0.08);";
+
+						<div class="d-flex flex-column gap-2">
+							@foreach (var o in award.Nominees)
+							{
+								var id = $"{groupName}-{o.NominationId}";
+								<div>
+									<input class="btn-check" type="radio" name="nominationId" id="@id" value="@o.NominationId" required />
+									<label class="btn btn-outline-light award-nominee-option w-100 text-start p-2" for="@id" style="display: grid; grid-template-columns: 48px 1fr; gap: 0.75rem; align-items: center;">
+										@if (!string.IsNullOrWhiteSpace(o.ImageUrl))
+										{
+											<img src="@o.ImageUrl" alt="@o.Label" style="@imgStyle" />
+										}
+										else
+										{
+											<div class="d-flex align-items-center justify-content-center" style="@placeholderStyle">
+												<i class="bi @(isPerson ? "bi-person-fill" : "bi-film") text-white opacity-25" style="font-size: 1.5rem; line-height: 0;"></i>
+											</div>
+										}
+										<span class="fw-semibold">@Localizer.LocalizeDisplayText(o.Label)</span>
+									</label>
+								</div>
+							}
+						</div>
+					}
+
+					<div class="col-12 col-lg-6">
+						<section class="info-panel h-100">
+							<div class="text-center mb-3">
+								<p class="mb-1 text-white fw-semibold fs-4">@Localizer["Vote_CategoryLabel"] @Localizer.LocalizeAwardCategory(award.Category)</p>
+								<p class="mb-0 fs-5"><strong>@Localizer["Vote_AwardLabel"]</strong> @award.Name</p>
+								@if (award.DaysRemaining == 0)
+								{
+									<p class="mb-0 mt-2"><span class="badge rounded-pill text-bg-warning text-dark">@Localizer["Award_EndsToday"]</span></p>
+								}
+								else if (award.DaysRemaining == 1)
+								{
+									<p class="mb-0 mt-2"><span class="badge rounded-pill text-bg-info">@Localizer["Award_DaysRemainingOne"]</span></p>
+								}
+								else
+								{
+									<p class="mb-0 mt-2"><span class="badge rounded-pill text-bg-info">@Localizer["Award_DaysRemaining", award.DaysRemaining]</span></p>
+								}
+							</div>
+
+							<hr class="my-2 opacity-25" />
+
+							<form asp-route="VoteCast" method="post" class="d-flex flex-column gap-3 m-0">
+								@Html.AntiForgeryToken()
+								<input type="hidden" name="festivalId" value="@Model.FestivalId" />
+
+								@{ RenderNomineeRadios($"vote-{award.Id}"); }
+
+								<button type="submit"
+								        class="btn btn-primary align-self-start fs-5"
+								        style="width: 25%; min-width: 180px; padding-top: 0.75rem; padding-bottom: 0.75rem;">
+									@Localizer["Vote_PageTitle"]
+								</button>
+							</form>
+						</section>
+					</div>
+				}
+			</div>
+		</div>
+	}
+
+	@if (Model.CompletedVotes.Count > 0)
+	{
+		<section class="container mt-4 mb-4">
+			<div class="info-panel">
+				<h2 class="fs-4 fw-semibold mb-4">@Localizer["Vote_VotesDone"]</h2>
+				<div class="row g-3">
+					@foreach (var completed in Model.CompletedVotes)
+					{
+						var award = completed.Award;
+						var isPerson = award.Category != "Film";
+						var imgStyle = isPerson
+							? "width: 48px; height: 48px; object-fit: cover; border-radius: 50%;"
+							: "width: 48px; height: 72px; object-fit: cover; border-radius: 6px;";
+						var placeholderStyle = isPerson
+							? "width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.08);"
+							: "width: 48px; height: 72px; border-radius: 4px; background: rgba(255,255,255,0.08);";
+
+						<div class="col-12 col-lg-6">
+							<article class="info-card review-card h-100 p-3">
+								<div class="text-center mb-3">
+									<p class="mb-1 fw-semibold fs-5">@Localizer["Vote_CategoryLabel"] @Localizer.LocalizeAwardCategory(award.Category)</p>
+									<p class="mb-0"><strong>@Localizer["Vote_AwardLabel"]</strong> @award.Name</p>
+									@if (!award.IsActive)
+									{
+										<p class="mb-0 mt-2"><span class="badge rounded-pill text-bg-danger award-status-badge">@Localizer["Vote_ResultsClosed"]</span></p>
+									}
+									else if (award.DaysRemaining == 0)
+									{
+										<p class="mb-0 mt-2"><span class="badge rounded-pill text-bg-warning text-dark award-status-badge">@Localizer["Vote_ResultsToday"]</span></p>
+									}
+									else if (award.DaysRemaining == 1)
+									{
+										<p class="mb-0 mt-2"><span class="badge rounded-pill text-bg-info award-status-badge">@Localizer["Vote_ResultsInOneDay"]</span></p>
+									}
+									else
+									{
+										<p class="mb-0 mt-2"><span class="badge rounded-pill text-bg-info award-status-badge">@Localizer["Vote_ResultsInDays", award.DaysRemaining]</span></p>
+									}
+								</div>
+
+								<hr class="my-2 opacity-25" />
+
+								<p class="mb-2 fw-semibold text-center">@Localizer["Award_NomineesLabel"]</p>
+								<div class="d-flex flex-column gap-2">
+									@foreach (var nominee in award.Nominees)
+									{
+										var isSelected = nominee.NominationId == completed.SelectedNominationId;
+										@if (!award.IsActive)
+										{
+											var pct = Math.Clamp(nominee.VotePercentage, 0, 100);
+											var resultImgStyle = isPerson
+												? "width: 24px; height: 24px; object-fit: cover; border-radius: 50%;"
+												: "width: 24px; height: 36px; object-fit: cover; border-radius: 4px;";
+											var resultPlaceholderStyle = isPerson
+												? "width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,0.08);"
+												: "width: 24px; height: 36px; border-radius: 4px; background: rgba(255,255,255,0.08);";
+
+											<div class="mb-2 rounded-3 p-2 @(isSelected ? "border border-success" : "")"
+											     style="@(isSelected ? "background: rgba(25, 135, 84, 0.12);" : "")">
+												<div class="d-flex justify-content-between align-items-end gap-2 mb-1">
+													<div class="d-flex align-items-center gap-2">
+														@if (!string.IsNullOrWhiteSpace(nominee.ImageUrl))
+														{
+															<img src="@nominee.ImageUrl" alt="@nominee.Label" style="@resultImgStyle" />
+														}
+														else
+														{
+															<div class="d-flex align-items-center justify-content-center" style="@resultPlaceholderStyle">
+																<i class="bi @(isPerson ? "bi-person-fill" : "bi-film") text-white opacity-25" style="font-size: 1.5rem; line-height: 0;"></i>
+															</div>
+														}
+														<div>
+															<span class="fw-medium" style="font-size: 0.95rem;">@Localizer.LocalizeDisplayText(nominee.Label)</span>
+															@if (isSelected)
+															{
+																<span class="badge rounded-pill text-bg-success ms-1">@Localizer["Vote_YourChoice"]</span>
+															}
+														</div>
+													</div>
+													<span style="font-size: 0.9rem;">@nominee.VoteCount (@pct%)</span>
+												</div>
+												<div class="mt-1" style="height: 10px; border: 1px solid rgba(255,255,255,0.35); border-radius: 999px; background: rgba(255,255,255,0.10); overflow: hidden;">
+													<div style="height: 100%; width: @pct%; background: #0d6efd;"></div>
+												</div>
+											</div>
+										}
+										else
+										{
+											<div class="rounded-3 p-2 border @(isSelected ? "border-success" : "border-secondary border-opacity-25")"
+											     style="@(isSelected ? "background: rgba(25, 135, 84, 0.12);" : "background: rgba(255,255,255,0.04);")">
+												<div class="d-flex align-items-center gap-2">
+													@if (!string.IsNullOrWhiteSpace(nominee.ImageUrl))
+													{
+														<img src="@nominee.ImageUrl" alt="@nominee.Label" style="@imgStyle" />
+													}
+													else
+													{
+														<div class="d-flex align-items-center justify-content-center" style="@placeholderStyle">
+															<i class="bi @(isPerson ? "bi-person-fill" : "bi-film") text-white opacity-25" style="font-size: 1.5rem; line-height: 0;"></i>
+														</div>
+													}
+													<div class="flex-grow-1">
+														<span class="fw-semibold">@Localizer.LocalizeDisplayText(nominee.Label)</span>
+														@if (isSelected)
+														{
+															<span class="badge rounded-pill text-bg-success ms-2">@Localizer["Vote_YourChoice"]</span>
+														}
+													</div>
+												</div>
+											</div>
+										}
+									}
+								</div>
+							</article>
+						</div>
+					}
+				</div>
+			</div>
+		</section>
+	}
+}

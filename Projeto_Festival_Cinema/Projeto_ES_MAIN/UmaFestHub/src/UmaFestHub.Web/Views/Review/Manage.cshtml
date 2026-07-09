@@ -1,0 +1,516 @@
+@* Staff Manage: filtered review cards + full reply threads (including hidden) and reply moderation. *@
+
+@model UmaFestHub.Web.ViewModels.ReviewManagePageViewModel
+
+@using UmaFestHub.Web.Security
+
+@{
+
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
+	ViewData["Title"] = Localizer["Review_PageTitle"].Value;
+
+	// This page is intended for staff users only; controllers enforce roles.
+
+	var isModerator = User.IsInAnyRole(RoleConstants.ModeratorRoles);
+
+	var returnUrl = $"{Context.Request.Path}{Context.Request.QueryString}";
+
+}
+
+
+
+<section class="page-hero">
+
+	<div class="container">
+
+		<h1>@Localizer["Common_Reviews"]</h1>
+
+		<p>@Localizer["Review_ManageSubtitle"]</p>
+
+	</div>
+
+</section>
+
+
+
+<section class="container mt-3">
+
+	<div class="info-panel">
+
+		@* GET form so filters are shareable/bookmarkable and pager can preserve them via query string. *@
+
+		<form method="get" action="/Review/Manage" class="d-flex flex-column gap-3">
+
+			<div class="row g-3">
+
+				<div class="col-12 col-lg-6">
+
+					<label class="form-label" for="movieQuery">@Localizer["Review_ManageSearchMovie"]</label>
+
+					<input id="movieQuery" name="movieQuery" type="text" class="form-control" value="@Model?.MovieQuery" />
+
+				</div>
+
+				<div class="col-12 col-lg-6">
+
+					<label class="form-label" for="authorQuery">@Localizer["Review_ManageSearchAuthor"]</label>
+
+					<input id="authorQuery" name="authorQuery" type="text" class="form-control" value="@Model?.AuthorQuery" />
+
+				</div>
+
+				<div class="col-12 col-lg-4">
+
+					<label class="form-label" for="status">@Localizer["Review_ManageStatus"]</label>
+
+					<select id="status" name="status" class="form-select">
+
+						<option value="">@Localizer["Common_All"]</option>
+
+						@* "Reported" is a special filter based on the IsReported flag, not the ReviewStatus enum value. *@
+
+						<option value="Pending" selected="@(string.Equals(Model?.Status, "Pending", StringComparison.OrdinalIgnoreCase) ? "selected" : null)">@Localizer["Review_StatusPending"]</option>
+
+						<option value="Approved" selected="@(string.Equals(Model?.Status, "Approved", StringComparison.OrdinalIgnoreCase) ? "selected" : null)">@Localizer["Review_StatusApproved"]</option>
+
+						<option value="Rejected" selected="@(string.Equals(Model?.Status, "Rejected", StringComparison.OrdinalIgnoreCase) ? "selected" : null)">@Localizer["Review_StatusRejected"]</option>
+
+						<option value="Reported" selected="@(string.Equals(Model?.Status, "Reported", StringComparison.OrdinalIgnoreCase) ? "selected" : null)">@Localizer["Review_StatusReported"]</option>
+
+					</select>
+
+				</div>
+
+				<div class="col-12 col-lg-4">
+
+					<label class="form-label" for="dayUtc">@Localizer["Review_ManageSearchDate"]</label>
+
+					<input id="dayUtc" name="dayUtc" type="date" class="form-control"
+
+						   value="@(Model?.DayUtc.HasValue == true ? Model!.DayUtc.Value.ToString("yyyy-MM-dd") : string.Empty)" />
+
+				</div>
+
+				<div class="col-12 col-lg-4 d-flex align-items-end gap-2">
+
+					<button type="submit" class="btn btn-primary w-100">@Localizer["Review_Filter"]</button>
+
+					<a class="btn btn-outline-light w-100" href="/Review/Manage">@Localizer["Review_Clear"]</a>
+
+				</div>
+
+			</div>
+
+			<p class="small text-secondary mb-0">
+
+				@Localizer["Review_ManageFilterHelp"]
+
+			</p>
+
+		</form>
+
+	</div>
+
+</section>
+
+
+
+<section class="container">
+
+	@if (Model?.Reviews is null || Model.Reviews.Count == 0)
+
+	{
+
+		<div class="row g-3">
+
+			<div class="col-12 col-md-6 col-lg-4">
+
+				<article class="info-card review-card">
+
+					<h2>@Localizer["Review_NoResults"]</h2>
+
+				</article>
+
+			</div>
+
+		</div>
+
+	}
+
+	else
+
+	{
+
+		<div class="row g-3">
+
+		@foreach (var review in Model.Reviews)
+
+		{
+
+			@* Build the star string for display only (rating is stored as an int). *@
+
+			var stars = string.Concat(Enumerable.Repeat("★", review.Rating));
+
+			var emptyStars = string.Concat(Enumerable.Repeat("☆", Math.Max(0, 5 - review.Rating)));
+
+			@* Show the best available film label; not all reviews have FilmTitle populated. *@
+
+			var filmLabel = !string.IsNullOrWhiteSpace(review.FilmTitle)
+
+				? review.FilmTitle
+
+				: (review.FilmId.HasValue ? review.FilmId.Value.ToString() : Localizer["Review_ExternalFilmLabel", review.ExternalFilmId].Value);
+
+			var statusLabel = review.Status switch
+
+			{
+
+				"Pending" => Localizer["Review_StatusPending"].Value,
+
+				"Approved" => Localizer["Review_StatusApproved"].Value,
+
+				"Rejected" => Localizer["Review_StatusRejected"].Value,
+
+				"Reported" => Localizer["Review_StatusReported"].Value,
+
+				_ => review.Status
+
+			};
+
+
+
+			<div class="col-12 col-md-6 col-lg-4">
+
+				<article class="info-card review-card">
+
+					<h2><span class="review-stars-filled">@stars</span><span class="review-stars-empty">@emptyStars</span></h2>
+
+					<p class="mb-1"><strong>@Localizer["Review_AuthorLabel"]</strong> @review.AuthorName</p>
+
+					<p class="mb-1"><strong>@Localizer["Award_CategoryFilm"]:</strong> @filmLabel</p>
+
+					<p class="mb-1"><strong>@Localizer["Review_ManageStatus"]:</strong> @statusLabel</p>
+
+					@if (review.IsReported)
+
+					{
+
+						<p class="mb-1">
+
+							<span class="badge text-bg-danger">@Localizer["Review_StatusReported"]</span>
+
+						</p>
+
+					}
+
+					<p><strong>@Localizer["Review_CommentPrefix"]</strong> “@review.Comment”</p>
+
+					<p class="mb-0"><strong>@Localizer["Review_DateLabel"]</strong> @review.DateUtc.ToString("dd MMM yyyy")</p>
+
+
+
+					<div class="review-replies mt-3">
+
+						<div class="rounded-3 p-3 border hub-inner-card">
+
+							<h3 class="h5 text-center fw-semibold @(review.Replies.Count == 0 ? "mb-3" : "mb-0")">@Localizer["Review_Replies"]</h3>
+
+							@if (review.Replies.Count == 0)
+
+							{
+
+								<p class="small text-secondary mb-0 text-center">@Localizer["Review_NoReplies"]</p>
+
+							}
+
+							else
+
+							{
+
+								var ffId = review.FestivalFilmId ?? Guid.Empty;
+
+								<hr class="border-secondary border-opacity-25 my-3" />
+
+								@for (var ri = 0; ri < review.Replies.Count; ri++)
+
+								{
+
+									var reply = review.Replies[ri];
+
+									var rApproved = string.Equals(reply.Status, "Approved", StringComparison.OrdinalIgnoreCase);
+
+									var rRejected = string.Equals(reply.Status, "Rejected", StringComparison.OrdinalIgnoreCase);
+
+									var replyStatusLabel = reply.Status switch
+
+									{
+
+										"Pending" => Localizer["Review_StatusPending"].Value,
+
+										"Approved" => Localizer["Review_StatusApproved"].Value,
+
+										"Rejected" => Localizer["Review_StatusRejected"].Value,
+
+										"Reported" => Localizer["Review_StatusReported"].Value,
+
+										_ => reply.Status
+
+									};
+
+									var rSep = ri < review.Replies.Count - 1 ? "pb-3 mb-3 border-bottom border-secondary border-opacity-25" : "pb-1";
+
+									<div class="@rSep">
+
+										<p class="mb-1"><strong>@Localizer["Review_AuthorLabel"]</strong> @reply.AuthorName</p>
+
+										<p class="mb-1"><strong>@Localizer["Review_ManageStatus"]:</strong> @replyStatusLabel</p>
+
+										@if (reply.IsHiddenByAdmin)
+
+										{
+
+											<p class="mb-1"><strong>@Localizer["Review_PublicHidden"]</strong></p>
+
+										}
+
+										@if (reply.IsReported)
+
+										{
+
+											<p class="mb-1">
+
+												<span class="badge text-bg-danger">@Localizer["Review_StatusReported"]</span>
+
+											</p>
+
+										}
+
+										<p><strong>@Localizer["Review_CommentPrefix"]</strong> “@reply.Comment”</p>
+
+										<p class="mb-0"><strong>@Localizer["Review_DateLabel"]</strong> @reply.DateUtc.ToString("dd MMM yyyy")</p>
+
+										@if (isModerator)
+
+										{
+
+											<div class="d-flex flex-wrap gap-2 mt-2 align-items-center">
+
+												@if (!rApproved)
+
+												{
+
+													<form method="post" action="/Review/ApproveReply" class="m-0">
+
+														@Html.AntiForgeryToken()
+
+														<input type="hidden" name="replyId" value="@reply.Id" />
+
+														<input type="hidden" name="reviewId" value="@review.Id" />
+
+														<input type="hidden" name="festivalFilmId" value="@ffId" />
+
+														<input type="hidden" name="returnUrl" value="@returnUrl" />
+
+														<button type="submit" class="btn btn-sm btn-success">@Localizer["Review_ApproveReply"]</button>
+
+													</form>
+
+												}
+
+												@if (!rRejected)
+
+												{
+
+													<form method="post" action="/Review/HideReply" class="m-0">
+
+														@Html.AntiForgeryToken()
+
+														<input type="hidden" name="replyId" value="@reply.Id" />
+
+														<input type="hidden" name="reviewId" value="@review.Id" />
+
+														<input type="hidden" name="festivalFilmId" value="@ffId" />
+
+														<input type="hidden" name="returnUrl" value="@returnUrl" />
+
+														<button type="submit" class="btn btn-sm btn-warning">@Localizer["Review_HideReply"]</button>
+
+													</form>
+
+												}
+
+											</div>
+
+										}
+
+									</div>
+
+								}
+
+							}
+
+						</div>
+
+					</div>
+
+
+
+					@if (isModerator)
+
+					{
+
+						@* Management actions:
+
+						   - Approve: only makes sense for FestivalFilm-linked reviews (needs festivalFilmId for redirect)
+
+						   - Hide: removes from public listings *@
+
+						<div class="d-flex gap-2 mt-3">
+
+							@if (!string.Equals(review.Status, "Approved", StringComparison.OrdinalIgnoreCase) && review.FestivalFilmId.HasValue)
+
+							{
+
+								<form method="post" action="/Review/Approve" class="m-0">
+
+									@Html.AntiForgeryToken()
+
+									<input type="hidden" name="reviewId" value="@review.Id" />
+
+									<input type="hidden" name="festivalFilmId" value="@review.FestivalFilmId" />
+
+									<input type="hidden" name="returnUrl" value="@returnUrl" />
+
+									<button type="submit" class="btn btn-sm btn-success">@Localizer["Review_Approve"]</button>
+
+								</form>
+
+							}
+
+
+
+							@if (!string.Equals(review.Status, "Rejected", StringComparison.OrdinalIgnoreCase))
+
+							{
+
+								<form method="post" action="/Review/Hide" class="m-0">
+
+									@Html.AntiForgeryToken()
+
+									<input type="hidden" name="reviewId" value="@review.Id" />
+
+									<input type="hidden" name="festivalFilmId" value="@(review.FestivalFilmId ?? Guid.Empty)" />
+
+									<input type="hidden" name="returnUrl" value="@returnUrl" />
+
+									<button type="submit" class="btn btn-sm btn-warning">@Localizer["Review_Hide"]</button>
+
+								</form>
+
+							}
+
+						</div>
+
+					}
+
+				</article>
+
+			</div>
+
+		}
+
+		</div>
+
+	}
+
+</section>
+
+
+
+<section class="container mt-3">
+
+	<div class="d-flex justify-content-center align-items-center gap-3">
+
+		@* Pager preserves active filters by using Url.Action with the current filter values. *@
+
+		@if (Model is not null && Model.Page > 1)
+
+		{
+
+			var prevUrl = Url.Action("Manage", "Review", new
+
+			{
+
+				page = Model.Page - 1,
+
+				movieQuery = Model.MovieQuery,
+
+				authorQuery = Model.AuthorQuery,
+
+				status = Model.Status,
+
+				dayUtc = Model.DayUtc.HasValue ? Model.DayUtc.Value.ToString("yyyy-MM-dd") : null
+
+			});
+
+			<a class="btn btn-outline-light px-3 review-pager-btn" aria-label="@Localizer["Common_PreviousPage"]" href="@prevUrl">←</a>
+
+		}
+
+		else
+
+		{
+
+			<button class="btn btn-outline-light px-3 review-pager-btn" aria-label="@Localizer["Common_PreviousPage"]" disabled>←</button>
+
+		}
+
+
+
+		@if (Model is not null)
+
+		{
+
+			<span class="badge rounded-pill text-bg-light" style="font-size: 0.95rem; padding: 0.55rem 0.9rem;">@Model.Page</span>
+
+		}
+
+
+
+		@if (Model is not null && Model.HasNext)
+
+		{
+
+			var nextUrl = Url.Action("Manage", "Review", new
+
+			{
+
+				page = Model.Page + 1,
+
+				movieQuery = Model.MovieQuery,
+
+				authorQuery = Model.AuthorQuery,
+
+				status = Model.Status,
+
+				dayUtc = Model.DayUtc.HasValue ? Model.DayUtc.Value.ToString("yyyy-MM-dd") : null
+
+			});
+
+			<a class="btn btn-outline-light px-3 review-pager-btn" aria-label="@Localizer["Common_NextPage"]" href="@nextUrl">→</a>
+
+		}
+
+		else
+
+		{
+
+			<button class="btn btn-outline-light px-3 review-pager-btn" aria-label="@Localizer["Common_NextPage"]" disabled>→</button>
+
+		}
+
+	</div>
+
+</section>
+

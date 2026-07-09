@@ -1,0 +1,55 @@
+# ---- .NET build output ----
+**/bin/
+**/obj/
+# Alternate-output build folders (must not sit under a project or **/*.cs picks up generated AssemblyInfo)
+**/out_build_check/
+
+# ---- User/tool files ----
+.vs/
+.vscode/
+.idea/
+.cursor/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+
+# ---- OS files ----
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+*.log
+logs/
+
+# ---- EF / local database artifacts ----
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# ---- Secrets / local env ----
+.env
+.env.*
+!.env.example
+
+# Keep appsettings templates, ignore local-only overrides
+**/appsettings.Development.json
+**/appsettings.Local.json
+
+# ---- Node (if ever added in web assets tooling) ----
+node_modules/
+
+# ---- Test artifacts ----
+TestResults/
+coverage/
+*.trx
+
+# ---- ISP / publish output under artifacts/isp-build (JSON manifests are tracked) ----
+artifacts/isp-build/**/*.dll
+artifacts/isp-build/**/*.exe
+artifacts/isp-build/**/*.pdb
+
+# ---- ISP / publish output under artifacts/isp-build ----
+artifacts/isp-build/

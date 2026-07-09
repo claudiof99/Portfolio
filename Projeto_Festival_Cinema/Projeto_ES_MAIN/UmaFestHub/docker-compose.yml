@@ -1,0 +1,23 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-umafesthub_root}
+      MYSQL_DATABASE: ${DB_NAME:-UmaFestHub_DB}
+    ports:
+      - "3307:3306"
+    volumes:
+      - umafesthub_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+
+volumes:
+  umafesthub_data:

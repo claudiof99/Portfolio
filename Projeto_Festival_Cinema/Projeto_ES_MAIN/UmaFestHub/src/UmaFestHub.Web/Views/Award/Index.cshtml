@@ -1,0 +1,357 @@
+@*
+  Awards, nominations & votes — Organizer awards hub: filter, paginate, create award, link to nominees, toggle active.
+*@
+@model UmaFestHub.Web.ViewModels.AwardIndexPageViewModel
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["Award_PageTitle"].Value;
+	var canManage = User.IsInRole("Organizer") || User.IsInRole("Admin");
+	var minAwardEndDate = DateTime.UtcNow.ToString("yyyy-MM-dd");
+}
+
+<section class="page-hero">
+	<div class="container">
+		<h1>@Localizer["Award_PageTitle"]</h1>
+		<p>@Localizer["Award_Subtitle"]</p>
+	</div>
+</section>
+
+<section class="container mt-3">
+	<div class="info-panel">
+		<p class="mb-0 fs-5 fw-semibold">@Localizer["Award_ActiveAwards"]</p>
+	</div>
+</section>
+
+<section class="container">
+	@if (Model?.Awards is null || Model.Awards.Count == 0)
+	{
+		<div class="row g-3">
+			<div class="col-12 col-md-4">
+				<article class="info-card review-card">
+					<h2>@Localizer["Award_NoAwards"]</h2>
+				</article>
+			</div>
+		</div>
+	}
+	else
+	{
+		<div class="row g-3">
+			@foreach (var award in Model.Awards)
+			{
+				<div class="col-12 col-md-4">
+					<article class="info-card review-card">
+						<div class="d-flex align-items-start justify-content-between gap-2 flex-wrap">
+							<h2 class="mb-0">@Localizer["Award_AwardLabel"] @award.Name</h2>
+							<div class="award-status-badges">
+								@if (award.IsActive)
+								{
+									<span class="badge rounded-pill text-bg-success award-status-badge">@Localizer["Award_Active"]</span>
+									@if (award.DaysRemaining == 0)
+									{
+										<span class="badge rounded-pill text-bg-warning text-dark award-status-badge">@Localizer["Award_EndsToday"]</span>
+									}
+									else if (award.DaysRemaining == 1)
+									{
+										<span class="badge rounded-pill text-bg-info award-status-badge">@Localizer["Award_DaysRemainingOne"]</span>
+									}
+									else
+									{
+										<span class="badge rounded-pill text-bg-info award-status-badge">@Localizer["Award_DaysRemaining", award.DaysRemaining]</span>
+									}
+								}
+								else
+								{
+									<span class="badge rounded-pill text-bg-danger award-status-badge">@Localizer["Award_Inactive"]</span>
+								}
+							</div>
+						</div>
+						<hr class="my-2 opacity-25" />
+						@if (!string.IsNullOrWhiteSpace(award.Category))
+						{
+							<p class="mb-1"><strong>@Localizer["Award_CategoryLabel"]</strong> @Localizer.LocalizeAwardCategory(award.Category)</p>
+							<hr class="my-2 opacity-25" />
+						}
+						@if (!string.IsNullOrWhiteSpace(award.FestivalName))
+						{
+							<p class="mb-1"><strong>@Localizer["Award_FestivalLabel"]</strong> @award.FestivalName</p>
+							<hr class="my-2 opacity-25" />
+						}
+
+						@if (award.Nominees.Count == 0)
+						{
+							<p class="mb-2 text-center fw-semibold">@Localizer["Award_NomineesLabel"]</p>
+							<p class="mb-0 text-body-secondary">@Localizer["Award_NoNominees"]</p>
+						}
+						else
+						{
+							<p class="mb-2 text-center fw-semibold">@Localizer["Award_NomineesLabel"]</p>
+							@foreach (var n in award.Nominees)
+							{
+								var pct = Math.Clamp(n.VotePercentage, 0, 100);
+								var isPerson = award.Category != "Film";
+								var imgStyle = isPerson 
+									? "width: 24px; height: 24px; object-fit: cover; border-radius: 50%;"
+									: "width: 24px; height: 36px; object-fit: cover; border-radius: 4px;";
+								var placeholderStyle = isPerson
+									? "width: 24px; height: 24px; border-radius: 50%; background: var(--hub-surface, #222); border: 1px solid var(--hub-border, rgba(128,128,128,0.2)); display: flex; align-items: center; justify-content: center;"
+									: "width: 24px; height: 36px; border-radius: 4px; background: var(--hub-surface, #222); border: 1px solid var(--hub-border, rgba(128,128,128,0.2)); display: flex; align-items: center; justify-content: center;";
+
+								<div class="mb-2">
+									<div class="d-flex justify-content-between align-items-end gap-2 mb-1">
+										<div class="d-flex align-items-center gap-2">
+											@if (!string.IsNullOrWhiteSpace(n.ImageUrl)) {
+												<img src="@n.ImageUrl" alt="@n.Label" style="@imgStyle" />
+											} else {
+												<div style="@placeholderStyle">
+													<i class="bi @(isPerson ? "bi-person-fill" : "bi-film") text-secondary opacity-75" style="font-size: 0.85rem; line-height: 0;"></i>
+												</div>
+											}
+											<span class="fw-medium award-nominee-label">@Localizer.LocalizeDisplayText(n.Label)</span>
+										</div>
+										<span class="award-nominee-votes">@n.VoteCount (@pct%)</span>
+									</div>
+									<div class="award-vote-bar-track">
+										<div class="award-vote-bar-fill" style="width: @pct%;"></div>
+									</div>
+								</div>
+							}
+						}
+
+					</article>
+				</div>
+			}
+		</div>
+	}
+</section>
+
+<section class="container mt-3 mb-4">
+	<div class="d-flex justify-content-center align-items-center gap-3">
+		@if (Model is not null && Model.Page > 1)
+		{
+			var prevUrl = Model.FestivalId is { } fPrev && fPrev != Guid.Empty
+				? Url.Action("Index", "Award", new { page = Model.Page - 1, festivalId = fPrev })
+				: Url.Action("Index", "Award", new { page = Model.Page - 1 });
+			<a class="btn btn-outline-light px-3" style="font-size: 2.1rem; line-height: 1;" aria-label="@Localizer["Common_PreviousPage"]" href="@prevUrl">←</a>
+		}
+		else
+		{
+			<button class="btn btn-outline-light px-3" style="font-size: 2.1rem; line-height: 1;" aria-label="@Localizer["Common_PreviousPage"]" disabled>←</button>
+		}
+
+		@if (Model is not null)
+		{
+			<span class="badge rounded-pill text-bg-light" style="font-size: 0.95rem; padding: 0.55rem 0.9rem;">
+				@Model.Page
+			</span>
+		}
+
+		@if (Model is not null && Model.HasNext)
+		{
+			var nextUrl = Model.FestivalId is { } fNext && fNext != Guid.Empty
+				? Url.Action("Index", "Award", new { page = Model.Page + 1, festivalId = fNext })
+				: Url.Action("Index", "Award", new { page = Model.Page + 1 });
+			<a class="btn btn-outline-light px-3" style="font-size: 2.1rem; line-height: 1;" aria-label="@Localizer["Common_NextPage"]" href="@nextUrl">→</a>
+		}
+		else
+		{
+			<button class="btn btn-outline-light px-3" style="font-size: 2.1rem; line-height: 1;" aria-label="@Localizer["Common_NextPage"]" disabled>→</button>
+		}
+	</div>
+</section>
+
+@if (canManage)
+{
+	var awardCreateError = TempData["AwardCreateError"] as string;
+
+	<section class="page-hero">
+		<div class="container">
+			<h1 class="fs-4 fw-semibold mb-0">@Localizer["Award_AddAwardsHeading"]</h1>
+			<p>@Localizer["Award_AddAwardsSubtitle"]</p>
+		</div>
+	</section>
+
+	@if (!string.IsNullOrWhiteSpace(awardCreateError))
+	{
+		<section class="container mt-3">
+			<div class="alert alert-danger mb-0" role="alert">
+				<p class="fw-semibold mb-0">@awardCreateError</p>
+			</div>
+		</section>
+	}
+
+	<section class="container info-panel py-4 mt-3">
+		<p class="mb-4 text-white fs-4 fw-semibold">@Localizer["Award_CategoryFilm"]</p>
+		<form method="get" asp-route="AwardNominees" class="row g-3">
+			<input type="hidden" name="category" value="0" />
+			<input type="hidden" name="categoryLabel" value="Film" />
+			<div class="col-12">
+				<input class="form-control" name="awardName" placeholder="@Localizer["Award_AwardNamePlaceholder"]" autocomplete="off" required />
+			</div>
+			<div class="col-12">
+				<label class="form-label text-white fw-semibold mb-1">@Localizer["Award_EndDateLabel"]</label>
+				<input class="form-control" type="date" name="endDate" min="@minAwardEndDate" required />
+			</div>
+			<div class="col-12">
+				<hr class="my-2 opacity-25" />
+				<p class="mb-3 text-white fw-semibold fs-5">@Localizer["Award_SelectFestival"]</p>
+				<div class="row g-2 mt-2 award-festival-picker">
+					@{
+						var filmFestivals = Model?.Festivals ?? Array.Empty<UmaFestHub.Web.ViewModels.FestivalOptionViewModel>();
+						var filmFi = 0;
+					}
+					@foreach (var f in filmFestivals)
+					{
+						var id = $"films-festival-{f.Id}";
+						<div class="col-12 col-sm-6 col-md-4">
+							@if (filmFi == 0)
+							{
+								<input class="award-festival-radio" type="radio" name="festivalId" id="@id" value="@f.Id" required />
+							}
+							else
+							{
+								<input class="award-festival-radio" type="radio" name="festivalId" id="@id" value="@f.Id" />
+							}
+							<label class="award-festival-pill w-100" for="@id">@f.Name</label>
+						</div>
+						filmFi++;
+					}
+				</div>
+			</div>
+			<div class="col-12 mt-4">
+				<button type="submit" class="btn btn-primary w-100">@Localizer["Award_AddNominees"]</button>
+			</div>
+		</form>
+	</section>
+
+	<section class="container info-panel py-4">
+		<p class="mb-4 text-white fs-4 fw-semibold">@Localizer["Award_CategoryActor"]</p>
+		<form method="get" asp-route="AwardNominees" class="row g-3">
+			<input type="hidden" name="category" value="1" />
+			<input type="hidden" name="categoryLabel" value="Actor" />
+			<div class="col-12">
+				<input class="form-control" name="awardName" placeholder="@Localizer["Award_AwardNamePerformance"]" autocomplete="off" required />
+			</div>
+			<div class="col-12">
+				<label class="form-label text-white fw-semibold mb-1">@Localizer["Award_EndDateLabel"]</label>
+				<input class="form-control" type="date" name="endDate" min="@minAwardEndDate" required />
+			</div>
+			<div class="col-12">
+				<hr class="my-2 opacity-25" />
+				<p class="mb-3 text-white fw-semibold fs-5">@Localizer["Award_SelectFestival"]</p>
+				<div class="row g-2 mt-2 award-festival-picker">
+					@{
+						var actorFestivals = Model?.Festivals ?? Array.Empty<UmaFestHub.Web.ViewModels.FestivalOptionViewModel>();
+						var actorFi = 0;
+					}
+					@foreach (var f in actorFestivals)
+					{
+						var id = $"actors-festival-{f.Id}";
+						<div class="col-12 col-sm-6 col-md-4">
+							@if (actorFi == 0)
+							{
+								<input class="award-festival-radio" type="radio" name="festivalId" id="@id" value="@f.Id" required />
+							}
+							else
+							{
+								<input class="award-festival-radio" type="radio" name="festivalId" id="@id" value="@f.Id" />
+							}
+							<label class="award-festival-pill w-100" for="@id">@f.Name</label>
+						</div>
+						actorFi++;
+					}
+				</div>
+			</div>
+			<div class="col-12 mt-4">
+				<button type="submit" class="btn btn-primary w-100">@Localizer["Award_AddNominees"]</button>
+			</div>
+		</form>
+	</section>
+
+	<section class="container info-panel py-4">
+		<p class="mb-4 text-white fs-4 fw-semibold">@Localizer["Award_CategoryDirector"]</p>
+		<form method="get" asp-route="AwardNominees" class="row g-3">
+			<input type="hidden" name="category" value="2" />
+			<input type="hidden" name="categoryLabel" value="Director" />
+			<div class="col-12">
+				<input class="form-control" name="awardName" placeholder="@Localizer["Award_AwardNameDirector"]" autocomplete="off" required />
+			</div>
+			<div class="col-12">
+				<label class="form-label text-white fw-semibold mb-1">@Localizer["Award_EndDateLabel"]</label>
+				<input class="form-control" type="date" name="endDate" min="@minAwardEndDate" required />
+			</div>
+			<div class="col-12">
+				<hr class="my-2 opacity-25" />
+				<p class="mb-3 text-white fw-semibold fs-5">@Localizer["Award_SelectFestival"]</p>
+				<div class="row g-2 mt-2 award-festival-picker">
+					@{
+						var directorFestivals = Model?.Festivals ?? Array.Empty<UmaFestHub.Web.ViewModels.FestivalOptionViewModel>();
+						var directorFi = 0;
+					}
+					@foreach (var f in directorFestivals)
+					{
+						var id = $"director-festival-{f.Id}";
+						<div class="col-12 col-sm-6 col-md-4">
+							@if (directorFi == 0)
+							{
+								<input class="award-festival-radio" type="radio" name="festivalId" id="@id" value="@f.Id" required />
+							}
+							else
+							{
+								<input class="award-festival-radio" type="radio" name="festivalId" id="@id" value="@f.Id" />
+							}
+							<label class="award-festival-pill w-100" for="@id">@f.Name</label>
+						</div>
+						directorFi++;
+					}
+				</div>
+			</div>
+			<div class="col-12 mt-4">
+				<button type="submit" class="btn btn-primary w-100">@Localizer["Award_AddNominees"]</button>
+			</div>
+		</form>
+	</section>
+
+	<section class="container info-panel py-4">
+		<p class="mb-4 text-white fs-4 fw-semibold">@Localizer["Award_CategoryWriting"]</p>
+		<form method="get" asp-route="AwardNominees" class="row g-3">
+			<input type="hidden" name="category" value="3" />
+			<input type="hidden" name="categoryLabel" value="Writing" />
+			<div class="col-12">
+				<input class="form-control" name="awardName" placeholder="@Localizer["Award_AwardNameScreenplay"]" autocomplete="off" required />
+			</div>
+			<div class="col-12">
+				<label class="form-label text-white fw-semibold mb-1">@Localizer["Award_EndDateLabel"]</label>
+				<input class="form-control" type="date" name="endDate" min="@minAwardEndDate" required />
+			</div>
+			<div class="col-12">
+				<hr class="my-2 opacity-25" />
+				<p class="mb-3 text-white fw-semibold fs-5">@Localizer["Award_SelectFestival"]</p>
+				<div class="row g-2 mt-2 award-festival-picker">
+					@{
+						var writingFestivals = Model?.Festivals ?? Array.Empty<UmaFestHub.Web.ViewModels.FestivalOptionViewModel>();
+						var writingFi = 0;
+					}
+					@foreach (var f in writingFestivals)
+					{
+						var id = $"writing-festival-{f.Id}";
+						<div class="col-12 col-sm-6 col-md-4">
+							@if (writingFi == 0)
+							{
+								<input class="award-festival-radio" type="radio" name="festivalId" id="@id" value="@f.Id" required />
+							}
+							else
+							{
+								<input class="award-festival-radio" type="radio" name="festivalId" id="@id" value="@f.Id" />
+							}
+							<label class="award-festival-pill w-100" for="@id">@f.Name</label>
+						</div>
+						writingFi++;
+					}
+				</div>
+			</div>
+			<div class="col-12 mt-4">
+				<button type="submit" class="btn btn-primary w-100">@Localizer["Award_AddNominees"]</button>
+			</div>
+		</form>
+	</section>
+}

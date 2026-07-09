@@ -1,0 +1,271 @@
+@model UmaFestHub.Web.ViewModels.FilmViewModel?
+@inject UmaFestHub.Domain.Interfaces.IFilmRepository FilmRepository
+@inject UmaFestHub.Application.Interfaces.IEntitlementService EntitlementService
+@inject UmaFestHub.Domain.Interfaces.IProductRepository ProductRepository
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["FilmDetails_PageTitle"].Value;
+	var confirmDeleteFilm = Localizer["FilmDetails_ConfirmDelete"].Value.Replace("'", "\\'");
+}
+
+<section class="container hub-section mt-4">
+	@if (TempData["ErrorMessage"] != null)
+	{
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			<strong>@Localizer["Common_Stop"]</strong> @TempData["ErrorMessage"]
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@Localizer["Common_Close"]"></button>
+		</div>
+	}
+	<div class="hub-section-header"><h2>@Localizer["FilmDetails_PageTitle"]</h2></div>
+	@if (Model is null)
+	{
+		<div class="hub-empty-state">@Localizer["Common_ComingSoon"]</div>
+	}
+	else
+	{
+		var fullCredits = Model.Credits ?? new List<UmaFestHub.Application.DTOs.FilmCreditDto>();
+
+		var currentUserIdString = User.FindFirst("sub")?.Value;
+		var currentUserId = Guid.TryParse(currentUserIdString, out var parsedUserId) ? parsedUserId : Guid.Empty;
+		var hasPurchased = false;
+		var canWatchNow = false;
+		string? watchLink = null;
+		DateTime? earliestSessionStartUtc = null;
+		
+		var filmEntity = await FilmRepository.GetByIdAsync(Model.Id);
+		if (currentUserId != Guid.Empty && filmEntity?.FestivalFilms != null)
+		{
+			foreach (var ff in filmEntity.FestivalFilms)
+			{
+				// Check pass/rental access (no session — time-gated by pass/rental rules)
+				if (await EntitlementService.CanWatchMovieAsync(currentUserId, ff.FestivalId, ff.Id, null))
+				{
+					hasPurchased = true;
+					canWatchNow = true;
+					watchLink = $"/festivals/{ff.FestivalId}/films/{ff.Id}/watch";
+					break;
+				}
+
+				if (ff.Sessions != null)
+				{
+					foreach (var session in ff.Sessions)
+					{
+						// Check if user owns a ticket for this session (regardless of time)
+						var ownsTicket = await EntitlementService.HasPurchasedForSessionAsync(currentUserId, session.Id);
+						if (ownsTicket)
+						{
+							hasPurchased = true;
+							// Check if the session is currently watchable (time-gated)
+							var nowUtc = DateTime.UtcNow;
+							if (nowUtc >= session.StartTimeUtc && nowUtc <= session.EndTimeUtc)
+							{
+								canWatchNow = true;
+								watchLink = $"/festivals/{ff.FestivalId}/sessions/{session.Id}/watch";
+								break;
+							}
+							else if (nowUtc < session.StartTimeUtc)
+							{
+								// Track earliest upcoming session for the "scheduled" message
+								if (!earliestSessionStartUtc.HasValue || session.StartTimeUtc < earliestSessionStartUtc.Value)
+								{
+									earliestSessionStartUtc = session.StartTimeUtc;
+								}
+							}
+						}
+						else
+						{
+							// User doesn't own a ticket — check CanWatch for pass/rental per session
+							if (await EntitlementService.CanWatchMovieAsync(currentUserId, ff.FestivalId, ff.Id, session.Id))
+							{
+								hasPurchased = true;
+								canWatchNow = true;
+								watchLink = $"/festivals/{ff.FestivalId}/sessions/{session.Id}/watch";
+								break;
+							}
+						}
+					}
+				}
+
+				if (hasPurchased) break;
+			}
+		}
+
+		<div class="hub-hero-panel position-relative p-4 p-md-5 mb-5 shadow-lg" style="background-color: var(--hub-surface-2); border-radius: 16px; border: 1px solid var(--hub-border, rgba(255,255,255,0.1));">
+			<div class="row align-items-start g-5">
+				@if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+				{
+					<div class="col-md-4 col-lg-3 text-center text-md-start">
+						<img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded shadow-lg w-100" style="object-fit: cover; max-width: 350px;" />
+					</div>
+				}
+				
+				<div class="@(string.IsNullOrWhiteSpace(Model.ImageUrl) ? "col-12" : "col-md-8 col-lg-9")">
+					<h1 class="fw-bold mb-3">@Model.Name</h1>
+					
+					<div class="d-flex flex-wrap gap-2 mb-4">
+						<span class="badge" style="background: var(--hub-surface); border: 1px solid var(--hub-border, rgba(255,255,255,0.2)); font-size: 0.9rem; color: var(--hub-text);">
+							<i class="bi bi-clock me-1"></i> @Localizer["FilmIndex_DurationLabel", Model.DurationMinutes]
+						</span>
+						@foreach (var genre in Model.Genres)
+						{
+							<span class="badge bg-primary" style="font-size: 0.9rem;">@genre</span>
+						}
+					</div>
+
+					<p class="fs-5 mb-4" style="color: var(--hub-muted, #a3a3a3); line-height: 1.6;">
+						@Localizer.LocalizeFilmDescription(Model.Id, Model.Description)
+					</p>
+
+					<div class="mt-4 mb-4">
+						<h4 class="mb-3 border-bottom pb-2" style="border-color: var(--hub-border, rgba(255,255,255,0.1)) !important; color: var(--hub-text);">@Localizer["FilmDetails_CastCrew", fullCredits.Count]</h4>
+						@if (fullCredits.Any())
+						{
+							<div class="row g-3">
+								@foreach (var credit in fullCredits)
+								{
+									<div class="col-6 col-sm-4 col-md-3">
+										@{
+											await Html.RenderPartialAsync("~/Views/Shared/_PersonCard.cshtml", credit);
+										}
+									</div>
+								}
+							</div>
+						}
+						else
+						{
+							<div class="text-muted fst-italic" style="color: var(--hub-muted, #a3a3a3);">@Localizer["FilmDetails_NoCastCrew"]</div>
+						}
+					</div>
+
+					<div class="mt-5 mb-4">
+						<h4 class="mb-3 border-bottom pb-2" style="border-color: var(--hub-border, rgba(255,255,255,0.1)) !important; color: var(--hub-text);">@Localizer["FilmDetails_ScreeningsHeading"]</h4>
+						@if (filmEntity?.FestivalFilms != null && filmEntity.FestivalFilms.Any())
+						{
+							<div class="d-flex flex-column gap-4">
+								@foreach (var ff in filmEntity.FestivalFilms)
+								{
+									var rental = await ProductRepository.GetRentalAsync(ff.Id);
+									var festivalName = ff.Festival?.Name ?? Localizer["FilmDetails_UnknownFestival"].Value;
+									var festivalReturnUrl = ff.Festival != null
+										? Url.RouteUrl("FestivalDetails", new { id = ff.Festival.Id })
+										: null;
+									
+									<div class="p-4 rounded shadow-sm" style="background: var(--hub-surface-2); border: 1px solid var(--hub-border, rgba(255,255,255,0.1));">
+										<div class="d-flex justify-content-between align-items-center mb-3">
+											<h5 class="fw-bold mb-0" style="color: var(--hub-text);">@festivalName</h5>
+											@if (ff.Festival != null)
+											{
+												<a href="/festivals/@ff.Festival.Id" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">
+													@Localizer["FilmDetails_GoToFestival"] <i class="bi bi-arrow-right ms-1"></i>
+												</a>
+											}
+										</div>
+										
+										<div class="d-flex flex-wrap gap-2">
+											@{
+												var filmNowUtc = DateTime.UtcNow;
+												var regularSessions = ff.Sessions?
+													.Where(s => !(s.SessionType?.ToString() ?? "").Equals("AccessWindow", StringComparison.OrdinalIgnoreCase))
+													.Where(s => s.EndTimeUtc > filmNowUtc)
+													.OrderBy(s => s.StartTimeUtc);
+												var hasAccessWindow = ff.Sessions?.Any(s =>
+													(s.SessionType?.ToString() ?? "").Equals("AccessWindow", StringComparison.OrdinalIgnoreCase)
+													&& s.EndTimeUtc > filmNowUtc) == true;
+											}
+											@if (regularSessions != null && regularSessions.Any())
+											{
+												foreach (var session in regularSessions)
+												{
+													@if (hasPurchased)
+													{
+														<button disabled class="btn btn-outline-secondary fw-bold shadow-sm d-flex align-items-center gap-2">
+															<i class="bi bi-ticket-perforated"></i>
+															<div class="text-start">
+																<div style="font-size: 0.8rem; line-height: 1; opacity: 0.9;">@Localizer.LocalizeSessionType(session.SessionType)</div>
+																<div style="font-size: 0.95rem; line-height: 1.2;">@session.StartTimeUtc.ToString("dd MMM, HH:mm")</div>
+															</div>
+														</button>
+													}
+													else
+													{
+														var ticket = await ProductRepository.GetTicketAsync(session.Id);
+														if (ticket != null)
+														{
+															<a asp-route="AddTicketIndex" asp-route-sessionId="@session.Id" asp-route-returnUrl="@festivalReturnUrl" class="btn btn-danger fw-bold shadow-sm d-flex align-items-center gap-2">
+																<i class="bi bi-ticket-perforated"></i>
+																<div class="text-start">
+																	<div style="font-size: 0.8rem; line-height: 1; opacity: 0.9;">@Localizer.LocalizeSessionType(session.SessionType)</div>
+																	<div style="font-size: 0.95rem; line-height: 1.2;">@session.StartTimeUtc.ToString("dd MMM, HH:mm")</div>
+																</div>
+															</a>
+														}
+													}
+												}
+											}
+											
+											@if (rental != null && hasAccessWindow)
+											{
+												@if (hasPurchased)
+												{
+													<button disabled class="btn btn-outline-secondary fw-bold shadow-sm d-flex align-items-center gap-2">
+														<i class="bi bi-play-circle"></i>
+														<div class="text-start">
+															<div style="font-size: 0.8rem; line-height: 1; opacity: 0.9;">@Localizer["FilmDetails_RentDigitally"]</div>
+															<div style="font-size: 0.95rem; line-height: 1.2;">@rental.Duration.Value @Localizer.LocalizeRentalUnit(rental.Duration.Unit.ToString())</div>
+														</div>
+													</button>
+												}
+												else
+												{
+													<a asp-route="AddRentalIndex" asp-route-festivalFilmId="@ff.Id" asp-route-returnUrl="@festivalReturnUrl" class="btn btn-secondary fw-bold shadow-sm d-flex align-items-center gap-2">
+														<i class="bi bi-play-circle"></i>
+														<div class="text-start">
+															<div style="font-size: 0.8rem; line-height: 1; opacity: 0.9;">@Localizer["FilmDetails_RentDigitally"]</div>
+															<div style="font-size: 0.95rem; line-height: 1.2;">@rental.Duration.Value @Localizer.LocalizeRentalUnit(rental.Duration.Unit.ToString())</div>
+														</div>
+													</a>
+												}
+											}
+										</div>
+									</div>
+								}
+							</div>
+						}
+						else
+						{
+							<p class="text-muted" style="color: var(--hub-muted, #a3a3a3) !important;">@Localizer["FilmDetails_NoScreenings"]</p>
+						}
+					</div>
+
+					<div class="d-flex gap-3 flex-wrap mt-auto pt-4 border-top" style="border-color: var(--hub-border, rgba(255,255,255,0.1)) !important;">
+						@if (canWatchNow && !string.IsNullOrWhiteSpace(watchLink))
+						{
+							<a class="btn rounded-pill px-4 fw-bold shadow-sm" style="background: var(--hub-accent, #e50914); color: #ffffff;" href="@watchLink">
+								<i class="bi bi-play-fill me-1"></i> @Localizer["FilmDetails_Watch"]
+							</a>
+						}
+						else if (hasPurchased && !canWatchNow && earliestSessionStartUtc.HasValue)
+						{
+							<button disabled class="btn rounded-pill px-4 fw-bold shadow-sm" style="background: var(--hub-surface); color: var(--hub-muted, #a3a3a3); border: 1px solid var(--hub-border, rgba(255,255,255,0.2)); cursor: not-allowed;">
+								<i class="bi bi-clock me-1"></i> @Localizer["FilmDetails_WatchScheduled", earliestSessionStartUtc.Value.ToString("dd MMM yyyy, HH:mm")]
+							</button>
+						}
+						<a class="btn btn-hub-outline rounded-pill px-4" asp-route="FilmIndex">
+							<i class="bi bi-list me-1"></i> @Localizer["Common_Back"]
+						</a>
+
+						@if (User.IsInRole("Admin"))
+						{
+							<form method="post" asp-route="FilmDelete" asp-route-id="@Model.Id" class="ms-auto m-0">
+								@Html.AntiForgeryToken()
+								<button type="submit" class="btn btn-outline-danger rounded-pill px-4" onclick="return confirm('@confirmDeleteFilm');">
+									<i class="bi bi-trash me-1"></i> @Localizer["FilmDetails_DeleteMovie"]
+								</button>
+							</form>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</section>

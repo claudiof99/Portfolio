@@ -1,0 +1,30 @@
+@model UmaFestHub.Application.DTOs.FilmCreditDto
+
+@{
+    string? imageUrl = Model?.ImageUrl;
+    var unknown = Localizer["Common_Unknown"].Value;
+    string personName = Model?.PersonName ?? unknown;
+    string role = Model?.Role ?? unknown;
+
+    // TMDB returns relative paths like "/abc.jpg", we need to prepend the base URL
+    if (!string.IsNullOrWhiteSpace(imageUrl) && imageUrl.StartsWith("/"))
+    {
+        imageUrl = "https://image.tmdb.org/t/p/w200" + imageUrl;
+    }
+}
+
+<div class="text-center d-flex flex-column align-items-center p-2">
+    @if (!string.IsNullOrWhiteSpace(imageUrl))
+    {
+        <img src="@imageUrl" alt="@personName" class="rounded-circle shadow-sm mb-2" width="80" height="80" style="object-fit: cover; border: 2px solid rgba(255,255,255,0.1);" />
+    }
+    else
+    {
+        <!-- Fallback avatar if no image is available -->
+        <div class="rounded-circle shadow-sm mb-2 d-flex justify-content-center align-items-center" style="width: 80px; height: 80px; background-color: var(--hub-surface, #222); border: 2px solid rgba(255,255,255,0.1);">
+            <i class="bi bi-person text-secondary" style="font-size: 2rem;"></i>
+        </div>
+    }
+    <div class="fw-semibold" style="color: var(--hub-text); font-size: 0.95rem; line-height: 1.2;">@(string.IsNullOrWhiteSpace(personName) ? unknown : personName)</div>
+    <div style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3);">@Localizer.LocalizeCreditRole(role)</div>
+</div>

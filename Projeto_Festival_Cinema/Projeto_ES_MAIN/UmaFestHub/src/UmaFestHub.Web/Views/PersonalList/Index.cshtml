@@ -1,0 +1,163 @@
+@*
+  Personal list hub (/personal-list): tabs for Watchlist / Seen / Favorites; GET filters; remove posts keep query string via listReturnUrl.
+  Seen tab = PersonalListType.Watched (same rows as /watchHistory; rows from entitled watch URLs via Observer + manual remove).
+*@
+@using UmaFestHub.Domain.Entities
+@model UmaFestHub.Web.ViewModels.PersonalListPageViewModel
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Model.PageTitle;
+	var type = Model.ListType;
+	// Preserve type + filters after Remove redirects back here.
+	var listReturnUrl = Url.Action("Index", "PersonalList", new
+	{
+		type = Model.ListType,
+		title = Model.FilterTitle,
+		genre = Model.FilterGenre,
+		festivalId = Model.SelectedFestivalId
+	}) ?? $"/personal-list?type={type}";
+}
+
+<section class="container hub-section mt-4 pb-5">
+	<header class="mb-4">
+		<div class="d-flex flex-wrap align-items-start gap-3 w-100">
+			<div class="flex-grow-1 min-width-0" style="max-width: calc(100% - 9.5rem);">
+				<h1 class="hero-title mb-2" style="color: var(--hub-text, #ffffff);">@Model.PageTitle</h1>
+				<p class="hero-desc mb-0" style="color: var(--hub-muted, #a3a3a3); max-width: 640px;">
+					@Model.PageSubtitle
+				</p>
+			</div>
+			<a class="btn btn-outline-light rounded-pill hub-personal-list-back flex-shrink-0 ms-auto align-self-start position-relative"
+			   style="z-index: 2;"
+			   href="@(Url.Action("Index", "Home") ?? "/")">@Localizer["Common_Back"]</a>
+		</div>
+	</header>
+
+	<ul class="nav nav-tabs border-secondary mb-4">
+		<li class="nav-item">
+			<a class="nav-link @(type == PersonalListType.Watchlist ? "active" : "") fw-semibold"
+			   href="@(Url.Action("Index", "PersonalList", new { type = PersonalListType.Watchlist }) ?? "/personal-list?type=Watchlist")">
+				@Localizer["PersonalList_TabWatchlist"]
+			</a>
+		</li>
+		<li class="nav-item">
+			@* Seen = PersonalListType.Watched (same list as /watchHistory). *@
+			<a class="nav-link @(type == PersonalListType.Watched ? "active" : "") fw-semibold"
+			   href="@(Url.Action("Index", "PersonalList", new { type = PersonalListType.Watched }) ?? "/personal-list?type=Watched")">
+				@Localizer["PersonalList_TabSeen"]
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link @(type == PersonalListType.Favorites ? "active" : "") fw-semibold"
+			   href="@(Url.Action("Index", "PersonalList", new { type = PersonalListType.Favorites }) ?? "/personal-list?type=Favorites")">
+				@Localizer["PersonalList_TabFavorites"]
+			</a>
+		</li>
+	</ul>
+
+	<div class="row align-items-center mb-4 g-2">
+		<div class="col-12">
+			<form method="get" asp-controller="PersonalList" asp-action="Index" class="row g-2 align-items-end">
+				<input type="hidden" name="type" value="@type" />
+				<div class="col-md-4 col-lg-4">
+					<label class="form-label small mb-1" style="color: var(--hub-muted);">@Localizer["Common_Name"]</label>
+					<input class="form-control" type="search" name="title" value="@Model.FilterTitle" placeholder="@Localizer["Nav_SearchPlaceholder"]" />
+				</div>
+				<div class="col-md-3 col-lg-3">
+					<label class="form-label small mb-1" style="color: var(--hub-muted);">@Localizer["Common_Genre"]</label>
+					<input class="form-control" type="text" name="genre" value="@Model.FilterGenre" placeholder="@Localizer["Common_Genre"]" />
+				</div>
+				<div class="col-md-4 col-lg-4">
+					<label class="form-label small mb-1" style="color: var(--hub-muted);">@Localizer["Common_Festivals"]</label>
+					<select class="form-select" name="festivalId">
+						<option value="" selected="@(Model.SelectedFestivalId == null || Model.SelectedFestivalId == Guid.Empty ? "selected" : null)">
+							@Localizer["Common_All"]
+						</option>
+						@foreach (var f in Model.FestivalFilterOptions)
+						{
+							<option value="@f.Id" selected="@(Model.SelectedFestivalId == f.Id ? "selected" : null)">@f.Name</option>
+						}
+					</select>
+				</div>
+				<div class="col-md-1 col-lg-1 d-grid">
+					<button class="btn btn-primary" type="submit">@Localizer["Common_Go"]</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	@if (Model.SourceListFilmCount == 0)
+	{
+		<div class="hub-empty-state">
+			
+			@if (type == PersonalListType.Favorites)
+			{
+				<span>@Localizer["Home_EmptyFavorites"]</span>
+			}
+			else if (type == PersonalListType.Watchlist)
+			{
+				<span>@Localizer["Home_EmptyWatchlist"]</span>
+			}
+
+			else if (type == PersonalListType.Watched){
+				<span>@Localizer["Home_EmptySeen"]</span>
+			}
+		</div>
+	}
+	else if (Model.Films.Count == 0)
+	{
+		<div class="hub-empty-state">@Localizer["PersonalList_NoFilterMatches"]</div>
+	}
+	else
+	{
+		<div class="row row-cols-2 row-cols-sm-3 row-cols-lg-4 g-4">
+			@foreach (var film in Model.Films)
+			{
+				<div class="col">
+					<article class="hub-festival-card hub-personal-list-card h-100 d-flex flex-column p-3"
+					         style="background-color: var(--hub-surface-2, #1f1f1f); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;">
+						<a href="/films/@film.Id" class="text-decoration-none flex-grow-0 hub-personal-list-film-link">
+							<div class="hub-thumb w-100 position-relative rounded overflow-hidden mb-3" style="aspect-ratio: 2/3; background:#111;">
+								@if (!string.IsNullOrWhiteSpace(film.ImageUrl))
+								{
+									<img src="@film.ImageUrl" alt="@film.Name" class="w-100 h-100 img-fluid"
+									     style="object-fit: cover; display:block;" />
+								}
+								else
+								{
+									var initial = string.IsNullOrWhiteSpace(film.Name) ? "?" : film.Name.Trim().Substring(0, 1).ToUpperInvariant();
+									<div class="d-flex align-items-center justify-content-center h-100 w-100 bg-dark text-secondary fw-bold fs-3">@initial</div>
+								}
+							</div>
+							<strong class="d-block text-truncate hub-personal-list-film-title" title="@film.Name">@film.Name</strong>
+						</a>
+						@if (film.Genres.Count > 0)
+						{
+							<div class="d-flex flex-wrap gap-2 mt-2">
+								@foreach (var genre in film.Genres)
+								{
+									<span class="badge bg-primary" style="font-size: 0.9rem;">@genre</span>
+								}
+							</div>
+						}
+						@if (!string.IsNullOrWhiteSpace(film.Description))
+						{
+							var localizedDesc = Localizer.LocalizeFilmDescription(film.Id, film.Description);
+							<p class="small flex-grow-1 mt-2 mb-0" style="color: var(--hub-muted); line-height: 1.35;">
+								@(localizedDesc.Length > 140 ? localizedDesc[..140] + "…" : localizedDesc)
+							</p>
+						}
+						<form method="post" action="/PersonalList/Remove" class="mt-3 mb-0">
+							@Html.AntiForgeryToken()
+							<input type="hidden" name="type" value="@type" />
+							<input type="hidden" name="filmId" value="@film.Id" />
+							<input type="hidden" name="returnUrl" value="@listReturnUrl" />
+							<button type="submit" class="btn btn-sm rounded-pill w-100 outline-light border border-secondary bg-transparent hub-personal-list-remove-btn">
+								@Localizer["PersonalList_RemoveFromList"]</button>
+						</form>
+					</article>
+				</div>
+			}
+		</div>
+	}
+</section>

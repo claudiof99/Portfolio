@@ -1,0 +1,568 @@
+@model UmaFestHub.Web.ViewModels.FestivalViewModel
+@using UmaFestHub.Web.Security
+@inject UmaFestHub.Domain.Interfaces.IProductRepository ProductRepository
+@using UmaFestHub.Domain.Entities
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["FestivalDetails_PageTitle"].Value;
+}
+
+@{
+	var festivalQueryId = Model?.Id.ToString();
+	var purchasedProductIds = ViewBag.PurchasedProductIds as HashSet<Guid> ?? new HashSet<Guid>();
+	var accessMap = ViewBag.AccessMap as Dictionary<Guid, bool> ?? new Dictionary<Guid, bool>();
+	var watchLinkMap = ViewBag.WatchLinkMap as Dictionary<Guid, string> ?? new Dictionary<Guid, string>();
+	var dailyPassId = ViewBag.DailyPassId as Guid?;
+	var completePassId = ViewBag.CompletePassId as Guid?;
+	var hasDailyPass = dailyPassId.HasValue && purchasedProductIds.Contains(dailyPassId.Value);
+	var hasCompletePass = completePassId.HasValue && purchasedProductIds.Contains(completePassId.Value);
+	var isFestivalEnded = ViewBag.IsFestivalEnded as bool? ?? false;
+	var nowUtc = DateTime.UtcNow;
+	var returnUrl = $"{Context.Request.Path}{Context.Request.QueryString}";
+	var confirmDeleteFestival = Localizer["Common_ConfirmDelete"].Value.Replace("'", "\\'");
+	var confirmRemoveFilm = Localizer["FestivalDetails_ConfirmRemoveFilm"].Value.Replace("'", "\\'");
+}
+<section class="container hub-section mt-4">
+	@if (TempData["SuccessMessage"] != null)
+	{
+		<div class="alert alert-success alert-dismissible fade show mb-4 shadow-sm" role="alert">
+			<i class="bi bi-check-circle-fill me-2"></i> <strong>@Localizer["Common_Success"]</strong> @TempData["SuccessMessage"]
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@Localizer["Common_Close"]"></button>
+		</div>
+	}
+
+	@if (TempData["InfoMessage"] != null)
+	{
+		<div class="alert alert-info alert-dismissible fade show mb-4 shadow-sm" role="alert">
+			<i class="bi bi-info-circle-fill me-2"></i> <strong>@Localizer["Alert_Information"]</strong> @TempData["InfoMessage"]
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@Localizer["Common_Close"]"></button>
+		</div>
+	}
+
+	@if (TempData["ErrorMessage"] != null)
+	{
+		<div class="alert alert-danger alert-dismissible fade show mb-4 shadow-sm" role="alert">
+			<h4 class="alert-heading"><i class="bi bi-exclamation-triangle-fill me-2"></i> @Localizer["Common_Error"]</h4>
+			<p class="mb-0">@TempData["ErrorMessage"]</p>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@Localizer["Common_Close"]"></button>
+		</div>
+	}
+
+	@if (TempData["AccessError"] != null)
+	{
+		<div class="alert alert-warning alert-dismissible fade show mb-4 shadow-sm" role="alert">
+			<h4 class="alert-heading"><i class="bi bi-lock-fill me-2"></i> @Localizer["Alert_NotYetAvailable"]</h4>
+			<p class="mb-0">@TempData["AccessError"]</p>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@Localizer["Common_Close"]"></button>
+		</div>
+	}
+
+	@if (User.IsInRole(RoleConstants.Admin))
+	{
+		<div class="mb-4">
+			<a href="/admin" class="hub-admin-btn">
+				<i class="bi bi-shield-check"></i> @Localizer["Nav_AdminHub"]
+			</a>
+		</div>
+	}
+	else if (User.IsInRole(RoleConstants.Organizer))
+	{
+		<div class="mb-4">
+			<a asp-route="ManageIndex" class="hub-admin-btn">
+				<i class="bi bi-gear-fill"></i> @Localizer["Nav_OrganizerHub"]
+			</a>
+		</div>
+	}
+	@if (Model is null)
+	{
+		<div class="hub-empty-state">@Localizer["Common_ComingSoon"]</div>
+	}
+	else
+	{
+
+		<div class="hub-hero-panel hub-reveal mb-5 position-relative">
+			<div class="row align-items-center g-5">
+				<!-- Left Column: Info -->
+				<div class="col-md-7">
+					<div class="d-flex flex-wrap gap-2 mb-3">
+						<span class="hero-chip">
+							<i class="bi bi-calendar3"></i> @Model.StartDateUtc.ToString("MMM dd", CultureInfo.CurrentUICulture) @Localizer["Common_To"] @Model.EndDateUtc.ToString("MMM dd, yyyy", CultureInfo.CurrentUICulture)
+						</span>
+						<span class="hero-chip">
+							<i class="bi bi-film"></i> @(Model.Films?.Count ?? 0) @Localizer["Common_Films"]
+						</span>
+						@if (Model.EarlyBirdDiscountPercent.HasValue && Model.EarlyBirdDaysBeforeStart.HasValue)
+						{
+							<span class="hero-chip" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #ffffff; font-weight: 600;">
+								<i class="bi bi-lightning-charge-fill"></i> @Localizer["FestivalDetails_EarlyBirdBadge", Math.Round(Model.EarlyBirdDiscountPercent.Value, 0), Model.EarlyBirdDaysBeforeStart]
+							</span>
+						}
+					</div>
+
+					<h1 class="hero-title text-start">@Model.Name</h1>
+					
+					@if (!string.IsNullOrWhiteSpace(Model.Description))
+					{
+						<p class="hero-desc text-start mb-4">@Localizer.LocalizeFestivalDescription(Model.Id, Model.Description)</p>
+					}
+
+					<div data-countdown-target="@Model.StartDateUtc.ToString("o")"
+					     data-countdown-end="@Model.EndDateUtc.ToString("o")"
+					     data-countdown-prefix="@Localizer["Countdown_GoingLiveIn"]"
+					     data-countdown-live="@Localizer["Countdown_LiveNow"]"
+					     data-countdown-ended="@Localizer["Countdown_FestivalEnded"]"
+					     data-countdown-days="@Localizer["Countdown_Days"]"
+					     data-countdown-hours="@Localizer["Countdown_Hours"]"
+					     data-countdown-mins="@Localizer["Countdown_Mins"]"
+					     data-countdown-secs="@Localizer["Countdown_Secs"]"></div>
+
+					@if (User.IsInAnyRole(RoleConstants.ModeratorRoles))
+					{
+						<hr style="border-color: rgba(255,255,255,0.1); margin: 1.5rem 0;" />
+						<p style="font-size:0.78rem; color:var(--hub-muted, #a3a3a3); text-transform:uppercase; letter-spacing:0.08em;">
+							@Localizer["FestivalDetails_ManagerTools"]
+						</p>
+						<div class="d-flex flex-wrap gap-2 align-items-center">
+							<a class="btn btn-sm btn-outline-warning rounded-pill px-3" asp-route="FestivalEdit" asp-route-id="@Model.Id">@Localizer["Common_Edit"]</a>
+							<a class="btn btn-sm btn-outline-info rounded-pill px-3" href="#festival-films-section">@Localizer["Common_Sessions"]</a>
+							<a class="btn btn-sm btn-outline-success rounded-pill px-3" asp-route="AwardIndex" asp-route-festivalId="@Model.Id">@Localizer["Common_Awards"]</a>
+							<a href="/manage/festivals/@Model.Id/import" class="btn btn-sm btn-outline-primary rounded-pill px-3">@Localizer["FestivalDetails_ImportFilms"]</a>
+							<a href="/passes/create?festivalId=@Model.Id&type=Day" class="btn btn-sm btn-outline-light rounded-pill px-3">@Localizer["FestivalDetails_ConfigureDailyPass"]</a>
+							<a href="/passes/create?festivalId=@Model.Id&type=Complete" class="btn btn-sm btn-outline-light rounded-pill px-3">@Localizer["FestivalDetails_ConfigureFullPass"]</a>
+							@if (User.IsInRole(RoleConstants.Admin))
+							{
+								<form method="post" asp-controller="Festival" asp-action="Delete" asp-route-id="@Model.Id" class="m-0">
+									@Html.AntiForgeryToken()
+									<button type="submit" class="btn btn-sm btn-outline-danger rounded-pill px-3" onclick="return confirm('@confirmDeleteFestival');">@Localizer["Common_Delete"]</button>
+								</form>
+								var hideLabel = Model.IsHidden
+									? Localizer["Festival_UnhideButton"].Value
+									: Localizer["Festival_HideButton"].Value;
+								var hideBtnStyle = Model.IsHidden
+									? "btn btn-sm btn-outline-success rounded-pill px-3"
+									: "btn btn-sm btn-outline-secondary rounded-pill px-3";
+								<button id="btnHideUnhide"
+										type="button"
+										class="@hideBtnStyle"
+										data-festival-id="@Model.Id"
+										data-is-hidden="@Model.IsHidden.ToString().ToLower()"
+										data-hide-url="/festival/@Model.Id/hide"
+										data-unhide-url="/festival/@Model.Id/unhide"
+										data-hide-label="@Localizer["Festival_HideButton"]"
+										data-unhide-label="@Localizer["Festival_UnhideButton"]"
+										data-hide-class="btn btn-sm btn-outline-secondary rounded-pill px-3"
+										data-unhide-class="btn btn-sm btn-outline-success rounded-pill px-3">
+									@hideLabel
+								</button>
+							}
+						</div>
+					}
+				</div>
+
+				<!-- Right Column: Passes -->
+				<div class="col-md-5">
+					<div class="row g-3 h-100">
+						<!-- Daily Pass Card -->
+						<div class="col-sm-6">
+							<div class="pass-card">
+								<div class="pass-icon"><i class="bi bi-ticket-perforated"></i></div>
+								<h4 class="h5 mb-1 fw-bold">@Localizer["FestivalDetails_DailyPass"]</h4>
+								<p class="small mb-2 flex-grow-1" style="color: var(--hub-muted, #a3a3a3);">@Localizer["FestivalDetails_DailyPassDesc"]</p>
+								
+								@if (Model.DailyPassPrice.HasValue)
+								{
+									@if (Model.DailyPassDiscountedPrice.HasValue && Model.DailyPassDiscountedPrice < Model.DailyPassPrice)
+									{
+										<p class="mb-1" style="text-decoration: line-through; color: #888;">@Model.DailyPassPrice.Value.ToString("C")</p>
+										<p class="fw-bold mb-2 text-success">@Model.DailyPassDiscountedPrice.Value.ToString("C") <span class="badge bg-warning text-dark ms-1">@Localizer["FestivalDetails_EarlyBirdPercent", (int)((1 - Model.DailyPassDiscountedPrice.Value / Model.DailyPassPrice.Value) * 100)]</span></p>
+									}
+									else
+									{
+										<p class="fw-bold mb-3 text-success">@Model.DailyPassPrice.Value.ToString("C")</p>
+									}
+									@if (hasDailyPass)
+									{
+										<button disabled class="btn rounded-pill w-100">@Localizer["FestivalDetails_Purchased"]</button>
+									}
+									else
+									{
+										<a asp-route="AddPassIndex" asp-route-festivalId="@Model.Id" asp-route-type="Day" asp-route-returnUrl="@returnUrl" class="btn btn-hub-outline rounded-pill w-100 text-center text-decoration-none" style="display: inline-block; padding: 6px 12px;">@Localizer["FestivalDetails_AddToCart"]</a>
+									}
+								}
+								else
+								{
+									<p class="fw-bold mb-3 text-warning">@Localizer["Common_ComingSoon"]</p>
+									<button disabled class="btn rounded-pill w-100">@Localizer["Common_Unavailable"]</button>
+								}
+							</div>
+						</div>
+						
+						<!-- Full Pass Card -->
+						<div class="col-sm-6">
+							<div class="pass-card pass-card-featured">
+								<div class="pass-icon"><i class="bi bi-star-fill"></i></div>
+								<h4 class="h5 mb-1 fw-bold">@Localizer["FestivalDetails_FullPass"]</h4>
+								<p class="small mb-2 flex-grow-1" style="color: var(--hub-muted, #a3a3a3);">@Localizer["FestivalDetails_FullPassDesc"]</p>
+								
+								@if (Model.CompletePassPrice.HasValue)
+								{
+									@if (Model.CompletePassDiscountedPrice.HasValue && Model.CompletePassDiscountedPrice < Model.CompletePassPrice)
+									{
+										<p class="mb-1" style="text-decoration: line-through; color: #888;">@Model.CompletePassPrice.Value.ToString("C")</p>
+										<p class="fw-bold mb-2 text-success">@Model.CompletePassDiscountedPrice.Value.ToString("C") <span class="badge bg-warning text-dark ms-1">@Localizer["FestivalDetails_EarlyBirdPercent", (int)((1 - Model.CompletePassDiscountedPrice.Value / Model.CompletePassPrice.Value) * 100)]</span></p>
+									}
+									else
+									{
+										<p class="fw-bold mb-3 text-success">@Model.CompletePassPrice.Value.ToString("C")</p>
+									}
+									@if (hasCompletePass)
+									{
+										<button disabled class="btn rounded-pill w-100">@Localizer["FestivalDetails_Purchased"]</button>
+									}
+									else
+									{
+										<a asp-route="AddPassIndex" asp-route-festivalId="@Model.Id" asp-route-type="Complete" asp-route-returnUrl="@returnUrl" class="btn btn-hub-outline rounded-pill w-100 text-center text-decoration-none" style="display: inline-block; padding: 6px 12px;">@Localizer["FestivalDetails_AddToCart"]</a>
+									}
+								}
+								else
+								{
+									<p class="fw-bold mb-3 text-warning">@Localizer["Common_ComingSoon"]</p>
+									<button disabled class="btn rounded-pill w-100">@Localizer["Common_Unavailable"]</button>
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="festival-films-section" class="hub-section hub-reveal mt-4">
+			<div class="hub-section-header">
+				<h2>@Localizer["FestivalDetails_FilmsInFestival"]</h2>
+			</div>
+
+			@if (Model.Films == null || !Model.Films.Any())
+			{
+				<div class="hub-empty-state">@Localizer["FestivalDetails_NoFilms"]</div>
+			}
+			else
+			{
+				<div class="container px-0">
+					<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4 hub-reveal-stagger">
+						@foreach (var film in Model.Films)
+						{
+							var canWatch = accessMap.TryGetValue(film.Id, out var hasAccess) && hasAccess;
+							var watchLink = watchLinkMap.TryGetValue(film.Id, out var link) ? link : null;
+							var hasWatchLink = !string.IsNullOrWhiteSpace(watchLink);
+							var localizedFilmDesc = string.IsNullOrWhiteSpace(film.FilmDescription)
+								? Localizer["FestivalDetails_NoDescription"].Value
+								: Localizer.LocalizeFilmDescription(film.FilmId, film.FilmDescription);
+							var filmDescPreview = localizedFilmDesc.Length > 120 ? localizedFilmDesc[..120] + "..." : localizedFilmDesc;
+							
+							var filmAnchorId = $"film-{film.FilmId}";
+							var returnUrlWithAnchor = $"{returnUrl}#{filmAnchorId}";
+							<div class="col d-flex hub-reveal">
+								<article id="@filmAnchorId" data-tilt class="hub-festival-card flex-fill d-flex flex-column w-100 shadow-sm" style="background-color: var(--hub-surface-2); border-radius: 12px; overflow: hidden; min-width: 100%; border: 1px solid var(--hub-border, rgba(255,255,255,0.1)); color: var(--hub-text);">
+									<a href="/films/@film.FilmId" class="text-decoration-none d-block">
+										<div class="hub-thumb position-relative" style="aspect-ratio: 2/3; overflow: hidden;">
+											@if (!string.IsNullOrWhiteSpace(film.ImageUrl))
+											{
+												<img src="@film.ImageUrl" alt="@film.FilmName" class="img-fluid w-100 h-100" style="object-fit: cover;" />
+											}
+											else
+											{
+												<div class="d-flex align-items-center justify-content-center w-100 h-100" style="background-color: var(--hub-surface, #141414);">
+													<span style="font-size: 3rem; color: #adb5bd; font-weight: bold;">@(string.IsNullOrWhiteSpace(film.FilmName) ? "F" : film.FilmName.Trim().Substring(0, 1).ToUpperInvariant())</span>
+												</div>
+											}
+										</div>
+									</a>
+									<div class="p-4 pb-3 d-flex flex-column flex-grow-1">
+										@if (film.IsWorldPremier)
+										{
+											<span class="badge bg-warning text-dark mb-2" style="font-size:.7rem; align-self: flex-start;">@Localizer["FestivalDetails_WorldPremiere"]</span>
+										}
+										<strong>@film.FilmName</strong>
+										<p style="font-size:.9rem; color: var(--hub-muted, #a3a3a3); margin: .75rem 0;">@filmDescPreview</p>
+										<small style="color: var(--hub-accent, #e50914); font-weight: 500;">@string.Join(", ", film.Genres)</small>
+										<small style="color: var(--hub-muted, #a3a3a3);">@Localizer["FestivalDetails_SessionMeta", film.DurationMinutes, film.SessionCount]</small>
+
+										@* Favorites / watchlist toggles → PersonalListController; returnUrl scrolls back to #film-{FilmId}. *@
+										<div class="d-flex flex-wrap gap-2 mt-3 mb-auto">
+											<a href="/films/@film.FilmId" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">@Localizer["Common_Details"]</a>
+											<a href="/Review?festivalFilmId=@film.Id" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">@Localizer["Common_Reviews"]</a>
+											@if (film.IsFavorite)
+											{
+												<form method="post" action="/PersonalList/Remove" class="m-0">
+													@Html.AntiForgeryToken()
+													<input type="hidden" name="type" value="@PersonalListType.Favorites" />
+													<input type="hidden" name="filmId" value="@film.FilmId" />
+													<input type="hidden" name="returnUrl" value="@returnUrlWithAnchor" />
+													<button type="submit" class="btn btn-sm rounded-pill px-3 btn-action-warning">⭐ @Localizer["FestivalDetails_RemoveFavorite"]</button>
+												</form>
+											}
+											else
+											{
+												<form method="post" action="/PersonalList/Add" class="m-0">
+													@Html.AntiForgeryToken()
+													<input type="hidden" name="type" value="@PersonalListType.Favorites" />
+													<input type="hidden" name="filmId" value="@film.FilmId" />
+													<input type="hidden" name="returnUrl" value="@returnUrlWithAnchor" />
+													<button type="submit" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">⭐ @Localizer["FestivalDetails_AddFavorite"]</button>
+												</form>
+											}
+											@if (film.IsWatchlist)
+											{
+												<form method="post" action="/PersonalList/Remove" class="m-0">
+													@Html.AntiForgeryToken()
+													<input type="hidden" name="type" value="@PersonalListType.Watchlist" />
+													<input type="hidden" name="filmId" value="@film.FilmId" />
+													<input type="hidden" name="returnUrl" value="@returnUrlWithAnchor" />
+													<button type="submit" class="btn btn-sm rounded-pill px-3 btn-action-warning">@Localizer["FestivalDetails_RemoveWatchlist"]</button>
+												</form>
+											}
+											else
+											{
+												<form method="post" action="/PersonalList/Add" class="m-0">
+													@Html.AntiForgeryToken()
+													<input type="hidden" name="type" value="@PersonalListType.Watchlist" />
+													<input type="hidden" name="filmId" value="@film.FilmId" />
+													<input type="hidden" name="returnUrl" value="@returnUrlWithAnchor" />
+													<button type="submit" class="btn btn-sm btn-hub-outline rounded-pill px-3" style="font-size: 0.8rem;">+ @Localizer["FestivalDetails_AddWatchlist"]</button>
+												</form>
+											}
+											@if (User.IsInAnyRole(RoleConstants.ModeratorRoles))
+											{
+												<a asp-route="SessionIndex"
+													asp-route-festivalId="@Model.Id"
+													asp-route-festivalFilmId="@film.Id" class="btn btn-sm rounded-pill px-3 btn-action-warning">@Localizer["FestivalDetails_ManageSessions"]</a>
+												@if (User.IsInRole("Admin"))
+												{
+													<form method="post" asp-route="FestivalRemoveFilm" style="display:inline;">
+														@Html.AntiForgeryToken()
+														<input type="hidden" name="festivalFilmId" value="@film.Id" />
+														<input type="hidden" name="festivalId" value="@Model.Id" />
+														<button type="submit" class="btn btn-sm rounded-pill px-3 btn-action-danger" onclick="return confirm('@confirmRemoveFilm');">@Localizer["FestivalDetails_RemoveMovie"]</button>
+													</form>
+												}
+											}
+										</div>
+									</div>
+
+									<div class="px-4 pb-4 pt-3 border-top mt-auto" style="border-color: var(--hub-border, rgba(255,255,255,0.1)) !important;">
+											<p class="mb-2" style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3);">@Localizer["FestivalDetails_AccessOptions"]</p>
+											<div class="d-flex flex-column gap-2">
+
+												@{
+													var regularSessions = film.Sessions?
+														.Where(s => !(s.SessionType?.ToString() ?? "").Contains("AccessWindow", StringComparison.OrdinalIgnoreCase))
+														.Where(s => s.EndTimeUtc > nowUtc)
+														.ToList() ?? new List<UmaFestHub.Web.ViewModels.SessionViewModel>();
+													var hasAnyActiveAccessWindow = film.Sessions?
+														.Any(s => (s.SessionType?.ToString() ?? "").Contains("AccessWindow", StringComparison.OrdinalIgnoreCase)
+															&& s.EndTimeUtc > nowUtc) ?? false;
+												}
+
+												@if (hasDailyPass || hasCompletePass)
+												{
+													if (isFestivalEnded)
+													{
+														<button class="btn rounded-pill w-100 fw-semibold" style="background: #333333; color: #888888; border: none; cursor: not-allowed;" disabled>
+															⏰ @Localizer["Countdown_FestivalEnded"]
+														</button>
+													}
+													else if (ViewBag.IsFestivalStarted == false)
+													{
+														<button class="btn rounded-pill w-100 fw-semibold" style="background: #333333; color: #888888; border: none; cursor: not-allowed;" disabled>
+															🕐 @Localizer["FestivalDetails_StartsOn", ((DateTime)ViewBag.FestivalStartDate).ToString("MMM dd")]
+														</button>
+													}
+													else if (!isFestivalEnded)
+													{
+														<a href="/festivals/@Model.Id/films/@film.Id/watch"
+														   class="btn rounded-pill w-100 fw-semibold mb-2"
+														   style="background: var(--hub-accent, #e50914); color: #ffffff; border: none;">
+															📺 @Localizer["FestivalDetails_WatchNowPass"]
+														</a>
+														<a href="/watchparty?festivalId=@Model.Id&festivalFilmId=@film.Id" class="btn btn-hub-outline rounded-pill w-100 fw-semibold mb-2">
+															<i class="bi bi-people-fill"></i> @Localizer["Watch_WatchParty"]
+														</a>
+
+														if (regularSessions.Any())
+														{
+															foreach (var session in regularSessions)
+															{
+																if (nowUtc < session.StartTimeUtc)
+																{
+																	<button disabled class="btn rounded-pill w-100 fw-bold shadow-sm mb-2" style="background: var(--hub-surface); color: var(--hub-muted, #a3a3a3); border: 1px solid var(--hub-border, rgba(255,255,255,0.2)); cursor: not-allowed;">
+																		<i class="bi bi-clock me-1"></i> @Localizer.LocalizeSessionType(session.SessionType) — @session.StartTimeUtc.ToString("MMM dd, HH:mm", CultureInfo.CurrentUICulture) @Localizer["Common_UtcSuffix"]
+																	</button>
+																}
+																else
+																{
+																	<a href="/festivals/@Model.Id/sessions/@session.Id/watch" class="btn rounded-pill w-100 fw-semibold mb-2" style="background: var(--hub-accent, #e50914); color: #ffffff; border: none;">
+																		🎟️ @Localizer.LocalizeSessionType(session.SessionType) — @session.StartTimeUtc.ToString("MMM dd, HH:mm", CultureInfo.CurrentUICulture) @Localizer["Common_UtcSuffix"] (Available)
+																	</a>
+																}
+															}
+														}
+													}
+												}
+												else
+												{
+													var rentalAccessMap = ViewBag.RentalAccessMap as System.Collections.Generic.Dictionary<Guid, bool> ?? new System.Collections.Generic.Dictionary<Guid, bool>();
+													var hasActiveRental = rentalAccessMap.TryGetValue(film.Id, out var hr) && hr;
+
+													if (hasActiveRental)
+													{
+														if (ViewBag.IsFestivalStarted == false)
+														{
+															<button class="btn rounded-pill w-100 fw-semibold" style="background: #333333; color: #888888; border: none; cursor: not-allowed;" disabled>
+																🕐 @Localizer["FestivalDetails_StartsOn", ((DateTime)ViewBag.FestivalStartDate).ToString("MMM dd")]
+															</button>
+														}
+														else if (isFestivalEnded)
+														{
+															<button class="btn rounded-pill w-100 fw-semibold" style="background: #333333; color: #888888; border: none; cursor: not-allowed;" disabled>
+																⏰ @Localizer["Countdown_FestivalEnded"]
+															</button>
+														}
+														else
+														{
+															<a href="@watchLink" class="btn rounded-pill w-100 fw-semibold mb-2" style="background: var(--hub-accent, #e50914); color: #ffffff; border: none;">
+																📺 @Localizer["FestivalDetails_WatchNowRental"]
+															</a>
+															<a href="/watchparty?festivalId=@Model.Id&festivalFilmId=@film.Id" class="btn btn-hub-outline rounded-pill w-100 fw-semibold mb-2">
+																<i class="bi bi-people-fill"></i> @Localizer["Watch_WatchParty"]
+															</a>
+														}
+													}
+
+													if (regularSessions.Any())
+													{
+														var purchasedIds = ViewBag.PurchasedProductIds as HashSet<Guid> ?? new HashSet<Guid>();
+														foreach (var session in regularSessions)
+														{
+															var ownsTicket = session.TicketId.HasValue && purchasedIds.Contains(session.TicketId.Value);
+															if (ownsTicket)
+															{
+																if (nowUtc < session.StartTimeUtc)
+																{
+																	<button disabled class="btn rounded-pill w-100 fw-bold shadow-sm mb-2" style="background: var(--hub-surface); color: var(--hub-muted, #a3a3a3); border: 1px solid var(--hub-border, rgba(255,255,255,0.2)); cursor: not-allowed;">
+																		<i class="bi bi-clock me-1"></i> @Localizer["FilmDetails_WatchScheduled", session.StartTimeUtc.ToString("MMM dd, HH:mm", CultureInfo.CurrentUICulture)]
+																	</button>
+																}
+																else if (nowUtc > session.EndTimeUtc)
+																{
+																	<button disabled class="btn rounded-pill w-100 fw-bold shadow-sm mb-2" style="background: var(--hub-surface); color: var(--hub-muted, #a3a3a3); border: 1px solid var(--hub-border, rgba(255,255,255,0.2)); cursor: not-allowed;">
+																		<i class="bi bi-x-circle me-1"></i> @Localizer["SessionAccess_SessionEnded"]
+																	</button>
+																}
+																else
+																{
+																	<a href="/festivals/@Model.Id/sessions/@session.Id/watch" class="btn rounded-pill w-100 fw-semibold mb-2" style="background: var(--hub-accent, #e50914); color: #ffffff; border: none;">
+																		🎟️ @Localizer.LocalizeSessionType(session.SessionType) — @session.StartTimeUtc.ToString("MMM dd, HH:mm", CultureInfo.CurrentUICulture) @Localizer["Common_UtcSuffix"] (Available)
+																	</a>
+																}
+															}
+															else if (session.TicketId.HasValue)
+															{
+																<a asp-route="AddTicketIndex" asp-route-sessionId="@session.Id" asp-route-returnUrl="@returnUrl" class="btn rounded-pill w-100 fw-semibold mb-2" style="background: var(--hub-accent, #e50914); color: #ffffff; border: none;">
+																	🎟️ @Localizer.LocalizeSessionType(session.SessionType) — @session.StartTimeUtc.ToString("MMM dd, HH:mm", CultureInfo.CurrentUICulture) @Localizer["Common_UtcSuffix"]
+																</a>
+															}
+														}
+													}
+
+													if (hasAnyActiveAccessWindow && !hasActiveRental)
+													{
+														var rental = await ProductRepository.GetRentalAsync(film.Id);
+														if (rental != null)
+														{
+															<a asp-route="AddRentalIndex" asp-route-festivalFilmId="@film.Id" asp-route-returnUrl="@returnUrl" class="btn btn-hub-outline rounded-pill w-100 fw-semibold">
+																📺 @Localizer["FestivalDetails_RentDigitally"]
+															</a>
+														}
+													}
+												}
+												@if (!hasAnyActiveAccessWindow)
+												{
+													<p style="font-size: 0.85rem; color: var(--hub-muted, #a3a3a3); text-align: center; margin: 0;">
+														🕐 @Localizer["FestivalDetails_NoRentalYet"]
+													</p>
+												}
+
+											</div>
+										</div>
+								</article>
+							</div>
+						}
+					</div>
+				</div>
+			}
+</div>
+
+	@if (User.Identity?.IsAuthenticated == true && User.IsInRole(RoleConstants.Customer))
+		{
+			<div class="hub-section hub-reveal mt-5 pt-4">
+				<div class="card text-center shadow" style="background: var(--hub-surface-2); border: none; border-left: 4px solid var(--hub-accent); border-radius: 12px; color: var(--hub-text);">
+					<div class="card-body py-5 px-4">
+						<i class="bi bi-trophy-fill mb-3" style="font-size: 3rem; color: var(--hub-accent);"></i>
+						<h2 class="fw-bold mb-2">@Localizer["FestivalDetails_AwardsSection"]</h2>
+						<p class="mx-auto mb-4" style="max-width: 500px; color: var(--hub-muted, #a3a3a3);">
+							@Localizer["FestivalDetails_AwardsSectionDesc"]
+						</p>
+						<a asp-route="VoteIndex" asp-route-festivalId="@Model.Id" class="btn rounded-pill px-5 py-2 fw-bold" style="background: var(--hub-accent, #e50914); color: #ffffff; border: none; font-size: 1.1rem;">@Localizer["FestivalDetails_VoteNow"]</a>
+					</div>
+				</div>
+			</div>
+		}
+
+	}
+</section>
+
+@if (User.IsInRole(UmaFestHub.Web.Security.RoleConstants.Admin) && Model is not null)
+{
+<script>
+(function () {
+	var btn = document.getElementById('btnHideUnhide');
+	if (!btn) return;
+
+	btn.addEventListener('click', async function () {
+		var isHidden = btn.dataset.isHidden === 'true';
+		var url = isHidden ? btn.dataset.unhideUrl : btn.dataset.hideUrl;
+		var token = document.querySelector('input[name="__RequestVerificationToken"]')?.value ?? '';
+
+		btn.disabled = true;
+		try {
+			var resp = await fetch(url, {
+				method: 'POST',
+				headers: {
+					'RequestVerificationToken': token,
+					'Content-Type': 'application/json'
+				}
+			});
+			if (!resp.ok) throw new Error('Request failed');
+			var data = await resp.json();
+
+			// Flip state
+			var newIsHidden = data.isHidden;
+			btn.dataset.isHidden = newIsHidden ? 'true' : 'false';
+			btn.textContent = newIsHidden ? btn.dataset.unhideLabel : btn.dataset.hideLabel;
+			btn.className = newIsHidden ? btn.dataset.unhideClass : btn.dataset.hideClass;
+
+			// Show inline toast
+			var toast = document.createElement('span');
+			toast.textContent = ' ' + data.message;
+			toast.style.cssText = 'font-size:0.78rem;color:var(--hub-muted,#a3a3a3);margin-left:0.4rem;';
+			btn.parentNode.appendChild(toast);
+			setTimeout(function () { toast.remove(); }, 3000);
+		} catch (e) {
+			console.error('Hide/unhide failed', e);
+		} finally {
+			btn.disabled = false;
+		}
+	});
+})();
+</script>
+}

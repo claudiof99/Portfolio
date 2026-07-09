@@ -1,0 +1,11 @@
+@using UmaFestHub.Web.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> Localizer
+@{
+    ViewData["Title"] = Localizer["AccessDenied_Heading"].Value;
+}
+<div class="container mt-5 text-center">
+    <h2 class="text-danger">@Localizer["AccessDenied_Heading"]</h2>
+    <p>@Localizer["AccessDenied_Body"]</p>
+    <a href="/" class="btn btn-primary">@Localizer["AccessDenied_GoHome"]</a>
+</div>

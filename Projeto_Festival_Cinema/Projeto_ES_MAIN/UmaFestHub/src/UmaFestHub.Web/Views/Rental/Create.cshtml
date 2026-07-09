@@ -1,0 +1,62 @@
+@model UmaFestHub.Web.ViewModels.CreateRentalViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = Localizer["FilmDetails_PageTitle"].Value;
+}
+
+<section class="container hub-section mt-4">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>@Localizer["Common_Error"]!</strong> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@Localizer["Common_Close"]"></button>
+        </div>
+    }
+
+    <h2>@Localizer["Rental_CreateHeading"]</h2>
+
+    <form method="post" asp-action="Create" asp-controller="Rental">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="FestivalFilmId" />
+
+        <div>
+            <label asp-for="Price">@Localizer["Rental_PriceLabel"]</label>
+            <input asp-for="Price" type="number" step="0.01" />
+            <span asp-validation-for="Price"></span>
+        </div>
+
+        <div>
+            <label asp-for="DurationValue">@Localizer["Rental_DurationLabel"]</label>
+            <input asp-for="DurationValue" type="number" />
+            <span asp-validation-for="DurationValue"></span>
+        </div>
+
+        <div>
+            <label asp-for="DurationUnit">@Localizer["Rental_UnitLabel"]</label>
+            <select asp-for="DurationUnit">
+                <option value="Minutes">@Localizer["Rental_UnitMinutes"]</option>
+                <option value="Hours">@Localizer["Rental_UnitHours"]</option>
+                <option value="Days">@Localizer["Rental_UnitDays"]</option>
+            </select>
+        </div>
+
+        <button type="submit">@Localizer["Rental_CreateSubmit"]</button>
+        <a asp-route="FestivalIndex">@Localizer["Rental_Cancel"]</a>
+    </form>
+</section>
+
+@section Scripts {
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            var priceInput = document.querySelector('input[name="Price"]');
+            if (priceInput) {
+                var val = priceInput.value.replace(',', '.');
+                if (isNaN(val) || Number(val) < 0 || val.trim() === '') {
+                    e.preventDefault();
+                    alert("@Localizer["CreatePass_InvalidPrice"]");
+                    priceInput.focus();
+                }
+            }
+        });
+    </script>
+}

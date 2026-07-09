@@ -1,0 +1,579 @@
+@model UmaFestHub.Web.ViewModels.WatchViewModel
+@using System.Globalization
+@{
+    Layout = null;
+    var genreText = Model.Genres.Count > 0 ? string.Join(" · ", Model.Genres) : "";
+    var durationText = Model.DurationMinutes > 0
+        ? Localizer["Watch_DurationFormat", Model.DurationMinutes / 60, Model.DurationMinutes % 60].Value
+        : "";
+}
+<!DOCTYPE html>
+<html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@Model.FilmName — @Localizer["Watch_CinemaSuffix"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════
+           CINEMA MODE — UmaFestHub Cinematic Player
+           ═══════════════════════════════════════════════ */
+        :root {
+            --cinema-bg: #06080d;
+            --cinema-surface: #0d1117;
+            --cinema-accent: #e50914;
+            --cinema-accent-glow: rgba(229, 9, 20, 0.35);
+            --cinema-text: #f0f6fc;
+            --cinema-muted: #8b949e;
+            --cinema-border: rgba(139, 148, 158, 0.15);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--cinema-bg);
+            color: var(--cinema-text);
+            height: 100vh;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        /* ── Film grain overlay ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-size: 200px;
+            animation: grain 0.4s steps(6) infinite;
+        }
+        @@keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -10%); }
+            30% { transform: translate(3%, -15%); }
+            50% { transform: translate(12%, 9%); }
+            70% { transform: translate(9%, 4%); }
+            90% { transform: translate(-1%, 7%); }
+        }
+
+        /* ── Cinema layout ── */
+        .cinema-shell {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* ── Top bar (gradient fade) ── */
+        .cinema-top {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            z-index: 20;
+            padding: 2rem 3rem;
+            background: linear-gradient(180deg, rgba(6, 8, 13, 0.95) 0%, rgba(6, 8, 13, 0.5) 70%, transparent 100%);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .cinema-shell.controls-hidden .cinema-top {
+            opacity: 0;
+        }
+
+        .cinema-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--cinema-text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--cinema-border);
+            background: rgba(13, 17, 23, 0.6);
+            backdrop-filter: blur(12px);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .cinema-back:hover {
+            background: rgba(229, 9, 20, 0.15);
+            border-color: rgba(229, 9, 20, 0.4);
+            color: #fff;
+        }
+
+        .cinema-film-meta {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cinema-film-title {
+            font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.4rem;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .cinema-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cinema-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid var(--cinema-border);
+            background: rgba(13, 17, 23, 0.5);
+            backdrop-filter: blur(8px);
+            color: #d1d5db;
+        }
+        .cinema-chip.accent {
+            background: rgba(229, 9, 20, 0.12);
+            border-color: rgba(229, 9, 20, 0.3);
+            color: #ff8787;
+            font-weight: 600;
+        }
+
+        .cinema-dot {
+            width: 3px; height: 3px;
+            border-radius: 50%;
+            background: var(--cinema-muted);
+            flex-shrink: 0;
+        }
+
+        /* ── Player area ── */
+        .cinema-player-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* ── Ambient glow behind video ── */
+        .cinema-ambient {
+            position: absolute;
+            width: 80%;
+            height: 60%;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, var(--cinema-accent-glow) 0%, transparent 70%);
+            filter: blur(100px);
+            opacity: 0.4;
+            animation: ambientPulse 4s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+        @@keyframes ambientPulse {
+            0% { opacity: 0.25; transform: scale(0.95); }
+            100% { opacity: 0.45; transform: scale(1.05); }
+        }
+
+        .cinema-video-wrap {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            max-height: min(58vh, calc(100vh - 280px));
+            aspect-ratio: 16 / 9;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.06),
+                0 20px 50px -12px rgba(0, 0, 0, 0.7),
+                0 0 60px var(--cinema-accent-glow);
+            z-index: 1;
+            background: #000;
+        }
+
+        .cinema-video-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* ── Placeholder when no trailer ── */
+        .cinema-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background:
+                radial-gradient(ellipse at 30% 40%, rgba(229, 9, 20, 0.08), transparent 50%),
+                var(--cinema-surface);
+        }
+        .cinema-placeholder-icon {
+            font-size: 4.5rem;
+            color: rgba(229, 9, 20, 0.3);
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+        @@keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .cinema-placeholder h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--cinema-text);
+        }
+        .cinema-placeholder p {
+            font-size: 0.9rem;
+            color: var(--cinema-muted);
+            max-width: 360px;
+            text-align: center;
+        }
+
+        /* ── Bottom info bar ── */
+        .cinema-bottom {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            z-index: 20;
+            padding: 2.2rem 3rem 2.2rem;
+            background: linear-gradient(0deg, rgba(6, 8, 13, 0.96) 0%, rgba(6, 8, 13, 0.5) 75%, transparent 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .cinema-shell.controls-hidden .cinema-bottom {
+            opacity: 0;
+        }
+
+        .cinema-bottom-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cinema-bottom-info p {
+            font-size: 0.85rem;
+            color: var(--cinema-muted);
+            line-height: 1.5;
+            max-width: 580px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .cinema-bottom-actions {
+            display: flex;
+            gap: 0.6rem;
+            flex-shrink: 0;
+        }
+
+        .cinema-action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1.1rem;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid var(--cinema-border);
+            background: rgba(13, 17, 23, 0.6);
+            backdrop-filter: blur(12px);
+            color: var(--cinema-text);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .cinema-action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+        }
+        .cinema-action-btn.primary {
+            background: var(--cinema-accent);
+            border-color: var(--cinema-accent);
+            box-shadow: 0 4px 16px var(--cinema-accent-glow);
+        }
+        .cinema-action-btn.primary:hover {
+            background: #c7080f;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px var(--cinema-accent-glow);
+        }
+
+        /* ── Now Playing indicator ── */
+        .cinema-now-playing {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.8rem;
+        }
+        .cinema-eq-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 14px;
+        }
+        .cinema-eq-bar {
+            width: 3px;
+            background: var(--cinema-accent);
+            border-radius: 2px;
+            animation: eqBounce 0.8s ease-in-out infinite alternate;
+        }
+        .cinema-eq-bar:nth-child(1) { height: 40%; animation-delay: 0s; }
+        .cinema-eq-bar:nth-child(2) { height: 80%; animation-delay: 0.15s; }
+        .cinema-eq-bar:nth-child(3) { height: 55%; animation-delay: 0.3s; }
+        .cinema-eq-bar:nth-child(4) { height: 90%; animation-delay: 0.1s; }
+        @@keyframes eqBounce {
+            0% { transform: scaleY(0.3); }
+            100% { transform: scaleY(1); }
+        }
+
+        .cinema-now-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--cinema-accent);
+        }
+
+        /* ── Poster thumbnail ── */
+        .cinema-poster-thumb {
+            width: 64px;
+            height: 96px;
+            border-radius: 6px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+        .cinema-poster-thumb:hover {
+            transform: scale(1.05);
+        }
+
+        /* ── Keyboard shortcuts hint ── */
+        .cinema-shortcuts {
+            position: absolute;
+            bottom: 1rem;
+            right: 2.5rem;
+            z-index: 25;
+            display: flex;
+            gap: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .cinema-shell:not(.controls-hidden) .cinema-shortcuts {
+            opacity: 0.4;
+        }
+        .cinema-shortcuts:hover {
+            opacity: 0.8 !important;
+        }
+        .cinema-kbd {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 26px;
+            height: 22px;
+            padding: 0 6px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--cinema-muted);
+        }
+
+        /* ── Loading shimmer ── */
+        .cinema-loading {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--cinema-surface);
+            transition: opacity 0.6s ease;
+        }
+        .cinema-loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .cinema-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid rgba(229, 9, 20, 0.15);
+            border-top-color: var(--cinema-accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @@keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ── Responsive ── */
+        @@media (max-width: 768px) {
+            .cinema-top { padding: 1rem 1.25rem; gap: 1rem; }
+            .cinema-bottom { padding: 1.2rem 1.25rem; flex-direction: column; align-items: flex-start; }
+            .cinema-film-title { font-size: 1.3rem; }
+            .cinema-video-wrap { width: 96%; max-height: none; border-radius: 10px; }
+            .cinema-poster-thumb { display: none; }
+            .cinema-shortcuts { display: none; }
+        }
+
+        /* ── Entry animation ── */
+        .cinema-top, .cinema-bottom { animation: fadeIn 0.8s ease both; }
+        .cinema-video-wrap { animation: scaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: 0.15s; }
+        .cinema-ambient { animation: ambientPulse 4s ease-in-out infinite alternate, fadeIn 1.2s ease both; animation-delay: 0.3s; }
+
+        @@keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @@keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cinema-shell" id="cinemaShell">
+        <!-- ── Top bar: film info ── -->
+        <div class="cinema-top">
+            <a href="/festivals/@Model.FestivalId" class="cinema-back">
+                <i class="bi bi-arrow-left"></i> @Localizer["Common_Back"]
+            </a>
+            <div class="cinema-film-meta">
+                <h1 class="cinema-film-title">@Model.FilmName</h1>
+                <div class="cinema-meta-row">
+                    <span class="cinema-chip accent">
+                        <i class="bi bi-play-circle-fill"></i> @Localizer["Countdown_LiveNow"]
+                    </span>
+                    @if (!string.IsNullOrWhiteSpace(durationText))
+                    {
+                        <span class="cinema-dot"></span>
+                        <span class="cinema-chip">
+                            <i class="bi bi-clock"></i> @durationText
+                        </span>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(genreText))
+                    {
+                        <span class="cinema-dot"></span>
+                        <span class="cinema-chip">@genreText</span>
+                    }
+                    <span class="cinema-dot"></span>
+                    <span class="cinema-chip">
+                        <i class="bi bi-ticket-detailed"></i> @Localizer.LocalizeSessionType(Model.SessionType)
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Player area ── -->
+        <div class="cinema-player-area">
+            <div class="cinema-ambient"></div>
+            <div class="cinema-video-wrap">
+                <!-- Loading shimmer -->
+                <div class="cinema-loading" id="cinemaLoading">
+                    <div class="cinema-spinner"></div>
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.TrailerEmbedUrl))
+                {
+                    <iframe
+                        id="cinemaIframe"
+                        src="@Model.TrailerEmbedUrl"
+                        allow="autoplay; encrypted-media; fullscreen"
+                        allowfullscreen
+                        onload="document.getElementById('cinemaLoading').classList.add('hidden');">
+                    </iframe>
+                }
+                else
+                {
+                    <div class="cinema-placeholder">
+                        <i class="bi bi-film cinema-placeholder-icon"></i>
+                        <h3>@Localizer["Watch_ScreeningUnavailable"]</h3>
+                        <p>@Localizer["Watch_ScreeningUnavailableBody"]</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- ── Bottom bar: description + actions ── -->
+        <div class="cinema-bottom">
+            <div style="display: flex; align-items: center; gap: 1.5rem; flex: 1; min-width: 0;">
+                @if (!string.IsNullOrWhiteSpace(Model.PosterUrl))
+                {
+                    <img src="@Model.PosterUrl" alt="@Model.FilmName" class="cinema-poster-thumb" />
+                }
+                <div class="cinema-bottom-info">
+                    <div class="cinema-now-playing">
+                        <div class="cinema-eq-bars">
+                            <div class="cinema-eq-bar"></div>
+                            <div class="cinema-eq-bar"></div>
+                            <div class="cinema-eq-bar"></div>
+                            <div class="cinema-eq-bar"></div>
+                        </div>
+                        <span class="cinema-now-label">@Localizer["Watch_NowPlaying", Model.FestivalName]</span>
+                    </div>
+                    @if (!string.IsNullOrWhiteSpace(Model.FilmDescription))
+                    {
+                        <p>@Localizer.LocalizeFilmDescription(Model.FilmId, Model.FilmDescription)</p>
+                    }
+                </div>
+            </div>
+            <div class="cinema-bottom-actions">
+                <a href="/watchparty?festivalId=@Model.FestivalId&festivalFilmId=@Model.FestivalFilmId@(Model.SessionId.HasValue ? $"&sessionId={Model.SessionId}" : "")" class="cinema-action-btn primary">
+                    <i class="bi bi-people-fill"></i> @Localizer["Watch_WatchParty"]
+                </a>
+                <a href="/festivals/@Model.FestivalId" class="cinema-action-btn">
+                    <i class="bi bi-grid-3x3-gap"></i> @Localizer["FilmIndex_BrowseFestivals"]
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ═══════════════════════════════════════
+        // CINEMA MODE — Interactive Controls
+        // ═══════════════════════════════════════
+
+        const shell = document.getElementById('cinemaShell');
+        let hideTimer = null;
+
+        // Auto-hide controls after 3.5 seconds of inactivity
+        function resetHideTimer() {
+            shell.classList.remove('controls-hidden');
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => {
+                shell.classList.add('controls-hidden');
+            }, 3500);
+        }
+
+        document.addEventListener('mousemove', resetHideTimer);
+        document.addEventListener('click', resetHideTimer);
+        resetHideTimer();
+
+        // Hide loading if no iframe (placeholder mode)
+        if (!document.getElementById('cinemaIframe')) {
+            const loader = document.getElementById('cinemaLoading');
+            if (loader) loader.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

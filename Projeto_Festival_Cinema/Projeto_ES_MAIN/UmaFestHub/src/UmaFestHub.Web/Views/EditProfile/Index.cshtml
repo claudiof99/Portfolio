@@ -1,0 +1,54 @@
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["EditProfile_PageTitle"].Value;
+	var isAuthenticated = User?.Identity?.IsAuthenticated ?? false;
+	var firstLetter = User?.Identity?.Name?.FirstOrDefault().ToString().ToUpperInvariant() ?? "U";
+	var userName = User?.Identity?.Name ?? string.Empty;
+    var userEmail = User?.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value ?? string.Empty;
+}
+
+<section class="container mt-4 d-flex justify-content-center">
+	<div class="hub-auth-card" style="max-width: 480px; width: 100%;">
+		<div class="text-center mb-4">
+			<a class="hub-avatar" href="#" style="width: 100px; height: 100px; font-size: 2.5rem;">
+				@firstLetter
+			</a>
+			<h2 class="mt-3 mb-1">@Localizer["EditProfile_PageTitle"]</h2>
+			<p class="text-white-50 mb-0">@userEmail</p>
+		</div>
+
+		@if (!ViewData.ModelState.IsValid)
+		{
+			<div class="alert alert-danger">
+				<ul class="mb-0">
+					@foreach (var modelState in ViewData.ModelState.Values)
+					{
+						foreach (var error in modelState.Errors)
+						{
+							<li>@error.ErrorMessage</li>
+						}
+					}
+				</ul>
+			</div>
+		}
+
+		<form method="post" action="/edit-profile" class="hub-auth-form hub-profile-edit-form">
+			@Html.AntiForgeryToken()
+
+			<div class="mb-3">
+				<label>@Localizer["Common_Name"]</label>
+				<input type="text" name="NewName" class="hub-input" placeholder="@Localizer["Register_FullName"]" value="@userName">
+			</div>
+
+			<div class="mb-3">
+				<label>@Localizer["Common_Email"]</label>
+				<input type="email" name="NewEmail" class="hub-input" placeholder="@Localizer["Common_Email"]" value="@userEmail">
+			</div>
+
+			<div class="d-flex flex-column gap-2 mt-4">
+				<button type="submit" class="hub-auth-btn">@Localizer["FestivalEdit_SaveChanges"]</button>
+				<a href="/profile" class="btn btn-outline-light hub-profile-edit-btn w-100 py-2">@Localizer["EditProfile_Cancel"]</a>
+			</div>
+		</form>
+	</div>
+</section>

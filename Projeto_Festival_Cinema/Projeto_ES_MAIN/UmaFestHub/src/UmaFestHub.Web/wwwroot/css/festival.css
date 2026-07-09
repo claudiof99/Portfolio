@@ -1,0 +1,80 @@
+/* Festival Hero Section Styles */
+.hub-hero-panel {
+    background: linear-gradient(145deg, var(--hub-surface, #141414) 0%, #000000 100%);
+    border-radius: 12px;
+    padding: 3.5rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: var(--hub-text, #ffffff);
+    margin-bottom: 1rem;
+}
+
+.hero-desc {
+    color: var(--hub-muted, #a3a3a3);
+    font-size: 1.1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.6;
+}
+
+.hero-chip {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--hub-text, #e5e5e5);
+    padding: 0.4rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.pass-card {
+    background: var(--hub-surface-2, #1f1f1f);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pass-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--hub-accent, #e50914);
+}
+
+.pass-icon {
+    font-size: 1.8rem;
+    color: var(--hub-accent, #e50914);
+    margin-bottom: 0.75rem;
+}
+
+.btn-hub-accent {
+    background: var(--hub-accent, #e50914);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-hub-accent:hover { background: #b20710; color: #fff; }
+
+.btn-hub-outline {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    font-weight: 600;
+}
+
+.btn-hub-outline:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }

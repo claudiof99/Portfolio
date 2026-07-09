@@ -1,0 +1,54 @@
+@model UmaFestHub.Web.ViewModels.CreatePassViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var displayName = Model.PassType switch
+    {
+        "DailyPass" or "Day" => Localizer["CreatePass_Daily"].Value,
+        "CompletePass" or "Complete" or "Full" => Localizer["CreatePass_Complete"].Value,
+        _ => Model.PassType
+    };
+    ViewData["Title"] = Localizer["FestivalDetails_PageTitle"].Value;
+}
+
+<div class="hub-auth-wrap">
+    <div class="hub-auth-card">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show mb-4 shadow-sm" role="alert">
+                <h4 class="alert-heading"><i class="bi bi-exclamation-triangle-fill me-2"></i> @Localizer["Common_Error"]</h4>
+                <p class="mb-0">@TempData["ErrorMessage"]</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@Localizer["Common_Close"]"></button>
+            </div>
+        }
+        <h2>@Localizer["CreatePass_Heading", displayName]</h2>
+        <form action="/passes/create" method="post" class="hub-auth-form">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="FestivalId" value="@Model.FestivalId" />
+            <input type="hidden" name="PassType" value="@Model.PassType" />
+
+            <div>
+                <label for="Price">@Localizer["CreatePass_PriceLabel"]</label>
+                <input name="Price" id="Price" type="text" inputmode="decimal" placeholder="@Localizer["CreatePass_PricePlaceholder"]" required style="width: 100%; border-radius: 4px; padding: 8px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white;" />
+            </div>
+
+            <button type="submit" class="hub-auth-btn mt-4">@Localizer["CreatePass_SaveButton"]</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelector('.hub-auth-form').addEventListener('submit', function(e) {
+            var priceInput = document.querySelector('input[name="Price"]');
+            if (priceInput) {
+                var val = priceInput.value.replace(',', '.');
+
+                if (isNaN(val) || Number(val) < 0 || val.trim() === '') {
+                    e.preventDefault();
+                    alert("@Localizer["CreatePass_InvalidPrice"]");
+                    priceInput.focus();
+                }
+            }
+        });
+    </script>
+}

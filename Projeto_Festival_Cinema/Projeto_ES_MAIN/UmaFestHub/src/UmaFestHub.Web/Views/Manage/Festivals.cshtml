@@ -1,0 +1,148 @@
+@model IReadOnlyList<UmaFestHub.Web.ViewModels.FestivalViewModel>
+@using System.Linq
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = Localizer["Manage_FestivalsHeading"].Value;
+}
+
+<style>
+    /* 1. Dim hidden rows by overriding the Bootstrap table text color variable.
+       This keeps badges and buttons fully opaque while muting text. */
+    .festival-row--hidden {
+        --bs-table-color: rgba(0, 0, 0, 0.55) !important;
+        color: rgba(0, 0, 0, 0.55);
+    }
+</style>
+
+<section class="page-hero">
+    <div class="container">
+        <h1>@Localizer["Manage_FestivalsHeading"]</h1>
+        <p>@Localizer["Manage_FestivalsDescription"]</p>
+        
+        <!-- 3. Summary stat bar above the table -->
+        <p class="fs-5 fw-semibold text-info mt-2 mb-0">
+            @Model.Count festivals &middot; @Model.Count(f => f.IsHidden) hidden
+        </p>
+    </div>
+</section>
+
+<section class="container hub-section hub-reveal mb-5">
+    <div class="info-panel d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+        <!-- 4. Align Back button styling with Create Festival -->
+        <a asp-route="ManageIndex" class="btn btn-secondary rounded-pill px-4">
+            <i class="bi bi-arrow-left"></i> @Localizer["Common_Back"]
+        </a>
+        <a asp-route="FestivalCreateView" class="btn hub-auth-btn text-white rounded-pill px-4">
+            <i class="bi bi-plus-lg me-1"></i>@Localizer["Common_CreateFestival"]
+        </a>
+    </div>
+
+    @if (Model is null || Model.Count == 0)
+    {
+        <div class="hub-empty-state hub-reveal text-center py-5">
+            <div class="fs-1 mb-3 opacity-50" aria-hidden="true">🎪</div>
+            <p class="mb-3">@Localizer["Manage_NoFestivalsFound"]</p>
+            <a asp-route="FestivalCreateView" class="btn btn-hub-outline text-white rounded-pill">@Localizer["Common_CreateFestival"]</a>
+        </div>
+    }
+    else
+    {
+        <div class="info-panel hub-reveal">
+            <table class="table table-bordered table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>@Localizer["Common_Name"]</th>
+                        <th>@Localizer["Manage_StartDateColumn"]</th>
+                        <th>@Localizer["Manage_EndDateColumn"]</th>
+                        <th>@Localizer["Manage_ActionsColumn"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var festival in Model)
+                    {
+                        <!-- 1. Apply conditional CSS class for hidden rows -->
+                        <tr class="@(festival.IsHidden ? "festival-row--hidden" : "")" data-festival-row="@festival.Id">
+                            <td>
+                                @festival.Name
+                                <!-- Badge remains opaque -->
+                                <span class="badge bg-secondary ms-2 festival-hidden-badge" title="@Localizer["Festival_HiddenBadgeTitle"]" style="display: @(festival.IsHidden ? "inline-block" : "none");">
+                                    <i class="bi bi-eye-slash-fill me-1"></i>@Localizer["Festival_Hidden"]
+                                </span>
+                            </td>
+                            <td>@festival.StartDateUtc.ToString("dd MMM yyyy", CultureInfo.CurrentUICulture)</td>
+                            <td>@festival.EndDateUtc.ToString("dd MMM yyyy", CultureInfo.CurrentUICulture)</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a asp-route="FestivalDetails" asp-route-id="@festival.Id" class="btn btn-pill btn-primary fw-semibold w-100">
+                                        @Localizer["Manage_ManageFestival"]
+                                    </a>
+                                    
+                                    <!-- 2. Quick hide/unhide toggle in Actions column -->
+                                    <button type="button" 
+                                            class="btn btn-pill btn-outline-secondary fw-semibold toggle-hidden-btn" 
+                                            data-festival-id="@festival.Id" 
+                                            data-is-hidden="@festival.IsHidden.ToString().ToLower()"
+                                            title="Toggle Visibility">
+                                        <i class="bi @(festival.IsHidden ? "bi-eye-fill" : "bi-eye-slash-fill")"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+
+@section Scripts {
+    <script>
+        // 2. AJAX logic for quick hide/unhide toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            var tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+            var token = tokenElement ? tokenElement.value : '';
+
+            document.querySelectorAll('.toggle-hidden-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var festivalId = this.dataset.festivalId;
+                    var currentlyHidden = this.dataset.isHidden === 'true';
+                    var url = currentlyHidden ? '/festival/' + festivalId + '/unhide' : '/festival/' + festivalId + '/hide';
+                    
+                    var formData = new FormData();
+                    if (token) {
+                        formData.append('__RequestVerificationToken', token);
+                    }
+
+                    fetch(url, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update button state
+                        this.dataset.isHidden = data.isHidden.toString();
+                        var icon = this.querySelector('i');
+                        icon.className = data.isHidden ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill';
+                        
+                        // Update row styling
+                        var row = document.querySelector('tr[data-festival-row="' + festivalId + '"]');
+                        if (row) {
+                            if (data.isHidden) {
+                                row.classList.add('festival-row--hidden');
+                            } else {
+                                row.classList.remove('festival-row--hidden');
+                            }
+                            
+                            // Update badge visibility
+                            var badge = row.querySelector('.festival-hidden-badge');
+                            if (badge) {
+                                badge.style.display = data.isHidden ? 'inline-block' : 'none';
+                            }
+                        }
+                    })
+                    .catch(error => console.error('Error toggling visibility:', error));
+                });
+            });
+        });
+    </script>
+}

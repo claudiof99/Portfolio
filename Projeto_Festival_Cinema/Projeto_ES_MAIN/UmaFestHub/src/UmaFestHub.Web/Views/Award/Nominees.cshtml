@@ -1,0 +1,136 @@
+@*
+  Awards, nominations & votes — Four nominee dropdowns; disables submit when fewer than four distinct options exist.
+*@
+@using System.Globalization
+@model UmaFestHub.Web.ViewModels.AwardNomineesPageViewModel
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Localizer["Common_Awards"].Value;
+	var distinctNomineeOptionCount = Model.Options.Select(o => o.Id).Distinct().Count();
+	var canPickFourNominees = distinctNomineeOptionCount >= 4;
+	var endDateCulture = CultureInfo.CurrentUICulture;
+}
+
+<section class="page-hero">
+	<div class="container">
+		<h1>@Localizer["Award_NomineesHeading"]</h1>
+		<p>@Localizer["Award_NomineesSubtitle"]</p>
+	</div>
+</section>
+
+<section class="container info-panel">
+	@if (!canPickFourNominees)
+	{
+		var insufficientMsg = string.IsNullOrWhiteSpace(Model.ErrorMessage)
+			? Localizer["Award_InsufficientOptions"].Value
+			: Model.ErrorMessage;
+		<div class="alert alert-warning mb-4" role="alert">
+			<p class="mb-0 fw-semibold">@insufficientMsg</p>
+		</div>
+		<a class="btn btn-primary fs-5" asp-route="AwardIndex" asp-route-festivalId="@Model.FestivalId">@Localizer["Common_Back"]</a>
+	}
+	else
+	{
+		<div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+			<div class="flex-grow-1 text-center">
+				@if (!string.IsNullOrWhiteSpace(Model.Category))
+				{
+					<p class="mb-1 text-white fw-semibold fs-4">@Localizer["Award_CategoryLabel"] @Localizer.LocalizeDisplayText(Model.Category)</p>
+				}
+				@if (!string.IsNullOrWhiteSpace(Model.AwardName))
+				{
+					<p class="mb-0 fs-5"><strong>@Localizer["Award_AwardLabel"]</strong> @Model.AwardName</p>
+				}
+				@if (Model.EndDateUtc != default)
+				{
+					<p class="mb-0 fs-6 text-secondary">@Localizer["Award_EndDateDisplay", Model.EndDateUtc.ToString("dd MMM yyyy", endDateCulture)]</p>
+				}
+			</div>
+
+			<a class="btn btn-primary align-self-start fs-5" asp-route="AwardIndex" asp-route-festivalId="@Model.FestivalId">@Localizer["Common_Back"]</a>
+		</div>
+
+		<hr class="my-2 opacity-25" />
+
+		<form asp-route="AwardSaveNominees" method="post" class="d-flex flex-column gap-3">
+		@Html.AntiForgeryToken()
+		<input type="hidden" name="festivalId" value="@Model.FestivalId" />
+		<input type="hidden" name="categoryValue" value="@Model.CategoryValue" />
+		<input type="hidden" name="awardName" value="@Model.AwardName" />
+		<input type="hidden" name="categoryLabel" value="@Model.Category" />
+		<input type="hidden" name="endDate" value="@Model.EndDate" />
+
+		@{
+			var isPerson = Model.CategoryValue != 0;
+			var imgStyle = isPerson 
+				? "width: 48px; height: 48px; object-fit: cover; border-radius: 50%;"
+				: "width: 48px; height: 72px; object-fit: cover; border-radius: 6px;";
+			var placeholderStyle = isPerson
+				? "width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.08);"
+				: "width: 48px; height: 72px; border-radius: 6px; background: rgba(255,255,255,0.08);";
+
+			void RenderNomineeRadios(string groupName, Guid? selectedId)
+			{
+				<div class="row g-2">
+					@foreach (var o in Model.Options)
+					{
+						var id = $"{groupName}-{o.Id}";
+						<div class="col-12 col-sm-6 col-lg-4">
+							<input class="btn-check" type="radio" name="@groupName" id="@id" value="@o.Id" checked="@(selectedId == o.Id)" required />
+							<label class="btn btn-outline-light award-nominee-option w-100 text-start p-2" for="@id" style="display: grid; grid-template-columns: 48px 1fr; gap: 0.75rem; align-items: center;">
+								@if (!string.IsNullOrWhiteSpace(o.ImageUrl))
+								{
+									<img src="@o.ImageUrl" alt="@o.Label" style="@imgStyle" />
+								}
+								else
+								{
+									<div class="d-flex align-items-center justify-content-center" style="@placeholderStyle">
+										<i class="bi @(isPerson ? "bi-person-fill" : "bi-film") text-white opacity-25" style="font-size: 1.5rem;"></i>
+									</div>
+								}
+								<span class="fw-semibold">@o.Label</span>
+							</label>
+						</div>
+					}
+				</div>
+			}
+		}
+
+		<div class="d-flex flex-column gap-4">
+			<div>
+				<p class="mb-2 text-white fw-semibold">@Localizer["Award_Nominee1"]</p>
+				@{ RenderNomineeRadios("nominee1", Model.SelectedNominee1); }
+			</div>
+			<hr class="my-2 opacity-25" />
+			<div>
+				<p class="mb-2 text-white fw-semibold">@Localizer["Award_Nominee2"]</p>
+				@{ RenderNomineeRadios("nominee2", Model.SelectedNominee2); }
+			</div>
+			<hr class="my-2 opacity-25" />
+			<div>
+				<p class="mb-2 text-white fw-semibold">@Localizer["Award_Nominee3"]</p>
+				@{ RenderNomineeRadios("nominee3", Model.SelectedNominee3); }
+			</div>
+			<hr class="my-2 opacity-25" />
+			<div>
+				<p class="mb-2 text-white fw-semibold">@Localizer["Award_Nominee4"]</p>
+				@{ RenderNomineeRadios("nominee4", Model.SelectedNominee4); }
+			</div>
+			<hr class="my-2 opacity-25" />
+		</div>
+
+		@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+		{
+			<div class="alert alert-danger mb-0" role="alert">
+				<p class="fw-semibold mb-0">@Model.ErrorMessage</p>
+			</div>
+		}
+
+		<button type="submit"
+				class="btn btn-primary align-self-start fs-5"
+				style="width: 25%; min-width: 180px; padding-top: 0.75rem; padding-bottom: 0.75rem;">
+			@Localizer["Award_Save"]
+		</button>
+	</form>
+	}
+</section>
