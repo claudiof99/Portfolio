@@ -1,73 +1,73 @@
-# Projeto Greenfoot — The Last Of Us
+# Greenfoot Project — The Last Of Us
 
-Jogo de plataforma 2D inspirado em *The Last of Us*, desenvolvido em **Java** com o motor **Greenfoot 3.0**.
-
----
-
-## O que precisa de instalar
-
-| Requisito | Versão | Notas |
-|-----------|--------|-------|
-| [Greenfoot](https://www.greenfoot.org/download) | 3.0+ | IDE e motor do jogo |
-| JDK | Incluído no Greenfoot | Java Development Kit |
-
-> O Greenfoot inclui o JDK necessário. Não é preciso instalar Java separadamente na maioria dos casos.
+2D platform game inspired by *The Last of Us*, developed in **Java** with the **Greenfoot 3.0** engine.
 
 ---
 
-## Como executar
+## Requirements
 
-1. Instale o **Greenfoot 3.x** a partir de [greenfoot.org](https://www.greenfoot.org/download).
-2. Abra o Greenfoot.
-3. **File → Open Project** e selecione a pasta `Projeto_Greenfoot_The Last Of Us`.
-4. Clique no botão **Run** (ou prima `Shift+Run` para correr sem pausa).
+| Requirement | Version | Notes |
+|-------------|---------|-------|
+| [Greenfoot](https://www.greenfoot.org/download) | 3.0+ | Game IDE and engine |
+| JDK | Included with Greenfoot | Java Development Kit |
 
-O jogo arranca no mundo **`TitleScreen`** (ecrã de título com botões Play, Tutorial e Exit).
-
----
-
-## Controlos
-
-Os controlos são geridos pelas classes `Player`, `GameManager` e `EventListener`. Após carregar em **Play** no ecrã de título, use as teclas definidas no jogo para mover o jogador, saltar e interagir.
+Greenfoot includes the required JDK. You usually do not need to install Java separately.
 
 ---
 
-## Estrutura do projeto
+## How to run
+
+1. Install **Greenfoot 3.x** from [greenfoot.org](https://www.greenfoot.org/download).
+2. Open Greenfoot.
+3. **File → Open Project** and select the `Projeto_Greenfoot_The Last Of Us` folder.
+4. Click **Run** (or press `Shift+Run` to run without pausing).
+
+The game starts in the **`TitleScreen`** world (title screen with Play, Tutorial, and Exit buttons).
+
+---
+
+## Controls
+
+Controls are handled by the `Player`, `GameManager`, and `EventListener` classes. After clicking **Play** on the title screen, use the in-game keys to move the player, jump, and interact.
+
+---
+
+## Project structure
 
 ```
 Projeto_Greenfoot_The Last Of Us/
-├── project.greenfoot       ← ficheiro de projeto Greenfoot
-├── TitleScreen.java        ← mundo inicial
+├── project.greenfoot       ← Greenfoot project file
+├── TitleScreen.java        ← initial world
 ├── GameManager.java
 ├── Player.java
 ├── Level.java
-└── ... (outras classes .java)
+└── ... (other .java classes)
 ```
 
 ---
 
-## Notas importantes
+## Important notes
 
-### Assets em falta
+### Missing assets
 
-O código referencia imagens e sons que **podem não estar incluídos** neste repositório, por exemplo:
+The code references images and sounds that **may not be included** in this repository, for example:
 
 - `./Title screen/logo.png`
 - `./Title screen/starting_screen.jpg`
-- `idle_0.png` (sprite do jogador)
+- `idle_0.png` (player sprite)
 
-Se o jogo abrir mas aparecer sem gráficos, é necessário adicionar a pasta `Title screen/` e os sprites de animação ao projeto.
+If the game opens but shows no graphics, add the `Title screen/` folder and animation sprites to the project.
 
-### Não é um projeto Maven/Gradle
+### Not a Maven/Gradle project
 
-Este projeto **não se compila com `javac` ou Maven** diretamente — deve ser aberto e executado exclusivamente no **Greenfoot IDE**.
+This project **cannot be compiled with `javac` or Maven** directly — it must be opened and run exclusively in the **Greenfoot IDE**.
 
 ---
 
-## Resolução de problemas
+## Troubleshooting
 
-| Problema | Solução |
-|----------|---------|
-| Projeto não abre | Confirme que selecionou a pasta com `project.greenfoot` |
-| Imagens em falta | Adicione os assets referenciados nas classes Java |
-| Erro de compilação no Greenfoot | Verifique a versão do Greenfoot (3.0.0 referenciada no projeto) |
+| Problem | Solution |
+|---------|----------|
+| Project won't open | Make sure you selected the folder containing `project.greenfoot` |
+| Missing images | Add the assets referenced in the Java classes |
+| Greenfoot compile error | Check Greenfoot version (3.0.0 referenced in the project) |

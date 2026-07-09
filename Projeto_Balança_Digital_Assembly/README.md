@@ -1,63 +1,63 @@
-# Projeto Balança Digital (Assembly)
+# Digital Scale Project (Assembly)
 
-Implementação de uma balança digital em **assembly** para um processador educacional, com circuito digital no simulador **SEPE** (Simulador Especial Para Ensino).
-
----
-
-## O que precisa de ter instalado
-
-| Requisito | Obrigatório? | Notas |
-|-----------|--------------|-------|
-| **SEPE** | Sim | Simulador de circuitos digitais (versão 2.3.0 referenciada no projeto) |
-| Toolchain de assembly | Sim | Montador/assembler do curso associado ao processador do SEPE |
-
-> Este projeto foi desenvolvido no âmbito académico e depende do software SEPE disponibilizado pela instituição de ensino.
+Digital scale implementation in **assembly** for an educational processor, with a digital circuit in the **SEPE** simulator (Simulador Especial Para Ensino).
 
 ---
 
-## Ficheiros do projeto
+## Requirements
 
-| Ficheiro | Descrição |
-|----------|-----------|
-| `Codigo_Assembly.asm` | Código assembly da balança (menus, peso, preço, registos) |
-| `Processador.cir` | Circuito do processador no formato SEPE |
-| `Memória.dat` | Dados de memória para o simulador |
+| Requirement | Required? | Notes |
+|-------------|-----------|-------|
+| **SEPE** | Yes | Digital circuit simulator (version 2.3.0 referenced in the project) |
+| Assembly toolchain | Yes | Course assembler tied to the SEPE processor |
 
----
-
-## Como executar
-
-### 1. Carregar o circuito no SEPE
-
-1. Abra o **SEPE**.
-2. Carregue o ficheiro `Processador.cir`.
-3. Carregue `Memória.dat` se o simulador o solicitar.
-
-### 2. Executar o código assembly
-
-1. Abra ou importe `Codigo_Assembly.asm` no ambiente de assembly do curso.
-2. Monte (assemble) o código.
-3. Execute no simulador com o circuito carregado.
-
-### 3. Periféricos simulados
-
-O código usa endereços de E/S para botões, switches e display (definidos no início de `Codigo_Assembly.asm`):
-
-- Botões: ON/OFF, OK, CHANGE, CANCEL
-- Switches: seleção de menu e introdução de peso
-- Display: saída de nome, peso, preço e total
+This project was developed in an academic context and depends on the SEPE software provided by the educational institution.
 
 ---
 
-## Funcionalidades
+## Project files
 
-- Modo **Balança** — pesagem e cálculo de preço
-- Modo **Registos** — visualização de registos
-- Modo **Limpar** — limpeza de registos
+| File | Description |
+|------|-------------|
+| `Codigo_Assembly.asm` | Scale assembly code (menus, weight, price, records) |
+| `Processador.cir` | Processor circuit in SEPE format |
+| `Memória.dat` | Memory data for the simulator |
 
 ---
 
-## Notas
+## How to run
 
-- Não existe compilador standalone: tudo corre dentro do ecossistema SEPE + toolchain do curso.
-- Se o SEPE não estiver instalado, o projeto não pode ser executado localmente fora desse ambiente.
+### 1. Load the circuit in SEPE
+
+1. Open **SEPE**.
+2. Load `Processador.cir`.
+3. Load `Memória.dat` if the simulator requests it.
+
+### 2. Run the assembly code
+
+1. Open or import `Codigo_Assembly.asm` in the course assembly environment.
+2. Assemble the code.
+3. Run it in the simulator with the circuit loaded.
+
+### 3. Simulated peripherals
+
+The code uses I/O addresses for buttons, switches, and display (defined at the top of `Codigo_Assembly.asm`):
+
+- Buttons: ON/OFF, OK, CHANGE, CANCEL
+- Switches: menu selection and weight input
+- Display: name, weight, price, and total output
+
+---
+
+## Features
+
+- **Scale** mode — weighing and price calculation
+- **Records** mode — view stored records
+- **Clear** mode — clear records
+
+---
+
+## Notes
+
+- There is no standalone compiler: everything runs inside the SEPE + course toolchain ecosystem.
+- Without SEPE installed, the project cannot be run locally outside that environment.

@@ -1,4 +1,4 @@
-# Projeto Programação Gráfica — Robot
+# Computer Graphics Project — Robot
 
 Interactive 3D robot built with [p5.js](https://p5js.org/) (WEBGL). Move the robot, pose its limbs, orbit the camera, and trigger sound effects — all from the keyboard.
 

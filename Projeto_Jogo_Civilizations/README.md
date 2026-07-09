@@ -1,35 +1,35 @@
-# Projeto Jogo Civilizations
+# Civilizations Game Project
 
-Jogo de estratégia por turnos em **Java** com mapa retangular, civilizações (Romana, Grega, etc.) e interface de linha de comandos.
+Turn-based strategy game in **Java** with a rectangular map, civilizations (Roman, Greek, etc.), and a command-line interface.
 
-**Código-fonte:** `Projeto2/Civilizations/`
+**Source code:** `Projeto2/Civilizations/`
 
 ---
 
-## O que precisa de instalar
+## Requirements
 
-| Requisito | Versão | Notas |
-|-----------|--------|-------|
-| JDK | **23** | Conforme `pom.xml` (`maven.compiler.release=23`) |
-| Maven | 3.6+ | Gestor de dependências e build |
+| Requirement | Version | Notes |
+|-------------|---------|-------|
+| JDK | **23** | Per `pom.xml` (`maven.compiler.release=23`) |
+| Maven | 3.6+ | Dependency and build manager |
 
-Verificar:
+Verify:
 
 ```bash
-java --version    # esperado: 23.x
+java --version    # expected: 23.x
 mvn --version
 ```
 
 ---
 
-## Como compilar
+## How to build
 
 ```powershell
 cd Projeto2\Civilizations
 mvn compile
 ```
 
-No Linux/macOS:
+On Linux/macOS:
 
 ```bash
 cd Projeto2/Civilizations
@@ -38,16 +38,16 @@ mvn compile
 
 ---
 
-## Como executar
+## How to run
 
-### Opção A — Maven
+### Option A — Maven
 
 ```powershell
 cd Projeto2\Civilizations
 mvn compile exec:java -Dexec.mainClass="com.mycompany.poo.civilizations.Civilizations"
 ```
 
-### Opção B — Java direto
+### Option B — Java directly
 
 ```powershell
 cd Projeto2\Civilizations
@@ -55,33 +55,33 @@ mvn compile
 java -cp target/classes com.mycompany.poo.civilizations.Civilizations
 ```
 
-### Opção C — IDE
+### Option C — IDE
 
-Abra a pasta `Projeto2/Civilizations` no IntelliJ IDEA, VS Code ou NetBeans e execute a classe `Civilizations`.
-
----
-
-## Dependências
-
-| Biblioteca | Versão | Uso |
-|------------|--------|-----|
-| `org.fusesource.jansi:jansi` | 2.4.0 | Cores no terminal |
-
-O Maven descarrega automaticamente as dependências com `mvn compile`.
+Open the `Projeto2/Civilizations` folder in IntelliJ IDEA, VS Code, or NetBeans and run the `Civilizations` class.
 
 ---
 
-## Utilização
+## Dependencies
 
-O jogo arranca com um menu interativo no terminal:
+| Library | Version | Purpose |
+|---------|---------|---------|
+| `org.fusesource.jansi:jansi` | 2.4.0 | Terminal colors |
 
-1. Escolha uma civilização (Romana, Grega, etc.)
-2. Gerencie unidades, recursos e turnos no mapa 33×15
-3. Siga as instruções apresentadas no ecrã
+Maven downloads dependencies automatically with `mvn compile`.
 
 ---
 
-## Estrutura do projeto
+## Usage
+
+The game starts with an interactive terminal menu:
+
+1. Choose a civilization (Roman, Greek, etc.)
+2. Manage units, resources, and turns on a 33×15 map
+3. Follow the on-screen instructions
+
+---
+
+## Project structure
 
 ```
 Projeto_Jogo_Civilizations/
@@ -93,10 +93,10 @@ Projeto_Jogo_Civilizations/
 
 ---
 
-## Resolução de problemas
+## Troubleshooting
 
-| Problema | Solução |
-|----------|---------|
-| `release version 23 not supported` | Instale JDK 23 |
-| `mvn` não encontrado | Instale Maven e adicione ao PATH |
-| Caracteres estranhos no terminal | Jansi requer terminal compatível (Windows Terminal, PowerShell, Linux) |
+| Problem | Solution |
+|---------|----------|
+| `release version 23 not supported` | Install JDK 23 |
+| `mvn` not found | Install Maven and add it to PATH |
+| Garbled terminal characters | Jansi requires a compatible terminal (Windows Terminal, PowerShell, Linux) |

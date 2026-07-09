@@ -1,19 +1,19 @@
-# Projeto Protótipo Sistema Qualidade
+# Quality System Prototype Project
 
-Protótipo web de gestão da qualidade (ISO), com autenticação, KPIs, tabelas, gráficos e não-conformidades. Backend em **Node.js + Express**, views em **EJS**, base de dados em ficheiros **JSON**.
+Web prototype for quality management (ISO), with authentication, KPIs, tables, charts, and non-conformities. Backend in **Node.js + Express**, views in **EJS**, database in **JSON** files.
 
-**Código-fonte:** `Protótipo/ER prototype/`
+**Source code:** `Protótipo/ER prototype/`
 
 ---
 
-## O que precisa de instalar
+## Requirements
 
-| Requisito | Versão | Notas |
-|-----------|--------|-------|
-| [Node.js](https://nodejs.org/) | 18+ (LTS recomendado) | Inclui `npm` |
-| IDE (opcional) | — | VS Code, Cursor, etc. |
+| Requirement | Version | Notes |
+|-------------|---------|-------|
+| [Node.js](https://nodejs.org/) | 18+ (LTS recommended) | Includes `npm` |
+| IDE (optional) | — | VS Code, Cursor, etc. |
 
-Verificar:
+Verify:
 
 ```bash
 node --version
@@ -22,14 +22,14 @@ npm --version
 
 ---
 
-## Como instalar dependências
+## Install dependencies
 
 ```powershell
 cd "Protótipo\ER prototype"
 npm install
 ```
 
-No Linux/macOS:
+On Linux/macOS:
 
 ```bash
 cd "Protótipo/ER prototype"
@@ -38,86 +38,86 @@ npm install
 
 ---
 
-## Como executar
+## How to run
 
-### Modo desenvolvimento (com auto-reload)
+### Development mode (with auto-reload)
 
 ```powershell
 npm run dev
 ```
 
-### Modo produção
+### Production mode
 
 ```powershell
 npm start
 ```
 
-### Setup completo (inicializar BD + arrancar)
+### Full setup (initialize DB + start)
 
 ```powershell
 npm run setup
 ```
 
-Abrir no browser: **http://localhost:3000**
+Open in browser: **http://localhost:3000**
 
 ---
 
-## Contas de teste
+## Test accounts
 
-| Papel | Email | Password |
-|-------|-------|----------|
+| Role | Email | Password |
+|------|-------|----------|
 | Admin | admin@example.com | Admin123! |
 | Quality Manager | qm@example.com | Qm12345 |
 | Staff | staff@example.com | Staff123 |
 
-> Os utilizadores estão definidos em `models/users.json`. Em caso de problemas de login, confirme as credenciais nesse ficheiro.
+Users are defined in `models/users.json`. If login fails, check credentials in that file.
 
 ---
 
-## Scripts disponíveis
+## Available scripts
 
-| Comando | Descrição |
-|---------|-----------|
-| `npm install` | Instala dependências |
-| `npm run init` | Inicializa a base de dados JSON |
-| `npm run dev` | Arranca com nodemon (auto-reload) |
-| `npm start` | Arranca o servidor |
+| Command | Description |
+|---------|-------------|
+| `npm install` | Install dependencies |
+| `npm run init` | Initialize the JSON database |
+| `npm run dev` | Start with nodemon (auto-reload) |
+| `npm start` | Start the server |
 | `npm run setup` | `init` + `dev` |
 
 ---
 
-## Dependências principais
+## Main dependencies
 
-- `express` — servidor web
-- `ejs` + `express-ejs-layouts` — templates HTML
-- `express-session` — sessões de utilizador
-- `bcrypt` — hash de passwords
-- `multer` — upload de ficheiros
-- `dotenv` — variáveis de ambiente
+- `express` — web server
+- `ejs` + `express-ejs-layouts` — HTML templates
+- `express-session` — user sessions
+- `bcrypt` — password hashing
+- `multer` — file uploads
+- `dotenv` — environment variables
 - `nodemon` — auto-reload (dev)
 
 ---
 
-## Estrutura do projeto
+## Project structure
 
 ```
 Projeto_Protótipo_Sistema_Qualidade/
 └── Protótipo/ER prototype/
-    ├── server.js           ← entry point (porta 3000)
+    ├── server.js           ← entry point (port 3000)
     ├── package.json
     ├── routes/
     ├── views/
-    ├── models/             ← users.json, dados JSON
+    ├── models/             ← users.json, JSON data
     └── public/
 ```
 
 ---
 
-## Resolução de problemas
+## Troubleshooting
 
-| Problema | Solução |
-|----------|---------|
-| `npm install` falha | Confirme Node.js 18+ instalado |
-| Porta 3000 ocupada | Feche outra app ou defina `PORT=3001` |
-| Login não funciona | Verifique `models/users.json` |
-| Página em branco | Confirme que corre `npm run dev` na pasta correta |
+| Problem | Solution |
+|---------|----------|
+| `npm install` fails | Confirm Node.js 18+ is installed |
+| Port 3000 in use | Close another app or set `PORT=3001` |
+| Login doesn't work | Check `models/users.json` |
+| Blank page | Confirm you run `npm run dev` in the correct folder |

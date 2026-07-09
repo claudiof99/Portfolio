@@ -1,44 +1,44 @@
-# Projeto Redes Nacionais
+# National Networks Project
 
-Projeto de **redes de computadores** com topologia nacional desenhada no **Cisco Packet Tracer**, acompanhado de relatório técnico em PDF.
-
----
-
-## O que precisa de instalar
-
-| Requisito | Notas |
-|-----------|-------|
-| [Cisco Packet Tracer](https://www.netacad.com/cisco-packet-tracer) | Simulador de redes (gratuito via Cisco Networking Academy) |
-
-> É necessária conta na Cisco NetAcad para descarregar o Packet Tracer.
+**Computer networks** project with a national topology designed in **Cisco Packet Tracer**, accompanied by a technical PDF report.
 
 ---
 
-## Ficheiros do projeto
+## Requirements
 
-| Ficheiro | Descrição |
-|----------|-----------|
-| `ProjetoPacketTracer.pkt` | Topologia de rede completa |
-| `Relatorio_ProjetoRCD.pdf` | Relatório do projeto |
+| Requirement | Notes |
+|-------------|-------|
+| [Cisco Packet Tracer](https://www.netacad.com/cisco-packet-tracer) | Network simulator (free via Cisco Networking Academy) |
 
----
-
-## Como executar / visualizar
-
-### Simulação de rede
-
-1. Instale o **Cisco Packet Tracer**.
-2. Abra o ficheiro `ProjetoPacketTracer.pkt`.
-3. Explore a topologia, configure dispositivos e execute simulações de tráfego.
-
-### Relatório
-
-Abra `Relatorio_ProjetoRCD.pdf` com qualquer leitor de PDF para consultar a documentação, diagramas e justificações do projeto.
+A Cisco NetAcad account is required to download Packet Tracer.
 
 ---
 
-## Notas
+## Project files
 
-- Este projeto **não contém código de aplicação** — é um projeto de design e simulação de redes.
-- Não é possível executar a topologia sem o Packet Tracer instalado.
-- O ficheiro `.pkt` é binário e só pode ser editado no Packet Tracer.
+| File | Description |
+|------|-------------|
+| `ProjetoPacketTracer.pkt` | Complete network topology |
+| `Relatorio_ProjetoRCD.pdf` | Project report |
+
+---
+
+## How to run / view
+
+### Network simulation
+
+1. Install **Cisco Packet Tracer**.
+2. Open `ProjetoPacketTracer.pkt`.
+3. Explore the topology, configure devices, and run traffic simulations.
+
+### Report
+
+Open `Relatorio_ProjetoRCD.pdf` with any PDF reader to view documentation, diagrams, and project rationale.
+
+---
+
+## Notes
+
+- This project **contains no application code** — it is a network design and simulation project.
+- The topology cannot be run without Packet Tracer installed.
+- The `.pkt` file is binary and can only be edited in Packet Tracer.

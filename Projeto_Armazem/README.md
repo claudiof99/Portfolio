@@ -1,22 +1,22 @@
-# Projeto Armazém
+# Warehouse Project
 
-Simulador de gestão de armazém em C++17. O programa gera secções aleatórias, gere stock de peças, faturação e operações interativas via linha de comandos.
+C++17 warehouse management simulator. The program generates random sections, manages parts inventory, billing, and interactive operations via the command line.
 
-**Código-fonte:** `Armazem/Warehouse/`
-
----
-
-## O que precisa de instalar
-
-| Requisito | Versão | Notas |
-|-----------|--------|-------|
-| Compilador C++ | C++17 | GCC, Clang ou MSVC |
-| CMake | ≥ 3.27 | Gerador de build |
-| IDE (opcional) | — | CLion, VS Code, Visual Studio |
+**Source code:** `Armazem/Warehouse/`
 
 ---
 
-## Como compilar
+## Requirements
+
+| Requirement | Version | Notes |
+|-------------|---------|-------|
+| C++ compiler | C++17 | GCC, Clang, or MSVC |
+| CMake | ≥ 3.27 | Build generator |
+| IDE (optional) | — | CLion, VS Code, Visual Studio |
+
+---
+
+## How to build
 
 ```powershell
 cd Armazem\Warehouse
@@ -24,7 +24,7 @@ cmake -B cmake-build-debug
 cmake --build cmake-build-debug
 ```
 
-No Linux/macOS:
+On Linux/macOS:
 
 ```bash
 cd Armazem/Warehouse
@@ -32,31 +32,31 @@ cmake -B cmake-build-debug
 cmake --build cmake-build-debug
 ```
 
-O executável gerado chama-se **`Warehouse`** (ou `Warehouse.exe` no Windows).
+The generated executable is **`Warehouse`** (or `Warehouse.exe` on Windows).
 
 ---
 
-## Como executar
+## How to run
 
-Não são necessários argumentos na linha de comandos.
+No command-line arguments are required.
 
 ```powershell
 cd Armazem\Warehouse\cmake-build-debug
 .\Warehouse.exe
 ```
 
-No Linux/macOS:
+On Linux/macOS:
 
 ```bash
 cd Armazem/Warehouse/cmake-build-debug
 ./Warehouse
 ```
 
-O programa arranca com um menu interativo no terminal para gerir secções, peças e faturação.
+The program starts with an interactive terminal menu to manage sections, parts, and billing.
 
 ---
 
-## Estrutura do projeto
+## Project structure
 
 ```
 Projeto_Armazem/
