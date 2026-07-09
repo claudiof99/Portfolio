@@ -80,7 +80,7 @@ sudo apt install ffmpeg
 Open a terminal in the project directory:
 
 ```bash
-cd path/to/Projeto_Galaxia_Paralelismo
+cd path/to/Projeto_Galaxia_Simulação_Paralelismo
 ```
 
 `-n <N>` sets the number of MPI processes (ranks). Use a value up to your CPU core count.
