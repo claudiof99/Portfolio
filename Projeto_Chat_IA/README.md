@@ -50,7 +50,7 @@ npm install
 1. Create a free cluster at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 2. Create a database user and allow your IP address in **Network Access**.
 3. Copy your connection string.
-4. Update the connection string in `BackEnd/server.js` (the `mongoose.connect(...)` call near the bottom of the file).
+4. Set it in `BackEnd/server.js` by replacing the placeholder in `MONGODB_URI`, or set the `MONGODB_URI` environment variable before starting the server.
 
 Example format:
 

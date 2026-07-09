@@ -19,6 +19,7 @@ const io = new Server(server);// Inicializa o Socket.IO no servidor
 const userSocketMap = {};//Mapeamento onde o id do utilizador da mongoDb é a chave e o socketID é o valor utilizado no chat 
 
 const PORT = 3050;//Porta onde o servidor irá rodar
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<dbname>?retryWrites=true&w=majority&appName=<appName>";
 
 app.set("view engine", "ejs");//Diz ao express para usar ejs
 app.set("views", path.join(__dirname, "../FrontEnd/views"));//Define a pasta onde as views estão armazenadas
@@ -56,11 +57,7 @@ app.get("/", (req, res) =>
 });
 
 mongoose
-    .connect
-    (
-        "mongodb+srv://BrainStormingProjectDBW:by3em64VXCIQQbVH@cluster0.aejhrzv.mongodb.net/ProjetoDBW?retryWrites=true&w=majority&appName=Cluster0",
-        {useUnifiedTopology : true , useNewUrlParser : true}
-    )
+    .connect(MONGODB_URI)
     .then( () => {console.log("Connected");})
     .catch((err) => {console.log(err);});
 
