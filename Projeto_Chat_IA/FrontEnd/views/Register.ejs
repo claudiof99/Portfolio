@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/LoginRegisto.css">
+    <title>Registo</title>
+</head>
+<body>
+    <div class="login-register-container">
+        
+        <div class="logo">
+            🧠
+            neuroStorming
+        </div>
+
+        <div class="login-register-inputs-box">
+            <h2>Registo</h2>
+            
+            <form action="/Register" method="POST">
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="username">Nome de utilizador:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="email">Email:</label>
+                        <input type="text" id="email" name="email" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" name="password" required>    
+                    </div>
+
+                    <div class="input-field">
+                        <label for="confirmPassword">Confirmar senha:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    
+                </div>
+                <p></p>
+                <% if (error) { %>
+                    <div style="color: red;">
+                        <%= error %>
+                    </div>
+                <% } %>
+                
+                <button class="login-register-button">Confirmar registo!! 🚀</button>
+            </form>
+        </div>
+        <div class="register-login-box">
+            <p>Já tem conta?</p>
+            <p>faça <a href="/Login">Login</a> e solte o génio que há em si!! 😎</p>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/LoginRegisto.css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="login-register-container">
+
+        <div class="logo">
+            🧠
+            <span>neuroStorming</span>
+        </div>
+
+        <div class="login-register-inputs-box">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="username">Nome de utilizador:</label>
+                        <input type="text" id="username" name="username" value="<%= typeof username !== 'undefined' ? username : '' %>" required >
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" name="password" required >    
+                    </div>
+                    
+                </div>
+                <p></p>
+                <% if (error) { %>
+                    <div style="color: red;">
+                        <%= error %>
+                    </div>
+                <% } %>
+                
+                <button type="submit" class="login-register-button">Iniciar Sessão 🚀</button>
+            </form>
+
+        </div>
+
+        <div class="register-login-box">
+            <p>Ainda não tem conta?</p>
+            <p><a href="/Register">Registe-se</a> e solte o génio que há em si!! 😎</p>
+        </div>
+    </div>
+</body>
+</html>
